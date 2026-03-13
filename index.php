@@ -1,6 +1,15 @@
 <?php
 $titulo = "Mis Proyectos";
-$items_a_ignorar = ['.', '..', '.git', 'plantilla.php'];
+$items_a_ignorar = [
+    '.', 
+    '..', 
+    '.git', 
+    'plantilla.php', 
+    '.heroku',      // Carpeta de sistema de Heroku
+    '.profile.d',   // Configuraciones de inicio
+    '.composer',    // Cache de dependencias
+    'vendor'        // Librerías de terceros (opcional, si no quieres mostrarla)
+];
 $items = scandir('.');
 $proyectos = [];
 
