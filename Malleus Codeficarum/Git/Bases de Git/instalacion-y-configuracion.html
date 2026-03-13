@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Instalación y configuración inicial de Git en Linux y Windows — Malleus Codeficarum.">
+    <title>Instalación y Configuración — Malleus Codeficarum</title>
+
+    <!-- Google Fonts — Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Breadcrumb ===== -->
+    <div class="lesson-breadcrumb">
+        <div class="container">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Instalación y Configuración</span>
+        </div>
+    </div>
+
+    <!-- ===== Lesson Content ===== -->
+    <main class="lesson-container">
+        <div class="container">
+
+            <!-- Header de la lección -->
+            <div class="lesson-hero">
+                <span class="lesson-tag-large tag-workshop">Taller</span>
+                <h1><i class="bi bi-download"></i> Instalación y Configuración de Git</h1>
+                <p class="lesson-subtitle">Prepara tu entorno de desarrollo: instala Git y configúralo correctamente en
+                    Linux o Windows.</p>
+            </div>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- PARTE 1: INSTALACIÓN EN LINUX              -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="lesson-section" id="instalacion-linux">
+                <h2><span class="section-number">01</span> <i class="bi bi-ubuntu"></i> Instalación en Linux</h2>
+
+                <p>
+                    En la mayoría de las distribuciones de Linux, Git se puede instalar directamente desde el
+                    <strong>gestor de paquetes</strong>
+                    del sistema. A continuación veremos los pasos para las distribuciones más populares.
+                </p>
+
+                <!-- ── Verificar si ya está instalado ── -->
+                <h3 class="lesson-subtitle-h3">1.1 Verificar si Git ya está instalado</h3>
+
+                <p>Antes de instalar, verifica si ya lo tienes. Abre una terminal y ejecuta:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git --version</code></pre>
+                </div>
+
+                <p>Si Git está instalado, verás algo como:</p>
+
+                <div class="code-block output">
+                    <pre><code>git version 2.43.0</code></pre>
+                </div>
+
+                <!-- Screenshot placeholder -->
+                <div class="screenshot-placeholder" id="img-linux-version">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Terminal mostrando git --version">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la terminal ejecutando <code>git --version</code> y
+                                mostrando el resultado con la versión instalada.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Si ves un error como <code>command not found</code>, necesitas instalarlo.</p>
+
+                <!-- ── Ubuntu / Debian ── -->
+                <h3 class="lesson-subtitle-h3">1.2 Ubuntu / Debian (apt)</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>sudo apt update
+sudo apt install git -y</code></pre>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-linux-apt">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Terminal instalando Git con apt">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la terminal ejecutando
+                                <code>sudo apt install git -y</code>, mostrando la descarga e instalación exitosa de los
+                                paquetes.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Fedora / RHEL ── -->
+                <h3 class="lesson-subtitle-h3">1.3 Fedora / RHEL / CentOS (dnf / yum)</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code># Fedora
+sudo dnf install git -y
+
+# RHEL / CentOS (versiones antiguas)
+sudo yum install git -y</code></pre>
+                </div>
+
+                <!-- ── Arch Linux ── -->
+                <h3 class="lesson-subtitle-h3">1.4 Arch Linux / Manjaro (pacman)</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>sudo pacman -S git</code></pre>
+                </div>
+
+                <!-- ── Verificar instalación ── -->
+                <h3 class="lesson-subtitle-h3">1.5 Verificar la instalación</h3>
+
+                <p>Después de instalar, confirma que todo está correcto:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git --version
+which git</code></pre>
+                </div>
+
+                <div class="code-block output">
+                    <pre><code>git version 2.43.0
+/usr/bin/git</code></pre>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-linux-verify">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Verificación exitosa de Git en Linux">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura mostrando <code>git --version</code> y
+                                <code>which git</code> con sus resultados exitosos después de la instalación.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- PARTE 2: INSTALACIÓN EN WINDOWS            -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="lesson-section" id="instalacion-windows">
+                <h2><span class="section-number">02</span> <i class="bi bi-windows"></i> Instalación en Windows</h2>
+
+                <p>
+                    En Windows, Git no viene preinstalado. Necesitas descargar el instalador oficial desde
+                    <a href="https://git-scm.com/download/win" target="_blank" class="lesson-link">git-scm.com</a>.
+                </p>
+
+                <!-- ── Paso 1: Descargar ── -->
+                <h3 class="lesson-subtitle-h3">2.1 Descargar el instalador</h3>
+
+                <div class="step-card">
+                    <span class="step-number">1</span>
+                    <div>
+                        <p>Ve a <a href="https://git-scm.com/download/win" target="_blank"
+                                class="lesson-link">https://git-scm.com/download/win</a></p>
+                        <p>La descarga del instalador debería iniciar automáticamente. Si no, haz clic en el enlace de
+                            descarga manual.</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-download">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Página de descarga de Git para Windows">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la página web <code>git-scm.com/download/win</code>
+                                mostrando los enlaces de descarga para Windows (64-bit y 32-bit).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Paso 2: Ejecutar instalador ── -->
+                <h3 class="lesson-subtitle-h3">2.2 Ejecutar el instalador</h3>
+
+                <div class="step-card">
+                    <span class="step-number">2</span>
+                    <div>
+                        <p>Ejecuta el archivo <code>.exe</code> descargado. Aparecerá el asistente de instalación de
+                            Git.</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-installer-start">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Pantalla inicial del instalador de Git">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la pantalla inicial del instalador de Git para
+                                Windows mostrando la licencia GNU GPL y el botón "Next".</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Paso 3: Opciones recomendadas ── -->
+                <h3 class="lesson-subtitle-h3">2.3 Opciones recomendadas del instalador</h3>
+
+                <p>El instalador tiene varias pantallas de configuración. Estas son las opciones recomendadas:</p>
+
+                <div class="options-list">
+                    <div class="option-item">
+                        <div class="option-header">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>Select Components</strong>
+                        </div>
+                        <p>Deja las opciones por defecto. Asegúrate de que <em>"Git Bash Here"</em> y <em>"Git GUI
+                                Here"</em> estén marcadas.</p>
+                    </div>
+
+                    <div class="option-item">
+                        <div class="option-header">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>Default Editor</strong>
+                        </div>
+                        <p>Selecciona el editor que prefieras. Si usas <strong>VS Code</strong>, selecciona <em>"Use
+                                Visual Studio Code as Git's default editor"</em>.</p>
+                    </div>
+
+                    <div class="option-item">
+                        <div class="option-header">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>Initial Branch Name</strong>
+                        </div>
+                        <p>Selecciona <em>"Override the default branch name"</em> y escribe <code>main</code> (es el
+                            estándar actual).</p>
+                    </div>
+
+                    <div class="option-item">
+                        <div class="option-header">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>PATH Environment</strong>
+                        </div>
+                        <p>Selecciona <em>"Git from the command line and also from 3rd-party software"</em> (opción
+                            recomendada).</p>
+                    </div>
+
+                    <div class="option-item">
+                        <div class="option-header">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <strong>Line Ending Conversions</strong>
+                        </div>
+                        <p>Selecciona <em>"Checkout Windows-style, commit Unix-style line endings"</em> (recomendado
+                            para evitar conflictos).</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-components">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Pantalla Select Components del instalador">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la pantalla "Select Components" del instalador con
+                                las casillas por defecto marcadas (Git Bash Here, Git GUI Here, etc.).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-editor">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Selección de editor por defecto">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la pantalla de selección del editor por defecto,
+                                mostrando la opción de VS Code seleccionada en el dropdown.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-branch">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Configuración del nombre de rama inicial">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la pantalla "Adjusting the name of the initial
+                                branch" con la opción "Override" seleccionada y <code>main</code> escrito en el
+                                campo.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Paso 4: Finalizar ── -->
+                <h3 class="lesson-subtitle-h3">2.4 Finalizar la instalación</h3>
+
+                <div class="step-card">
+                    <span class="step-number">3</span>
+                    <div>
+                        <p>Haz clic en <strong>"Install"</strong> y espera a que termine. Al finalizar, marca
+                            <em>"Launch Git Bash"</em> y haz clic en <strong>"Finish"</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-finish">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Instalación finalizada de Git en Windows">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la pantalla final del instalador mostrando
+                                "Completing the Git Setup Wizard" con la casilla "Launch Git Bash" marcada.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Paso 5: Verificar en Windows ── -->
+                <h3 class="lesson-subtitle-h3">2.5 Verificar en Windows</h3>
+
+                <p>Abre <strong>Git Bash</strong> (o CMD / PowerShell) y ejecuta:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git --version</code></pre>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-win-verify">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Git Bash mostrando la versión de Git">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de Git Bash abierta en Windows ejecutando
+                                <code>git --version</code> y mostrando la versión instalada exitosamente.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- PARTE 3: CONFIGURACIÓN INICIAL             -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="lesson-section" id="configuracion-inicial">
+                <h2><span class="section-number">03</span> <i class="bi bi-gear"></i> Configuración inicial</h2>
+
+                <p>
+                    Después de instalar Git (en cualquier sistema operativo), necesitas configurar tu
+                    <strong>identidad</strong>.
+                    Esta información se incluye en cada commit que hagas.
+                </p>
+
+                <div class="highlight-box">
+                    <i class="bi bi-info-circle"></i>
+                    <div>
+                        Estos comandos son los mismos en <strong>Linux</strong> y <strong>Windows</strong> (Git Bash,
+                        CMD o PowerShell).
+                        Solo necesitas ejecutarlos <strong>una vez</strong> por computadora.
+                    </div>
+                </div>
+
+                <!-- ── Nombre y Email ── -->
+                <h3 class="lesson-subtitle-h3">3.1 Configurar nombre y email</h3>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal / Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git config --global user.name "Tu Nombre"
+git config --global user.email "tu.email@ejemplo.com"</code></pre>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <div>
+                        <strong>Importante:</strong> Usa el mismo email que usarás en GitHub o GitLab para que tus
+                        commits
+                        se vinculen correctamente a tu perfil.
+                    </div>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-config-name">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Configurando nombre y email en Git">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la terminal ejecutando los comandos
+                                <code>git config --global user.name</code> y <code>git config --global user.email</code>
+                                con valores de ejemplo.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Editor por defecto ── -->
+                <h3 class="lesson-subtitle-h3">3.2 Configurar editor por defecto</h3>
+
+                <p>Cuando Git necesite que escribas un mensaje (como en un commit), abrirá un editor de texto. Puedes
+                    elegir cuál:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal / Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code># Para VS Code
+git config --global core.editor "code --wait"
+
+# Para Nano (Linux, más sencillo)
+git config --global core.editor "nano"
+
+# Para Vim (avanzado)
+git config --global core.editor "vim"</code></pre>
+                </div>
+
+                <!-- ── Rama por defecto ── -->
+                <h3 class="lesson-subtitle-h3">3.3 Configurar rama por defecto</h3>
+
+                <p>Por convención moderna, la rama principal se llama <code>main</code> en lugar de <code>master</code>:
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal / Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git config --global init.defaultBranch main</code></pre>
+                </div>
+
+                <!-- ── Verificar configuración ── -->
+                <h3 class="lesson-subtitle-h3">3.4 Verificar toda la configuración</h3>
+
+                <p>Para ver todas las configuraciones que has establecido:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal / Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git config --list</code></pre>
+                </div>
+
+                <div class="code-block output">
+                    <pre><code>user.name=Tu Nombre
+user.email=tu.email@ejemplo.com
+core.editor=code --wait
+init.defaultbranch=main</code></pre>
+                </div>
+
+                <div class="screenshot-placeholder" id="img-config-list">
+                    <div class="screenshot-frame">
+                        <img src="../../static/img/git/placeholder.png" alt="Resultado de git config --list">
+                        <div class="screenshot-note">
+                            <i class="bi bi-camera"></i>
+                            <span><strong>NOTA:</strong> Captura de la terminal ejecutando
+                                <code>git config --list</code> mostrando la lista completa de configuraciones
+                                (user.name, user.email, core.editor, init.defaultbranch, etc.).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p>También puedes verificar un valor específico:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang"><i class="bi bi-terminal"></i> Terminal / Git Bash</span>
+                        <button class="btn-copy" onclick="copyCode(this)" title="Copiar"><i
+                                class="bi bi-clipboard"></i></button>
+                    </div>
+                    <pre><code>git config user.name
+git config user.email</code></pre>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- PARTE 4: RESUMEN RÁPIDO                    -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="lesson-section" id="resumen">
+                <h2><span class="section-number">04</span> <i class="bi bi-bookmark-check"></i> Resumen rápido</h2>
+
+                <div class="table-responsive">
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+                                <th>Comando</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Instalar en Ubuntu/Debian</td>
+                                <td><code>sudo apt install git -y</code></td>
+                            </tr>
+                            <tr>
+                                <td>Instalar en Fedora</td>
+                                <td><code>sudo dnf install git -y</code></td>
+                            </tr>
+                            <tr>
+                                <td>Instalar en Arch</td>
+                                <td><code>sudo pacman -S git</code></td>
+                            </tr>
+                            <tr>
+                                <td>Instalar en Windows</td>
+                                <td>Descargar de <a href="https://git-scm.com/download/win" target="_blank"
+                                        class="lesson-link">git-scm.com</a></td>
+                            </tr>
+                            <tr>
+                                <td>Verificar versión</td>
+                                <td><code>git --version</code></td>
+                            </tr>
+                            <tr>
+                                <td>Configurar nombre</td>
+                                <td><code>git config --global user.name "Tu Nombre"</code></td>
+                            </tr>
+                            <tr>
+                                <td>Configurar email</td>
+                                <td><code>git config --global user.email "tu@email.com"</code></td>
+                            </tr>
+                            <tr>
+                                <td>Configurar editor</td>
+                                <td><code>git config --global core.editor "code --wait"</code></td>
+                            </tr>
+                            <tr>
+                                <td>Rama por defecto</td>
+                                <td><code>git config --global init.defaultBranch main</code></td>
+                            </tr>
+                            <tr>
+                                <td>Ver configuración</td>
+                                <td><code>git config --list</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== Navegación de lecciones ===== -->
+            <div class="lesson-nav">
+                <a href="que-es-git.html" class="lesson-nav-link prev">
+                    <i class="bi bi-arrow-left"></i> Anterior: ¿Qué es Git?
+                </a>
+                <a href="repositorios-init-clone.html" class="lesson-nav-link next">
+                    Siguiente: Repositorios: init y clone <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&gt;_ Malleus Codeficarum <span class="footer-separator">|</span> El grimorio del código</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../../static/js/main.js"></script>
+</body>
+
+</html>

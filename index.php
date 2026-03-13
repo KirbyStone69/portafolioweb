@@ -1,0 +1,243 @@
+<?php
+$titulo = "Mis Proyectos";
+$items_a_ignorar = ['.', '..', '.git', 'plantilla.php'];
+$items = scandir('.');
+$proyectos = [];
+
+foreach ($items as $item) {
+    if (is_dir($item) && !in_array($item, $items_a_ignorar)) {
+        // Buscar preview.jpg, preview.png o la primera imagen disponible
+        $preview_image = null;
+        
+        if (file_exists($item . '/preview.jpg')) {
+            $preview_image = $item . '/preview.jpg';
+        } elseif (file_exists($item . '/preview.png')) {
+            $preview_image = $item . '/preview.png';
+        } else {
+            // Buscar cualquier imagen en la carpeta
+            $images = glob($item . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+            if (!empty($images)) {
+                $preview_image = $images[0];
+            }
+        }
+        
+        $proyectos[] = [
+            'nombre' => $item,
+            'imagen' => $preview_image
+        ];
+    }
+}
+
+usort($proyectos, function($a, $b) {
+    return strcmp($a['nombre'], $b['nombre']);
+});
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($titulo) ?></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #00ff00;
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #lista-proyectos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .proyecto-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #00ff00;
+        }
+
+        .proyecto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.3);
+        }
+
+        .preview-container {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a3a2a 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-placeholder {
+            font-size: 4em;
+            color: #00ff00;
+            opacity: 0.3;
+        }
+
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .proyecto-card:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        .proyecto-info {
+            padding: 20px;
+            background: #2a2a2a;
+        }
+
+        .proyecto-nombre {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 15px;
+        }
+
+        .proyecto-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #00ff00;
+            color: #1a1a1a;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .proyecto-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+            background: #00dd00;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            #lista-proyectos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><?= htmlspecialchars($titulo) ?></h1>
+        <div id="lista-proyectos">
+            <?php foreach ($proyectos as $proyecto): ?>
+                <div class="proyecto-card">
+                    <div class="preview-container">
+                        <?php if ($proyecto['imagen']): ?>
+                            <img class="preview-image" src="<?= htmlspecialchars($proyecto['imagen']) ?>" alt="Preview de <?= htmlspecialchars($proyecto['nombre']) ?>">
+                        <?php else: ?>
+                            <div class="preview-placeholder">📁</div>
+                        <?php endif; ?>
+                        <div class="preview-overlay"></div>
+                    </div>
+                    <div class="proyecto-info">
+                        <div class="proyecto-nombre"><?= htmlspecialchars($proyecto['nombre']) ?></div>
+                        <a class="proyecto-btn" href="<?= htmlspecialchars($proyecto['nombre']) ?>/">
+                            Ver Proyecto →
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        // Animación del título
+        anime({
+            targets: 'h1',
+            translateY: [-50, 0],
+            opacity: [0, 1],
+            duration: 1200,
+            easing: 'easeOutExpo'
+        });
+
+        // Animación de las tarjetas
+        anime({
+            targets: '.proyecto-card',
+            translateY: [100, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(100, {start: 300}),
+            duration: 1000,
+            easing: 'easeOutExpo'
+        });
+
+
+
+        // Animación del botón
+        document.querySelectorAll('.proyecto-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                anime({
+                    targets: this,
+                    scale: 1.1,
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                anime({
+                    targets: this,
+                    scale: 1,
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

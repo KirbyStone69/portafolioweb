@@ -1,0 +1,231 @@
+Propuesta de Diseño de Investigación
+Para el documento: "Evaluación de un sistema de control de versiones con una plataforma web de capacitación inicial para reducir la concentración del trabajo en proyectos universitarios de programación"
+
+Autor: Eder Omar Zúñiga Zavala - 2430206
+Fecha de elaboración: Marzo 2026
+
+
+════════════════════════════════════════════════════════════════
+1. DISEÑO DE INVESTIGACIÓN PROPUESTO
+════════════════════════════════════════════════════════════════
+
+   Tipo:  Cuasi-experimental con grupo de control no equivalente
+   Enfoque:  Cuantitativo con complemento cualitativo (mixto secuencial)
+   Alcance:  Explicativo
+
+
+1.1 ¿Por qué cuasi-experimental?
+
+   El contexto universitario impide la asignación aleatoria de estudiantes a grupos (los grupos ya están formados por la institución). Se trabaja con grupos intactos, lo que descarta un diseño experimental puro pero permite comparar el efecto de la intervención (bootcamp + Git) contra un grupo de control que trabaja sin esa intervención.
+
+   Gunnar Wolf (2024) documenta en su artículo de referencia una experiencia similar: observó durante 8 semestres cómo el uso de Git impactó a estudiantes de Ingeniería en Computación en la UNAM, comparando métricas de commits entre semestres. Sin embargo, Wolf reconoce en "Threats to Validity" que su estudio es un reporte de experiencia sin diseño riguroso previo. La presente propuesta busca corregir esa limitación con un diseño planificado desde el inicio.
+
+
+1.2 ¿Por qué enfoque mixto?
+
+   - Cuantitativo: Las métricas de Git (commits, líneas de código, frecuencia de contribución) proporcionan datos numéricos objetivos y medibles, alineados con lo que proponen Cui et al. (2023) [ref. 7 del marco teórico] y Hundhausen et al. (2023) [ref. 8].
+   - Cualitativo: Se complementa con percepciones de los estudiantes (como hizo Wolf con su encuesta Likert + preguntas abiertas), para entender el "por qué" detrás de los números.
+
+
+════════════════════════════════════════════════════════════════
+2. ESTRUCTURA DEL DISEÑO
+════════════════════════════════════════════════════════════════
+
+   Notación del diseño cuasi-experimental:
+
+   Grupo Experimental (GE):   O₁   X   O₂
+   Grupo de Control (GC):     O₃       O₄
+
+   Donde:
+   O₁, O₃ = Medición previa (pre-test)
+   X       = Intervención (bootcamp interactivo + uso de Git como herramienta de gestión)
+   O₂, O₄ = Medición posterior (post-test)
+
+
+2.1 Variables
+
+   Variable Independiente (VI):
+   - Implementación del bootcamp interactivo de Git (plataforma Malleus Codeficarum) + uso obligatorio del sistema de control de versiones en proyectos.
+
+   Variable Dependiente (VD):
+   - Distribución del trabajo en proyectos de programación en equipo, medida a través de:
+     a) Índice de concentración de commits (coeficiente de Gini de contribuciones)
+     b) Frecuencia de commits por integrante
+     c) Líneas de código aportadas por integrante
+     d) Regularidad temporal de contribuciones (desviación estándar de fechas de commit)
+
+   Variables Intervinientes (a controlar):
+   - Experiencia previa en programación
+   - Experiencia previa con Git
+   - Tamaño del equipo
+   - Complejidad del proyecto asignado
+
+
+════════════════════════════════════════════════════════════════
+3. POBLACIÓN Y MUESTRA
+════════════════════════════════════════════════════════════════
+
+   Población: Estudiantes universitarios de carreras de informática/computación que cursen materias con proyectos de programación en equipo.
+
+   Muestra: No probabilística por conveniencia (grupos intactos).
+   - Grupo Experimental: Un grupo/sección que reciba el bootcamp (Malleus Codeficarum) y trabaje con Git.
+   - Grupo de Control: Un grupo/sección paralelo del mismo curso que trabaje con metodología tradicional (sin bootcamp, sin Git obligatorio).
+
+   Criterios de inclusión:
+   - Estudiantes inscritos en el mismo curso y periodo académico.
+   - Proyectos de programación asignados con las mismas especificaciones en ambos grupos.
+
+   Nota: Wolf trabajó con 224 estudiantes en 8 semestres, pero su encuesta solo obtuvo 30 respuestas (13%). Se recomienda implementar mecanismos para asegurar una mayor tasa de respuesta.
+
+
+════════════════════════════════════════════════════════════════
+4. INSTRUMENTOS DE RECOLECCIÓN DE DATOS
+════════════════════════════════════════════════════════════════
+
+4.1 Instrumentos cuantitativos
+
+   a) Encuesta diagnóstica inicial (pre-test):
+      - Nivel de experiencia en programación (escala Likert)
+      - Conocimiento previo de Git y herramientas de control de versiones
+      - Experiencia en trabajo en equipo de programación
+
+   b) Métricas automatizadas de Git (durante el proyecto):
+      - Número de commits por estudiante
+      - Líneas de código añadidas/modificadas/eliminadas por estudiante
+      - Distribución temporal de commits (¿rutina diaria o concentración al final?)
+      - Número de pull requests y revisiones de código
+      - Coeficiente de Gini de contribuciones por equipo (indicador de desigualdad)
+
+   c) Encuesta de percepción final (post-test):
+      - Percepción sobre distribución del trabajo (escala Likert)
+      - Satisfacción con la herramienta
+      - Autoevaluación de aprendizaje
+      Referencia: Similar a la encuesta de Wolf con escala Likert de 5 puntos, pero aplicada inmediatamente después del proyecto para evitar el sesgo temporal que Wolf reconoce.
+
+4.2 Instrumentos cualitativos
+
+   a) Preguntas abiertas en la encuesta final:
+      - ¿Cómo describirías la distribución del trabajo en tu equipo?
+      - ¿Qué dificultades encontraste con la herramienta?
+      - ¿Consideras que la capacitación fue suficiente?
+
+   b) Observación del repositorio:
+      - Análisis de patrones de trabajo similares a los que Wolf describe con el "Network graph" de GitHub (Figura 2 de su artículo).
+
+
+════════════════════════════════════════════════════════════════
+5. PROCEDIMIENTO (FASES)
+════════════════════════════════════════════════════════════════
+
+   Fase 1 — Diagnóstico (Semana 1)
+   ├─ Aplicar encuesta diagnóstica inicial a ambos grupos
+   ├─ Registrar nivel de experiencia previa
+   └─ Formar equipos de trabajo (mismos criterios en ambos grupos)
+
+   Fase 2 — Intervención / Capacitación (Semanas 2-3)
+   ├─ Grupo Experimental: Completar el bootcamp de Malleus Codeficarum
+   │   ├─ Módulo: ¿Qué es Git y para qué sirve? (Teoría)
+   │   ├─ Módulo: Instalación y configuración
+   │   ├─ Módulo: Repositorios (init, clone) — Teoría + Laboratorio
+   │   ├─ Módulo: Staging y commits — Teoría + Laboratorio
+   │   ├─ Módulo: Ramas y merge — Teoría + Laboratorio
+   │   ├─ Módulo: Remotos (push, pull, fetch) — Teoría + Laboratorio
+   │   └─ Evaluación final del bootcamp
+   └─ Grupo de Control: Clase normal sin capacitación en Git
+
+   Fase 3 — Desarrollo del proyecto (Semanas 4-10)
+   ├─ Ambos grupos reciben el mismo proyecto de programación
+   ├─ Grupo Experimental: Trabaja usando Git/GitHub como herramienta principal
+   ├─ Grupo de Control: Trabaja con su metodología habitual
+   └─ Recolección continua de métricas de Git (GE) y entregas parciales (GC)
+
+   Fase 4 — Evaluación (Semanas 11-12)
+   ├─ Aplicar encuesta de percepción final a ambos grupos
+   ├─ Extraer métricas finales de los repositorios (GE)
+   ├─ Evaluar entregas del grupo de control con auto-reporte de contribuciones
+   └─ Análisis comparativo
+
+
+════════════════════════════════════════════════════════════════
+6. ANÁLISIS DE DATOS
+════════════════════════════════════════════════════════════════
+
+6.1 Análisis cuantitativo
+
+   - Estadística descriptiva: Medias, medianas y desviación estándar de commits por estudiante, por equipo.
+   - Coeficiente de Gini: Para medir la desigualdad en la distribución de contribuciones dentro de cada equipo.
+   - Prueba t de Student o U de Mann-Whitney: Comparar la distribución de contribuciones entre GE y GC.
+   - Correlación de Pearson/Spearman: Relación entre actividad en el repositorio y desempeño académico (como proponen Cui et al., 2023).
+
+6.2 Análisis cualitativo
+
+   - Análisis temático de las respuestas abiertas.
+   - Categorización de patrones de uso del repositorio (similar al análisis de Network Graph que Wolf presenta).
+
+
+════════════════════════════════════════════════════════════════
+7. RELACIÓN CON LA REFERENCIA WOLF (2024)
+════════════════════════════════════════════════════════════════
+
+   El artículo de Gunnar Wolf es la referencia principal porque:
+
+   a) Comparte el mismo dominio: Uso de Git como herramienta de gestión académica en carreras de computación.
+
+   b) Proporciona evidencia empírica: 8 semestres de datos con métricas de commits (Tabla II de su artículo), patrones de contribución y una encuesta de satisfacción.
+
+   c) Identifica limitaciones que esta investigación busca superar:
+      - Wolf no tuvo un diseño de investigación planificado ("does not derive from a rigorous approach").
+      - Su encuesta tuvo un retraso de hasta 3 años, introduciendo sesgo.
+      - No usó grupo de control.
+      - La muestra de la encuesta fue solo del 13%.
+
+   d) La presente investigación extiende el trabajo de Wolf al:
+      - Agregar un componente de capacitación estructurada (bootcamp).
+      - Usar un diseño cuasi-experimental con grupo de control.
+      - Enfocarse en la distribución del trabajo (no solo en la adopción).
+      - Aplicar instrumentos inmediatamente para reducir sesgos temporales.
+
+
+════════════════════════════════════════════════════════════════
+8. CONSIDERACIONES ÉTICAS
+════════════════════════════════════════════════════════════════
+
+   - Consentimiento informado de los participantes.
+   - Anonimización de datos en el análisis y presentación de resultados.
+   - El grupo de control no se ve perjudicado: recibe la enseñanza habitual. Al finalizar el estudio, se puede ofrecer el bootcamp a ambos grupos.
+   - Alineado con lo que Wolf menciona: "all human/animal subject research procedures and protocols are exempt from review board approval."
+
+
+════════════════════════════════════════════════════════════════
+9. CRONOGRAMA ESTIMADO
+════════════════════════════════════════════════════════════════
+
+   Semana 1        │ Diagnóstico y pre-test
+   Semanas 2-3     │ Bootcamp / Intervención
+   Semanas 4-10    │ Desarrollo del proyecto y recolección de datos
+   Semanas 11-12   │ Post-test y recolección final
+   Semanas 13-14   │ Análisis de resultados
+   Semana 15       │ Elaboración del reporte final
+
+
+════════════════════════════════════════════════════════════════
+10. TIPO DE DISEÑO — RESUMEN
+════════════════════════════════════════════════════════════════
+
+   ┌──────────────────────────────────┬──────────────────────────────────────────────┐
+   │ Categoría                        │ Clasificación                                │
+   ├──────────────────────────────────┼──────────────────────────────────────────────┤
+   │ Enfoque                          │ Mixto (cuantitativo + cualitativo)            │
+   │ Tipo de diseño                   │ Cuasi-experimental                           │
+   │ Alcance                          │ Explicativo                                  │
+   │ Temporalidad                     │ Longitudinal (antes-después)                 │
+   │ Asignación de grupos             │ No aleatoria (grupos intactos)               │
+   │ Fuente de datos cuantitativos    │ Métricas de Git + encuestas Likert           │
+   │ Fuente de datos cualitativos     │ Preguntas abiertas + análisis de repositorio │
+   │ Referencia metodológica principal│ Wolf, G. (2024) — IEEE RITA Vol. 19           │
+   └──────────────────────────────────┴──────────────────────────────────────────────┘
+
+
+Notas:
+- Este diseño está alineado con la hipótesis, los objetivos y la pregunta de investigación planteados en el documento "herramientas_de_control_de_versiones.txt".
+- Se recomienda consultar con el director de la investigación para ajustar el tamaño de la muestra y la duración de cada fase según las condiciones reales del contexto universitario.

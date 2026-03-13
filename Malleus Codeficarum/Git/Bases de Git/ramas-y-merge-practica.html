@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Práctica interactiva: aprende a crear ramas, hacer merge y resolver flujos de trabajo con Git.">
+    <title>Práctica: Ramas y Merge (Práctico) — Malleus Codeficarum</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body class="sim-fullpage-body">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="lesson-breadcrumb sim-breadcrumb">
+        <div class="container-fluid">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Práctica: Ramas y Merge (Práctico)</span>
+        </div>
+    </div>
+
+    <!-- Full-Page Simulator -->
+    <main class="sim-fullpage-main">
+
+        <div class="sim-container sim-fullpage sim-two-panels">
+
+            <!-- Panel Instrucciones -->
+            <div class="sim-panel-instructions">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-book"></i> Instrucciones</span>
+                    <span class="sim-step-badge">Paso <span id="simPasoNum">1</span> de <span
+                            id="simPasoTotal">9</span></span>
+                </div>
+                <div class="sim-instructions-body">
+                    <h3 class="sim-step-title" id="simTituloPaso"></h3>
+                    <div class="sim-step-content" id="simContenidoPaso"></div>
+                    <div class="sim-hint" id="simPista"></div>
+                </div>
+                <div class="sim-instructions-footer">
+                    <button class="sim-btn sim-btn-hint" id="simBtnPista" type="button">
+                        <i class="bi bi-lightbulb"></i> Pista
+                    </button>
+                    <button class="sim-btn sim-btn-reset" id="simBtnReset" type="button">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reiniciar
+                    </button>
+                </div>
+                <div class="sim-progress">
+                    <div class="sim-progress-bar-bg">
+                        <div class="sim-progress-bar-fill" id="simProgressBar"></div>
+                    </div>
+                    <span class="sim-progress-text" id="simProgressText">0 / 9</span>
+                </div>
+            </div>
+
+            <!-- Panel Terminal -->
+            <div class="sim-panel-terminal">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-terminal"></i> Terminal</span>
+                    <span class="sim-terminal-hint">ls · pwd · clear</span>
+                </div>
+                <div class="sim-terminal-body" id="simTerminalBody"></div>
+                <div class="sim-terminal-input-row">
+                    <span class="sim-prompt" id="simTerminalPrompt">$</span>
+                    <input type="text" id="simTerminalInput" placeholder="Escribe un comando..." autocomplete="off"
+                        spellcheck="false">
+                    <button class="sim-btn-send" id="simBtnEnviar" type="button">Enviar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Lesson Nav -->
+    <nav class="sim-fullpage-nav">
+        <a href="ramas-y-merge.html" class="lesson-nav-link prev">
+            <i class="bi bi-arrow-left"></i> Teórico
+        </a>
+        <a href="remotos-push-pull.html" class="lesson-nav-link next">
+            Siguiente: Remotos: push y pull <i class="bi bi-arrow-right"></i>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/git-simulator.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            GitSimulator.init({
+                pasos: [
+                    {
+                        titulo: 'Ver la rama actual',
+                        instruccion: `
+                            <p>Ya estás dentro de un repositorio con un commit
+                            inicial. Usa <code>git branch</code> para ver en qué
+                            rama estás.</p>
+                            <p>El asterisco <code>*</code> indica la rama activa.</p>
+                        `,
+                        comando_esperado: 'git branch',
+                        salida: '* main',
+                        pista: 'Escribe: git branch',
+                        fs_cambios: function (fs) {
+                            fs['~'].children['.git'] = { type: 'dir', children: {} };
+                            fs['~'].children['index.html'] = { type: 'file' };
+                            fs['~'].children['styles.css'] = { type: 'file' };
+                        }
+                    },
+                    {
+                        titulo: 'Crear una nueva rama',
+                        instruccion: `
+                            <p>Crea una rama llamada <strong>feature/navbar</strong>
+                            para desarrollar una barra de navegación.</p>
+                            <p>Usa <code>git checkout -b</code> para crearla y
+                            moverte a ella en un solo paso.</p>
+                        `,
+                        comando_esperado: 'git checkout -b feature/navbar',
+                        salida: 'Switched to a new branch \'feature/navbar\'',
+                        pista: 'Escribe: git checkout -b feature/navbar'
+                    },
+                    {
+                        titulo: 'Verificar la rama',
+                        instruccion: `
+                            <p>Confirma que estás en la nueva rama con
+                            <code>git branch</code>.</p>
+                            <p>Deberías ver ambas ramas, con
+                            <code>feature/navbar</code> marcada con <code>*</code>.</p>
+                        `,
+                        comando_esperado: 'git branch',
+                        salida: '  main\n* feature/navbar',
+                        pista: 'Escribe: git branch'
+                    },
+                    {
+                        titulo: 'Crear un archivo en la rama',
+                        instruccion: `
+                            <p>Simula crear un archivo <code>navbar.html</code>
+                            en esta rama de feature.</p>
+                            <p>Este archivo solo existirá en esta rama hasta
+                            que hagas merge con <code>main</code>.</p>
+                        `,
+                        comando_esperado: 'touch navbar.html',
+                        salida: '',
+                        pista: 'Escribe: touch navbar.html',
+                        fs_cambios: function (fs) {
+                            fs['~'].children['navbar.html'] = { type: 'file' };
+                        }
+                    },
+                    {
+                        titulo: 'Hacer commit en la rama',
+                        instruccion: `
+                            <p>Agrega el archivo y haz un commit. Primero haz
+                            <code>git add navbar.html</code>.</p>
+                        `,
+                        comando_esperado: ['git add navbar.html', 'git add .'],
+                        salida: '',
+                        pista: 'Escribe: git add navbar.html'
+                    },
+                    {
+                        titulo: 'Confirmar el cambio',
+                        instruccion: `
+                            <p>Ahora haz el commit con un mensaje descriptivo:</p>
+                            <p><code>git commit -m "Agrega navbar"</code></p>
+                        `,
+                        comando_esperado: 'git commit -m "Agrega navbar"',
+                        salida: '[feature/navbar 7f3a2c1] Agrega navbar\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 navbar.html',
+                        pista: 'Escribe: git commit -m "Agrega navbar"'
+                    },
+                    {
+                        titulo: 'Volver a main',
+                        instruccion: `
+                            <p>Tu feature está lista. Ahora necesitas volver a
+                            <code>main</code> para hacer el merge allí.</p>
+                            <p>Recuerda: <strong>siempre te mueves a la rama que
+                            va a recibir</strong> los cambios.</p>
+                        `,
+                        comando_esperado: ['git checkout main', 'git switch main'],
+                        salida: 'Switched to branch \'main\'',
+                        pista: 'Escribe: git checkout main'
+                    },
+                    {
+                        titulo: 'Fusionar la rama',
+                        instruccion: `
+                            <p>Ahora fusiona <code>feature/navbar</code> dentro
+                            de <code>main</code> con <code>git merge</code>.</p>
+                            <p>Como <code>main</code> no avanzó, será un
+                            <strong>fast-forward</strong> (merge rápido).</p>
+                        `,
+                        comando_esperado: 'git merge feature/navbar',
+                        salida: 'Updating a3b8d1b..7f3a2c1\nFast-forward\n navbar.html | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 navbar.html',
+                        pista: 'Escribe: git merge feature/navbar'
+                    },
+                    {
+                        titulo: 'Eliminar la rama fusionada',
+                        instruccion: `
+                            <p>La rama ya fue fusionada, así que puedes
+                            eliminarla para mantener el repo limpio.</p>
+                            <p>Usa <code>git branch -d</code> para eliminarla
+                            de forma segura (solo funciona si ya fue fusionada).</p>
+                        `,
+                        comando_esperado: 'git branch -d feature/navbar',
+                        salida: 'Deleted branch feature/navbar (was 7f3a2c1).',
+                        pista: 'Escribe: git branch -d feature/navbar'
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Práctica interactiva: aprende a usar git init y git clone en un simulador de terminal.">
+    <title>Práctica: init y clone (Práctico) — Malleus Codeficarum</title>
+
+    <!-- Google Fonts — Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body class="sim-fullpage-body">
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Breadcrumb ===== -->
+    <div class="lesson-breadcrumb sim-breadcrumb">
+        <div class="container-fluid">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Práctica: init y clone (Práctico)</span>
+        </div>
+    </div>
+
+    <!-- ===== Full-Page Simulator (2 panels) ===== -->
+    <main class="sim-fullpage-main">
+
+        <div class="sim-container sim-fullpage sim-two-panels">
+
+            <!-- ── Panel Instrucciones ── -->
+            <div class="sim-panel-instructions">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-book"></i> Instrucciones</span>
+                    <span class="sim-step-badge">Paso <span id="simPasoNum">1</span> de <span
+                            id="simPasoTotal">6</span></span>
+                </div>
+                <div class="sim-instructions-body">
+                    <h3 class="sim-step-title" id="simTituloPaso"></h3>
+                    <div class="sim-step-content" id="simContenidoPaso"></div>
+                    <div class="sim-hint" id="simPista"></div>
+                </div>
+                <div class="sim-instructions-footer">
+                    <button class="sim-btn sim-btn-hint" id="simBtnPista" type="button">
+                        <i class="bi bi-lightbulb"></i> Pista
+                    </button>
+                    <button class="sim-btn sim-btn-reset" id="simBtnReset" type="button">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reiniciar
+                    </button>
+                </div>
+                <div class="sim-progress">
+                    <div class="sim-progress-bar-bg">
+                        <div class="sim-progress-bar-fill" id="simProgressBar"></div>
+                    </div>
+                    <span class="sim-progress-text" id="simProgressText">0 / 6</span>
+                </div>
+            </div>
+
+            <!-- ── Panel Terminal (única terminal, incluye output) ── -->
+            <div class="sim-panel-terminal">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-terminal"></i> Terminal</span>
+                    <span class="sim-terminal-hint">ls · pwd · clear</span>
+                </div>
+                <div class="sim-terminal-body" id="simTerminalBody"></div>
+                <div class="sim-terminal-input-row">
+                    <span class="sim-prompt" id="simTerminalPrompt">$</span>
+                    <input type="text" id="simTerminalInput" placeholder="Escribe un comando..." autocomplete="off"
+                        spellcheck="false">
+                    <button class="sim-btn-send" id="simBtnEnviar" type="button">Enviar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ===== Lesson Nav (compact) ===== -->
+    <nav class="sim-fullpage-nav">
+        <a href="repositorios-init-clone.html" class="lesson-nav-link prev">
+            <i class="bi bi-arrow-left"></i> Teórico
+        </a>
+        <a href="staging-y-commits.html" class="lesson-nav-link next">
+            Siguiente: Staging y Commits <i class="bi bi-arrow-right"></i>
+        </a>
+    </nav>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../../static/js/main.js"></script>
+
+    <!-- Git Simulator -->
+    <script src="../../static/js/git-simulator.js"></script>
+
+    <!-- Configuración del ejercicio -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            GitSimulator.init({
+                pasos: [
+                    {
+                        titulo: 'Crear una carpeta de proyecto',
+                        instruccion: `
+                            <p>Primero, crea una carpeta para tu proyecto usando
+                            <code>mkdir</code> (<em>make directory</em>).</p>
+                            <p>Crea una carpeta llamada <strong>mi-proyecto</strong>.</p>
+                            <p><strong>Tip:</strong> después de crearla puedes escribir
+                            <code>ls</code> para ver que la carpeta aparece.</p>
+                        `,
+                        comando_esperado: 'mkdir mi-proyecto',
+                        salida: '',
+                        pista: 'Escribe: mkdir mi-proyecto',
+                        fs_cambios: function (fs) {
+                            fs['~'].children['mi-proyecto'] = {
+                                type: 'dir',
+                                children: {}
+                            };
+                        }
+                    },
+                    {
+                        titulo: 'Entrar a la carpeta',
+                        instruccion: `
+                            <p>Entra a la carpeta que acabas de crear con
+                            <code>cd</code> (<em>change directory</em>).</p>
+                            <p>Fíjate que el prompt cambiará para mostrar
+                            en qué carpeta estás.</p>
+                        `,
+                        comando_esperado: 'cd mi-proyecto',
+                        salida: '',
+                        nuevo_cwd: '~/mi-proyecto',
+                        pista: 'Escribe: cd mi-proyecto'
+                    },
+                    {
+                        titulo: 'Inicializar el repositorio',
+                        instruccion: `
+                            <p>Usa <code>git init</code> para convertir esta carpeta
+                            en un <strong>repositorio de Git</strong>.</p>
+                            <p>Esto crea la carpeta oculta <code>.git/</code> con
+                            toda la estructura que Git necesita.</p>
+                            <p><strong>Tip:</strong> después de init, usa
+                            <code>ls -la</code> para ver la carpeta <code>.git/</code>
+                            que se creó.</p>
+                        `,
+                        comando_esperado: 'git init',
+                        salida: 'Initialized empty Git repository in ~/mi-proyecto/.git/',
+                        pista: 'Escribe: git init',
+                        fs_cambios: function (fs) {
+                            const proj = fs['~'].children['mi-proyecto'];
+                            proj.children['.git'] = {
+                                type: 'dir',
+                                children: {
+                                    'HEAD': { type: 'file' },
+                                    'config': { type: 'file' },
+                                    'objects': { type: 'dir', children: {} },
+                                    'refs': { type: 'dir', children: {} }
+                                }
+                            };
+                        }
+                    },
+                    {
+                        titulo: 'Verificar el estado del repo',
+                        instruccion: `
+                            <p>Usa <code>git status</code> para verificar que el
+                            repositorio se creó correctamente.</p>
+                            <p>Verás que estás en la rama <code>main</code>,
+                            sin commits aún, y sin archivos por rastrear.</p>
+                        `,
+                        comando_esperado: 'git status',
+                        salida: 'On branch main\n\nNo commits yet\n\nnothing to commit (create/copy files and use "git add" to track)',
+                        pista: 'Escribe: git status'
+                    },
+                    {
+                        titulo: 'Clonar un repositorio de GitHub',
+                        instruccion: `
+                            <p>Ahora practica <code>git clone</code>. Clona el
+                            repositorio de ejemplo de GitHub:</p>
+                            <p><code>git clone https://github.com/octocat/Hello-World.git</code></p>
+                            <p>Esto descarga <strong>todo el proyecto</strong>
+                            con su historial completo.</p>
+                        `,
+                        comando_esperado: 'git clone https://github.com/octocat/Hello-World.git',
+                        salida: 'Cloning into \'Hello-World\'...\nremote: Enumerating objects: 13, done.\nremote: Total 13 (delta 0), reused 0 (delta 0)\nReceiving objects: 100% (13/13), done.\nResolving deltas: 100% (1/1), done.',
+                        pista: 'Escribe: git clone https://github.com/octocat/Hello-World.git',
+                        fs_cambios: function (fs) {
+                            const proj = fs['~'].children['mi-proyecto'];
+                            proj.children['Hello-World'] = {
+                                type: 'dir',
+                                children: {
+                                    '.git': { type: 'dir', children: {} },
+                                    'README': { type: 'file' }
+                                }
+                            };
+                        }
+                    },
+                    {
+                        titulo: 'Verificar lo que se descargó',
+                        instruccion: `
+                            <p>Usa <code>ls</code> para ver la carpeta
+                            <strong>Hello-World</strong> que se acaba de clonar.</p>
+                            <p>Deberías ver la carpeta del proyecto descargado
+                            junto con la carpeta <code>.git</code> de tu repo local.</p>
+                        `,
+                        comando_esperado: 'ls',
+                        salida: '.git/    Hello-World/',
+                        pista: 'Escribe: ls'
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>

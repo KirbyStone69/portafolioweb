@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Práctica interactiva: aprende a usar git remote, push, pull y fetch en un simulador de terminal.">
+    <title>Remotos: push, pull y fetch (Práctico) — Malleus Codeficarum</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body class="sim-fullpage-body">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="lesson-breadcrumb sim-breadcrumb">
+        <div class="container-fluid">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Remotos: push, pull y fetch (Práctico)</span>
+        </div>
+    </div>
+
+    <!-- Full-Page Simulator -->
+    <main class="sim-fullpage-main">
+
+        <div class="sim-container sim-fullpage sim-two-panels">
+
+            <!-- Panel Instrucciones -->
+            <div class="sim-panel-instructions">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-book"></i> Instrucciones</span>
+                    <span class="sim-step-badge">Paso <span id="simPasoNum">1</span> de <span
+                            id="simPasoTotal">8</span></span>
+                </div>
+                <div class="sim-instructions-body">
+                    <h3 class="sim-step-title" id="simTituloPaso"></h3>
+                    <div class="sim-step-content" id="simContenidoPaso"></div>
+                    <div class="sim-hint" id="simPista"></div>
+                </div>
+                <div class="sim-instructions-footer">
+                    <button class="sim-btn sim-btn-hint" id="simBtnPista" type="button">
+                        <i class="bi bi-lightbulb"></i> Pista
+                    </button>
+                    <button class="sim-btn sim-btn-reset" id="simBtnReset" type="button">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reiniciar
+                    </button>
+                </div>
+                <div class="sim-progress">
+                    <div class="sim-progress-bar-bg">
+                        <div class="sim-progress-bar-fill" id="simProgressBar"></div>
+                    </div>
+                    <span class="sim-progress-text" id="simProgressText">0 / 8</span>
+                </div>
+            </div>
+
+            <!-- Panel Terminal -->
+            <div class="sim-panel-terminal">
+                <div class="sim-panel-header">
+                    <span class="sim-panel-title"><i class="bi bi-terminal"></i> Terminal</span>
+                    <span class="sim-terminal-hint">ls · pwd · clear</span>
+                </div>
+                <div class="sim-terminal-body" id="simTerminalBody"></div>
+                <div class="sim-terminal-input-row">
+                    <span class="sim-prompt" id="simTerminalPrompt">$</span>
+                    <input type="text" id="simTerminalInput" placeholder="Escribe un comando..." autocomplete="off"
+                        spellcheck="false">
+                    <button class="sim-btn-send" id="simBtnEnviar" type="button">Enviar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Lesson Nav -->
+    <nav class="sim-fullpage-nav">
+        <a href="remotos-push-pull.html" class="lesson-nav-link prev">
+            <i class="bi bi-arrow-left"></i> Remotos (Teórico)
+        </a>
+        <a href="evaluacion.html" class="lesson-nav-link next">
+            Siguiente: Evaluación Final <i class="bi bi-arrow-right"></i>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/git-simulator.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            GitSimulator.init({
+                pasos: [
+                    {
+                        titulo: 'Verificar el estado del repo',
+                        instruccion: `
+                            <p>Estás en un repositorio con un commit inicial.
+                            Usa <code>git status</code> para verificar que todo
+                            está limpio antes de conectar un remoto.</p>
+                        `,
+                        comando_esperado: 'git status',
+                        salida: 'On branch main\nnothing to commit, working tree clean',
+                        pista: 'Escribe: git status',
+                        fs_cambios: function (fs) {
+                            fs['~'].children['.git'] = { type: 'dir', children: {} };
+                            fs['~'].children['index.html'] = { type: 'file' };
+                            fs['~'].children['styles.css'] = { type: 'file' };
+                        }
+                    },
+                    {
+                        titulo: 'Agregar un remoto',
+                        instruccion: `
+                            <p>Conecta tu repositorio local con uno remoto en GitHub.
+                            Usa <code>git remote add</code>:</p>
+                            <p><code>git remote add origin https://github.com/tu-usuario/mi-web.git</code></p>
+                            <p>Esto configura <strong>origin</strong> como el
+                            nombre del remoto que apunta a esa URL.</p>
+                        `,
+                        comando_esperado: 'git remote add origin https://github.com/tu-usuario/mi-web.git',
+                        salida: '',
+                        pista: 'Escribe: git remote add origin https://github.com/tu-usuario/mi-web.git'
+                    },
+                    {
+                        titulo: 'Verificar el remoto',
+                        instruccion: `
+                            <p>Usa <code>git remote -v</code> para confirmar que el
+                            remoto se configuró correctamente.</p>
+                            <p>Deberías ver dos líneas: una para <strong>fetch</strong>
+                            (descargar) y otra para <strong>push</strong> (subir).</p>
+                        `,
+                        comando_esperado: 'git remote -v',
+                        salida: 'origin  https://github.com/tu-usuario/mi-web.git (fetch)\norigin  https://github.com/tu-usuario/mi-web.git (push)',
+                        pista: 'Escribe: git remote -v'
+                    },
+                    {
+                        titulo: 'Subir al remoto por primera vez',
+                        instruccion: `
+                            <p>Sube tu rama <code>main</code> al remoto con el flag
+                            <code>-u</code> para configurar el tracking.</p>
+                            <p><code>git push -u origin main</code></p>
+                            <p>Después de esto, solo necesitas <code>git push</code>.</p>
+                        `,
+                        comando_esperado: 'git push -u origin main',
+                        salida: 'Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nDelta compression using up to 4 threads\nCompressing objects: 100% (3/3), done.\nWriting objects: 100% (5/5), 1.23 KiB | 1.23 MiB/s, done.\nTotal 5 (delta 0), reused 0 (delta 0)\nTo https://github.com/tu-usuario/mi-web.git\n * [new branch]      main -> main\nBranch \'main\' set up to track remote branch \'main\' from \'origin\'.',
+                        pista: 'Escribe: git push -u origin main'
+                    },
+                    {
+                        titulo: 'Simular un cambio remoto',
+                        instruccion: `
+                            <p>Imagina que un compañero hizo cambios en GitHub.
+                            Usa <code>git fetch origin</code> para descargar
+                            esos cambios <strong>sin fusionarlos</strong> todavía.</p>
+                            <p>Esto es la forma segura de ver qué hay nuevo.</p>
+                        `,
+                        comando_esperado: 'git fetch origin',
+                        salida: 'remote: Enumerating objects: 4, done.\nremote: Counting objects: 100% (4/4), done.\nremote: Compressing objects: 100% (2/2), done.\nFrom https://github.com/tu-usuario/mi-web\n   a3b8d1b..f2c9e4d  main       -> origin/main',
+                        pista: 'Escribe: git fetch origin'
+                    },
+                    {
+                        titulo: 'Ver qué cambió',
+                        instruccion: `
+                            <p>Usa <code>git log HEAD..origin/main --oneline</code>
+                            para ver los commits que tiene el remoto y tú no.</p>
+                            <p>Esto te permite revisar los cambios antes de
+                            integrarlos a tu código.</p>
+                        `,
+                        comando_esperado: 'git log HEAD..origin/main --oneline',
+                        salida: 'f2c9e4d Actualiza estilos del footer\nb8a1c3e Corrige typo en index.html',
+                        pista: 'Escribe: git log HEAD..origin/main --oneline'
+                    },
+                    {
+                        titulo: 'Fusionar los cambios remotos',
+                        instruccion: `
+                            <p>Los cambios se ven bien. Ahora fusiónalo con
+                            <code>git merge origin/main</code>.</p>
+                            <p>Esto integra los commits remotos en tu rama local.
+                            Es equivalente a lo que <code>git pull</code> hace
+                            automáticamente (fetch + merge).</p>
+                        `,
+                        comando_esperado: 'git merge origin/main',
+                        salida: 'Updating a3b8d1b..f2c9e4d\nFast-forward\n index.html  | 2 +-\n styles.css  | 5 +++--\n 2 files changed, 4 insertions(+), 3 deletions(-)',
+                        pista: 'Escribe: git merge origin/main'
+                    },
+                    {
+                        titulo: 'Verificar el resultado',
+                        instruccion: `
+                            <p>Finalmente usa <code>git log --oneline</code>
+                            para confirmar que tu historial ahora incluye
+                            los commits remotos.</p>
+                        `,
+                        comando_esperado: ['git log --oneline', 'git log'],
+                        salida: 'f2c9e4d (HEAD -> main, origin/main) Actualiza estilos del footer\nb8a1c3e Corrige typo en index.html\na3b8d1b Commit inicial: estructura del proyecto',
+                        pista: 'Escribe: git log --oneline'
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+
+</html>

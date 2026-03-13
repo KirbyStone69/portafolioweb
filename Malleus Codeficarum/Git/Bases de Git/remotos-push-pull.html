@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Remotos en Git — Aprende a conectar tu repositorio con GitHub usando push, pull y fetch.">
+    <title>Remotos: push, pull y fetch (Teórico) — Malleus Codeficarum</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="lesson-breadcrumb">
+        <div class="container">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Remotos: push, pull y fetch (Teórico)</span>
+        </div>
+    </div>
+
+    <!-- Lesson Content -->
+    <main class="lesson-container">
+        <div class="container">
+
+            <div class="lesson-hero">
+                <span class="lesson-tag-large tag-theory">Teoría</span>
+                <h1><i class="bi bi-cloud-arrow-up"></i> Remotos: push, pull y fetch</h1>
+                <p class="lesson-subtitle">Teórico — Conecta tu repositorio local con el mundo exterior:
+                    sincroniza código con GitHub, GitLab o cualquier servidor remoto.</p>
+            </div>
+
+            <!-- Sección 1: ¿Qué es un remoto? -->
+            <section class="lesson-section" id="que-es-remoto">
+                <h2><span class="section-number">01</span> ¿Qué es un repositorio remoto?</h2>
+
+                <p>
+                    Un <strong>remoto</strong> (remote) es una copia de tu repositorio que vive en otro
+                    lugar — normalmente en un servidor como <strong>GitHub</strong>, <strong>GitLab</strong>
+                    o <strong>Bitbucket</strong>. Es lo que permite que varias personas trabajen en el
+                    mismo proyecto.
+                </p>
+
+                <div class="comparison-grid" style="margin-top: 1.5rem;">
+                    <div class="comparison-col">
+                        <h5><i class="bi bi-laptop" style="color: #60a5fa;"></i> Local</h5>
+                        <p>Tu copia del repositorio, en <strong>tu computadora</strong>.
+                            Aquí haces commits, creas ramas, y trabajas.</p>
+                    </div>
+                    <div class="comparison-col highlight">
+                        <h5><i class="bi bi-cloud" style="color: #a78bfa;"></i> Remoto</h5>
+                        <p>La copia en el <strong>servidor</strong>. Sirve como respaldo,
+                            punto central para el equipo, y para compartir código.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <i class="bi bi-lightbulb"></i>
+                    <div>
+                        <strong>Analogía:</strong> Tu local es como un cuaderno personal.
+                        El remoto es como un Google Drive compartido. Trabajas en tu cuaderno
+                        y cuando quieres que otros vean tus cambios, los subes (push).
+                        Cuando quieres ver qué hicieron otros, los bajas (pull).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 2: origin -->
+            <section class="lesson-section" id="origin">
+                <h2><span class="section-number">02</span> <code>origin</code> — El remoto principal</h2>
+
+                <p>
+                    Cuando clonas un repositorio con <code>git clone</code>, Git automáticamente
+                    configura un remoto llamado <strong>origin</strong> que apunta al URL original.
+                    Es una convención — puedes tener varios remotos con diferentes nombres.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>Administrar remotos</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code># Ver los remotos configurados
+git remote -v
+
+# Agregar un remoto manualmente
+git remote add origin https://github.com/tu-usuario/tu-repo.git
+
+# Cambiar el URL de un remoto
+git remote set-url origin https://github.com/tu-usuario/nuevo-repo.git
+
+# Eliminar un remoto
+git remote remove origin</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 3: git push -->
+            <section class="lesson-section" id="git-push">
+                <h2><span class="section-number">03</span> <code>git push</code> — Subir cambios</h2>
+
+                <p>
+                    <code>git push</code> envía tus commits locales al repositorio remoto.
+                    Los demás miembros del equipo podrán ver tus cambios después del push.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>Sintaxis de git push</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code># Push básico (la rama actual al remoto origin)
+git push origin main
+
+# Después del primer push, puedes hacer solo:
+git push
+
+# Push de una rama feature
+git push origin feature/login
+
+# Primer push de una rama nueva (configura tracking)
+git push -u origin feature/login</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="bi bi-info-circle"></i>
+                    <div>
+                        El flag <code>-u</code> (o <code>--set-upstream</code>) vincula tu rama local
+                        con la rama remota. Después de usarlo una vez, solo necesitas escribir
+                        <code>git push</code> sin especificar el remoto y la rama.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 4: git pull -->
+            <section class="lesson-section" id="git-pull">
+                <h2><span class="section-number">04</span> <code>git pull</code> — Bajar y fusionar</h2>
+
+                <p>
+                    <code>git pull</code> descarga los cambios del remoto <strong>y los fusiona</strong>
+                    automáticamente con tu rama local. Es la forma más común de actualizar tu código.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>Sintaxis de git pull</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code># Pull básico (descarga + merge)
+git pull origin main
+
+# Si ya tienes tracking configurado:
+git pull
+
+# Pull con rebase (reorganiza commits en lugar de merge)
+git pull --rebase</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <div>
+                        <strong>Importante:</strong> <code>git pull</code> puede causar conflictos
+                        si tú y alguien más modificaron las mismas líneas. Se resuelven igual que
+                        los conflictos de merge: editar, <code>git add</code>, y <code>git commit</code>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 5: git fetch -->
+            <section class="lesson-section" id="git-fetch">
+                <h2><span class="section-number">05</span> <code>git fetch</code> — Descargar sin fusionar</h2>
+
+                <p>
+                    <code>git fetch</code> descarga los cambios del remoto pero <strong>no los
+                        fusiona</strong>. Te permite ver qué hay de nuevo antes de decidir si integrarlos.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>fetch vs pull</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code># Descargar sin fusionar
+git fetch origin
+
+# Ver qué cambió en el remoto
+git log HEAD..origin/main --oneline
+
+# Si te convence, fusiona manualmente
+git merge origin/main</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-grid" style="margin-top: 1.5rem;">
+                    <div class="comparison-col">
+                        <h5><i class="bi bi-cloud-download"></i> git fetch</h5>
+                        <p>Descarga cambios. <strong>No modifica</strong> tu código local.
+                            Es seguro — puedes revisar antes de fusionar.</p>
+                    </div>
+                    <div class="comparison-col highlight">
+                        <h5><i class="bi bi-cloud-arrow-down"></i> git pull</h5>
+                        <p>Descarga + merge automático. <strong>Modifica</strong> tu código.
+                            Más rápido pero puede causar conflictos inesperados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 6: Flujo completo -->
+            <section class="lesson-section" id="flujo-completo">
+                <h2><span class="section-number">06</span> Flujo completo de trabajo con remotos</h2>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-arrow-repeat"></i>
+                        <h4>Ciclo diario de trabajo</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code># 1. Antes de empezar a trabajar, actualizar
+git pull origin main
+
+# 2. Crear una rama para tu tarea
+git checkout -b feature/nueva-funcionalidad
+
+# 3. Trabajar: editar, add, commit (varias veces)
+git add .
+git commit -m "Implementa nueva funcionalidad"
+
+# 4. Subir tu rama al remoto
+git push -u origin feature/nueva-funcionalidad
+
+# 5. Crear un Pull Request en GitHub (web)
+# 6. Después del merge en GitHub, actualizar local
+git checkout main
+git pull origin main</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== CUESTIONARIO ===== -->
+            <section class="quiz-section" id="cuestionario">
+                <div class="quiz-header">
+                    <h2><i class="bi bi-patch-question"></i> Cuestionario de evaluación</h2>
+                    <p>Demuestra que entiendes cómo funcionan los remotos en Git.</p>
+                </div>
+
+                <form id="quizForm">
+
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">1. ¿Qué es <code>origin</code> en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El primer commit del repositorio.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El nombre por defecto del repositorio remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La rama principal del proyecto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un comando para crear repositorios.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">2. ¿Qué hace <code>git push</code>?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Descarga cambios del remoto al local.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Crea un commit nuevo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Envía tus commits locales al repositorio remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Elimina una rama remota.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">3. ¿Cuál es la diferencia entre <code>fetch</code> y
+                            <code>pull</code>?
+                        </p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>fetch</code> solo descarga;
+                                    <code>pull</code> descarga y fusiona.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>pull</code> solo descarga;
+                                    <code>fetch</code> descarga y fusiona.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Son exactamente iguales.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>fetch</code> es para GitHub y
+                                    <code>pull</code> para GitLab.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">4. ¿Para qué sirve el flag <code>-u</code> en
+                            <code>git push -u</code>?
+                        </p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para hacer push de forma urgente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para forzar el push.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para crear una rama nueva localmente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para vincular la rama local con la remota (tracking).</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">5. ¿Cuál es el primer paso recomendado antes de empezar
+                            a trabajar cada día?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git push</code> para subir lo de ayer.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git pull</code> para descargar los cambios
+                                    más recientes.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git init</code> para iniciar un repo nuevo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git branch -d main</code> para limpiar.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <div class="quiz-actions">
+                        <button type="button" class="btn-quiz btn-check-quiz" id="btnCheckQuiz">
+                            <i class="bi bi-check-circle"></i> Comprobar respuestas
+                        </button>
+                        <button type="button" class="btn-quiz btn-retry-quiz" id="btnRetryQuiz" style="display:none;">
+                            <i class="bi bi-arrow-repeat"></i> Reintentar
+                        </button>
+                    </div>
+
+                    <div class="quiz-results" id="quizResults" style="display:none;">
+                        <div class="results-icon" id="resultsIcon"></div>
+                        <h3 id="resultsTitle"></h3>
+                        <p id="resultsText"></p>
+                        <div class="results-score">
+                            <span id="resultsScore"></span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Navegación -->
+            <div class="lesson-nav">
+                <a href="ramas-y-merge-practica.html" class="lesson-nav-link prev">
+                    <i class="bi bi-arrow-left"></i> Anterior: Ramas y Merge (Práctico)
+                </a>
+                <a href="remotos-push-pull-practica.html" class="lesson-nav-link next">
+                    Siguiente: Remotos (Práctico) <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&gt;_ Malleus Codeficarum <span class="footer-separator">|</span> El grimorio del código</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/quiz.js"></script>
+
+</body>
+
+</html>

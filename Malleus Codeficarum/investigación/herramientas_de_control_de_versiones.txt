@@ -1,0 +1,130 @@
+﻿Evaluación de un sistema de control de versiones con una plataforma web de capacitación inicial para reducir la concentración del trabajo en proyectos universitarios de programación
+
+
+Eder Omar Zúñiga Zavala - 2430206
+Dirigido al sector terciario, educación.
+
+
+Problema.
+En los proyectos universitarios de programación en equipo, es frecuente que las tareas de desarrollo se concentren en uno o pocos integrantes. Este desequilibrio limita las oportunidades de aprendizaje práctico del resto del grupo y dificulta una evaluación objetiva del desempeño individual.
+
+
+Aunque existen sistemas de control de versiones que permiten registrar y transparentar las contribuciones, su adopción suele ser desigual debido a la falta de una capacitación inicial estructurada. Esta situación impide una distribución equitativa del trabajo y reduce la efectividad del aprendizaje colaborativo.
+
+
+Objetivo General:
+Evaluar el impacto de la implementación de un sistema de control de versiones, acompañado de un entorno de aprendizaje interactivo, en la distribución del trabajo y la transparencia de las contribuciones dentro de proyectos universitarios de programación en equipo.
+
+
+Objetivos Específicos
+1. Desarrollar un bootcamp interactivo que estandarice las competencias básicas en herramientas de control de versiones, estableciendo una base técnica común para todos los estudiantes.
+2. Integrar el sistema de control de versiones como la herramienta principal de gestión del aprendizaje para el seguimiento, entrega y organización de los proyectos de programación.
+3. Analizar el impacto en la participación grupal a través de métricas de contribución objetivas, verificando si la capacitación y el uso de la herramienta reducen la concentración de tareas en pocos integrantes.
+
+
+
+
+Pregunta de Investigación
+¿La implementación de un sistema de control de versiones, acompañado de un protocolo de capacitación inicial, reduce la concentración del trabajo en uno o pocos integrantes en proyectos universitarios de programación en equipo?
+
+
+Justificación
+La implementación de un sistema de control de versiones permite centralizar el desarrollo del código y registrar de manera objetiva las contribuciones individuales, favoreciendo la transparencia y una distribución más equitativa del trabajo.
+
+
+Asimismo, la creación de un entorno de aprendizaje interactivo basado en una plataforma web se justifica como un medio para garantizar que todos los estudiantes adquieran competencias básicas en el uso de estas herramientas antes de integrarse al trabajo en equipo. Esto reduce las diferencias de conocimiento previo y mejora la participación activa de todos los integrantes.
+
+
+La combinación de ambas tecnologías no solo mejora los procesos de enseñanza–aprendizaje, sino que también replica prácticas ampliamente utilizadas en el ámbito laboral del desarrollo de software, facilitando la transición de los estudiantes a entornos profesionales y fortaleciendo competencias técnicas relevantes para su futura inserción laboral.
+
+
+Viabilidad
+El proyecto es viable en el contexto universitario, ya que se apoya en tecnologías accesibles y de uso común en el área de la informática. El desarrollo de una plataforma web con fines formativos no requiere infraestructuras complejas y puede realizarse de manera gradual conforme avanza la investigación.
+El uso de un sistema de control de versiones resulta igualmente factible, al tratarse de una herramienta ampliamente conocida y utilizada tanto en entornos educativos como profesionales. Su aplicación en proyectos de programación en equipo se integra de forma natural a las dinámicas habituales de trabajo de los estudiantes.
+
+
+Asimismo, la investigación es viable desde el punto de vista académico, al contar con una población adecuada para la aplicación del entorno propuesto y la evaluación de la distribución del trabajo en proyectos colaborativos. Esto permite obtener información relevante sin interferir con el desarrollo normal de las actividades académicas.
+
+
+Hipótesis de Investigación
+La implementación de un sistema de control de versiones, acompañado de una capacitación inicial mediante un entorno de aprendizaje interactivo, reduce la concentración del trabajo en uno o pocos integrantes en proyectos universitarios de programación en equipo.
+
+
+2 Marco Teórico
+2.I El Aprendizaje Colaborativo
+2.1.1. El fenómeno de la reducción de esfuerzo (Holgazanería Social)
+En el trabajo grupal surge con frecuencia la tendencia de algunos integrantes a disminuir su rendimiento individual cuando forman parte de un colectivo. Este comportamiento se denomina holgazanería social o fenómeno del "polizón".[1]
+Impacto del aprendizaje grupal: La evidencia indica que cuando un equipo logra un progreso real en sus conocimientos compartidos, la tendencia a reducir el esfuerzo disminuye. El aprendizaje conjunto actúa como un factor motivador que mantiene el compromiso de los miembros.
+Evolución del compromiso: Aunque el esfuerzo inicial depende de la disposición personal de cada estudiante, a largo plazo es la dinámica y el ritmo de trabajo del equipo lo que previene la falta de participación.
+2.1.2. Rendimiento académico en Fundamentos de Programación
+La enseñanza de la programación representa un reto complejo en la educación superior debido a su alta exigencia técnica.[2]
+Homogeneidad de conocimientos: Establecer una base sólida de competencias básicas mediante entornos interactivos permite que todos los estudiantes inicien con capacidades similares. Esto facilita una participación equilibrada en proyectos posteriores.
+2.1.3. Contexto de la Innovación Educativa Universitaria
+La innovación en el nivel superior se enfoca en desplazar el protagonismo hacia el estudiante, transformando el aula en un espacio de colaboración activa.[3]
+Nuevos formatos de enseñanza: La integración de recursos digitales y plataformas interactivas no solo moderniza el curso, sino que ayuda a mantener el interés del estudiante.
+2.2 Sistemas de Control de Versiones en Educación
+2.2.1. Git como plataforma de gestión académica
+El uso de Git permite sustituir los sistemas de gestión de aprendizaje por herramientas reales de desarrollo de software.[4]
+Seguimiento del progreso: A diferencia de las plataformas estáticas, esta herramienta registra cada avance, permitiendo al docente evaluar el proceso continuo de construcción del código y no solo el archivo final.
+Estandarización profesional: El estudiante se familiariza con el flujo de trabajo técnico vigente, integrando la entrega de trabajos con la práctica profesional.
+2.2.2. Impacto en la colaboración y el aprendizaje
+GitHub mejora la organización de los equipos de programación, especialmente en aquellos con poca experiencia en trabajo conjunto.[5]
+Competencias colaborativas: Obliga al uso de protocolos como solicitudes de integración y resolución de conflictos, transformando la tarea en un esfuerzo coordinado.
+Resultados académicos: El uso estructurado de estas plataformas incrementa el dominio técnico y la capacidad de organización colectiva de los estudiantes.
+2.2.3. Identificación de disparidades en la contribución
+La actividad en los repositorios permite medir de forma objetiva el nivel de participación individual dentro de un proyecto.[6]
+Detección de perfiles: El análisis de métricas (como la frecuencia de envíos de código) ayuda a identificar a los integrantes que no contribuyen equitativamente o que trabajan de forma aislada.
+Intervención docente: Estos datos permiten al profesor detectar problemas de distribución de carga de trabajo a tiempo y realizar ajustes antes de la evaluación final.
+2.3 Evaluación Mediante Métricas de Software
+2.3.1 Correlación entre métricas de las herramientas de control de versiones y el desempeño académico
+El uso de datos extraídos de plataformas de desarrollo permite establecer una relación directa entre el esfuerzo técnico y la calificación final del curso.[7]
+Indicadores de actividad: Jialin Cui y su equipo demuestran que métricas como el número de envíos de código (commits) y las líneas de código modificadas son predictores estadísticos del rendimiento. Existe una correlación positiva: a mayor actividad constante en el repositorio, mejor es el desempeño académico del estudiante.[7]
+Consistencia en el trabajo: El análisis estadístico revela que no solo importa la cantidad de código, sino la frecuencia del trabajo. Los estudiantes con mejores resultados mantienen una participación regular, a diferencia de aquellos que concentran sus aportes al final de los plazos.
+2.3.2 Evaluación integral de contribuciones individuales
+Para obtener una medición objetiva del trabajo en equipo, no basta con analizar el código; es necesario cruzar distintas fuentes de datos.
+Combinación de datos: Christopher Hundhausen propone un modelo que integra las métricas de GitHub con los registros de comunicación (chats) y las evaluaciones entre compañeros. Esta visión conjunta permite distinguir quién lidera técnicamente y quién coordina la comunicación del grupo.[8]
+2.3.3 Pensamiento computacional y resolución de problemas
+La evaluación objetiva también debe considerar cómo el estudiante desarrolla su capacidad lógica desde el inicio de la carrera.
+Resolución de problemas: La investigación de la Universidad Nacional Autónoma de Tayacaja destaca que el pensamiento computacional se fortalece mediante metodologías basadas en retos prácticos. Evaluar cómo un alumno estructura una solución antes de programarla es clave para medir su potencial de éxito. 
+Nivelación inicial: Identificar el nivel de pensamiento lógico de los alumnos de nuevo ingreso permite diseñar estrategias de apoyo. Esto asegura que todos los integrantes del equipo tengan las herramientas mentales necesarias para enfrentar los proyectos de programación sin depender exclusivamente de sus compañeros.[9]
+2.4 Innovación, Gamificación y Nuevos Entornos
+2.4.1. Autocorrección y estrategias lúdicas en la programación
+La implementación de mecanismos que permitan al estudiante validar su progreso de forma autónoma es clave para mantener un ritmo de trabajo constante.
+Retroalimentación interactiva: Según Serrano Collado, los sistemas de autocorrección reducen la dependencia del docente y permiten una práctica más intensiva. Esto facilita que el alumno corrija errores en tiempo real, mejorando la asimilación de conceptos técnicos antes de integrarse a un proyecto grupal.[10]
+El juego como recurso pedagógico: Martínez Allende et al. sostienen que el uso de dinámicas lúdicas ayuda a estructurar el pensamiento lógico y la elaboración de algoritmos. Estas estrategias transforman el aprendizaje de la programación en un proceso más atractivo, lo que incentiva una participación más activa y reduce el desinterés.[11]
+2.4.2. Formatos de capacitación intensiva (Bootcamp)
+Para asegurar que todos los integrantes de un equipo puedan contribuir de manera equitativa, es necesario establecer un punto de partida técnico común.
+Nivelación transdisciplinar: Isabela Ortiz Jaramillo propone el diseño de "bootcamps" o entornos de aprendizaje intensivos para estandarizar las competencias básicas. Este formato permite que, en un periodo corto, los estudiantes de reciente ingreso adquieran las habilidades necesarias en herramientas de versionado y lógica, evitando que la brecha de conocimientos genere desigualdad en el esfuerzo grupal.[12]
+2.4.3. Nuevos entornos de gestión y colaboración
+La evolución de la enseñanza universitaria exige el uso de plataformas que permitan una interacción más profunda y una gestión del aprendizaje basada en datos.
+Colaboración gamificada en entornos virtuales: Jovanović y Milosavljević analizan plataformas como VoRtex, que utilizan el metaverso para fomentar la colaboración. Estos entornos compartidos permiten que el trabajo en equipo sea visible y dinámico, dificultando que los integrantes asuman roles pasivos.[13]
+Integración de Inteligencia Artificial (IA) y medios digitales: Campbell Rodríguez destaca que la IA en los sistemas de gestión permite personalizar la enseñanza según el desempeño de cada alumno, detectando de forma automática quién necesita apoyo para integrarse al equipo. Asimismo, Sofi-Karim et al. resaltan que el uso de plataformas y aplicaciones innovadoras rompe con la rigidez de los sistemas tradicionales, favoreciendo un entorno de aprendizaje más flexible y conectado con la realidad tecnológica actual.[14], [15].
+2.5. Fundamentación para la Implementación Técnica y Normativa
+2.5.1. Antecedentes y herramientas del entorno
+La transición de sistemas de gestión tradicionales hacia herramientas profesionales como Git se fundamenta en la necesidad de alinear la formación académica con los estándares de la industria [4]. Esta evolución tecnológica permite que el seguimiento del estudiante pase de una revisión estática a un monitoreo continuo y transparente del flujo de trabajo, lo que incrementa el compromiso desde el inicio del curso [5].
+2.5.2. Temas legales y criterios de corrección
+El uso de plataformas interactivas y herramientas de corrección automática debe regirse por marcos normativos que aseguren la validez del proceso educativo.
+Licenciamiento y autoría: La implementación de software educativo se apoya frecuentemente en licencias de código abierto (como Creative Commons), las cuales permiten la libre distribución y adaptación de materiales siempre que se respete la autoría original [10].
+Regulación de la evaluación: Los sistemas de autocorrección deben cumplir con las normativas universitarias sobre evaluación, garantizando que los criterios de retroalimentación sean claros, objetivos y alineados con las competencias técnicas requeridas [10].
+2.5.3. De lo conceptual a la implementación
+Para trasladar la teoría sobre la reducción del esfuerzo individual a una ejecución práctica efectiva, es indispensable establecer protocolos de nivelación [1].
+Ejecución mediante Bootcamps: La fase de capacitación intensiva actúa como el puente entre el concepto de aprendizaje colaborativo y su aplicación real. Este formato asegura que la implementación de los sistemas de control de versiones sea viable al reducir las brechas de conocimiento previo entre los estudiantes [12].
+Validación de la propuesta: Al estandarizar las competencias básicas antes de iniciar los proyectos grupales, se garantiza que los datos de contribución registrados por las herramientas (commits y métricas) reflejen con precisión el desempeño individual y no la falta de habilidad técnica [12].
+Biografías
+
+
+[1]        C. Gabelica, S. De Maeyer, y M. C. Schippers, “Taking a free ride: How team learning affects social loafing.”, J. Educ. Psychol., vol. 114, núm. 4, pp. 716–733, may 2022, doi: 10.1037/edu0000713. 
+[2]        L. E. Narváez Díaz, M. Escalante Torres, C. M. González Segura, C. Miranda Palma, y M. Canché Euán, “Propuesta metodológica para mejorar el desempeño académico de los estudiantes en fundamentos de programación”, RIDE Rev. Iberoam. Para Investig. El Desarro. Educ., vol. 14, núm. 27, nov. 2023, doi: 10.23913/ride.v14i27.1714. 
+[3]        L. Luceño Casals, Enseñanza e Innovación Educativa en el ámbito Universitario, 1st ed. Madrid: Dykinson, 2024. 
+[4]        G. Wolf, “Using the Git Version Control System to Replace a Learning Management System”, IEEE Rev. Iberoam. Tecnol. Aprendiz., vol. 19, pp. 24–32, 2024, doi: 10.1109/RITA.2024.3368293. 
+[5]        P. Patani, S. Tiwari, y S. S. Rathore, “The impact of GitHub on students’ learning and engagement in a software engineering course”, Comput. Appl. Eng. Educ., vol. 32, núm. 5, p. e22775, sep. 2024, doi: 10.1002/cae.22775. 
+[6]        B.-A. Nguyen, H.-M. Chen, y C.-R. Dow, “Identifying nonconformities in contributions to programming projects: from an engagement perspective in improving code quality”, Behav. Inf. Technol., vol. 42, núm. 1, pp. 141–157, ene. 2023, doi: 10.1080/0144929X.2021.2017483. 
+[7]        J. Cui, R. Zhang, R. Li, Y. Song, F. Zhou, y E. Gehringer, “Correlating Students’ Class Performance Based on GitHub Metrics: A Statistical Study”, en Proceedings of the 2023 Conference on Innovation and Technology in Computer Science Education V. 1, Turku Finland: ACM, jun. 2023, pp. 526–532. doi: 10.1145/3587102.3588799. 
+[8]        C. Hundhausen, P. Conrad, O. Adesope, y A. Tariq, “Combining GitHub, Chat, and Peer Evaluation Data to Assess Individual Contributions to Team Software Development Projects”, ACM Trans. Comput. Educ., vol. 23, núm. 3, pp. 1–23, sep. 2023, doi: 10.1145/3593592. 
+[9]        Universidad Nacional Autónoma de Tayacaja Daniel Hernández Morillo et al., “Fomento del pensamiento computacional a través de la resolución de problemas en estudiantes de ingeniería de reciente ingreso en una universidad pública de la región andina del Perú”, RISTI - Rev. Ibérica Sist. E Tecnol. Informação, núm. 48, pp. 23–40, mar. 2023, doi: 10.17013/risti.48.23-40. 
+[10]        E. Serrano Collado, “Autocorrección interactiva para la enseñanza y aprendizaje de la programación”, Universidad de Granada, 2023. doi: 10.30827/Digibug.84117. 
+[11]        L. Martínez Allende, A. I. García Monroy, y E. E. Linares González, “El juego, estrategia pedagógica en la enseñanza de la programación y elaboración de algoritmos”, RIDE Rev. Iberoam. Para Investig. El Desarro. Educ., vol. 13, núm. 25, ago. 2022, doi: 10.23913/ride.v13i25.1267. 
+[12]        Ortiz Jaramillo, Isabela, “Diseño de bootcamp de programación y pensamiento computacional con enfoque transdisciplinar”, doi: 10.71590/1992/64050. 
+[13]        A. Jovanović y A. Milosavljević, “VoRtex Metaverse Platform for Gamified Collaborative Learning”, Electronics, vol. 11, núm. 3, p. 317, ene. 2022, doi: 10.3390/electronics11030317. 
+[14]        V. M. Campbell Rodríguez, “Revolucionando la Educación: Integración de Inteligencia Artificial en Sistemas de Gestión del Aprendizaje”, RIDE Rev. Iberoam. Para Investig. El Desarro. Educ., vol. 15, núm. 30, ene. 2025, doi: 10.23913/ride.v15i30.2242. 
+[15]        M. Sofi-Karim, A. O. Bali, y K. Rached, “Online education via media platforms and applications as an innovative teaching method”, Educ. Inf. Technol., vol. 28, núm. 1, pp. 507–523, ene. 2023, doi: 10.1007/s10639-022-11188-0.

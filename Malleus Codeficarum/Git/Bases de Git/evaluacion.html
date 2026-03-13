@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Evaluación final de Bases de Git — 15 preguntas que cubren todo lo aprendido en el módulo.">
+    <title>Evaluación Final: Bases de Git — Malleus Codeficarum</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="lesson-breadcrumb">
+        <div class="container">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Evaluación Final</span>
+        </div>
+    </div>
+
+    <!-- Lesson Content -->
+    <main class="lesson-container">
+        <div class="container">
+
+            <div class="lesson-hero">
+                <span class="lesson-tag-large tag-workshop">Evaluación</span>
+                <h1><i class="bi bi-mortarboard"></i> Evaluación Final: Bases de Git</h1>
+                <p class="lesson-subtitle">15 preguntas que cubren todo lo aprendido: desde qué es Git hasta
+                    repositorios remotos. ¿Estás listo?</p>
+            </div>
+
+            <!-- ===== CUESTIONARIO FINAL ===== -->
+            <section class="quiz-section" id="cuestionario">
+                <div class="quiz-header">
+                    <h2><i class="bi bi-clipboard2-check"></i> Evaluación completa</h2>
+                    <p>Selecciona la respuesta correcta para cada pregunta.
+                        Necesitas al menos <strong>12/15</strong> para aprobar.</p>
+                </div>
+
+                <form id="quizForm">
+
+                    <!-- ═══════════ QUÉ ES GIT ═══════════ -->
+
+                    <!-- Pregunta 1 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">1. ¿Qué tipo de sistema de control de versiones es
+                            Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Centralizado — todo se guarda en un solo
+                                    servidor.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Distribuido — cada persona tiene una copia
+                                    completa del repositorio.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Lineal — solo permite un historial sin
+                                    ramificaciones.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Manual — requiere copiar archivos a
+                                    mano.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">2. ¿Quién creó Git y en qué año?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Bill Gates en 2010.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Mark Zuckerberg en 2008.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Linus Torvalds en 2005.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">GitHub Inc. en 2012.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- ═══════════ REPOSITORIOS ═══════════ -->
+
+                    <!-- Pregunta 3 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">3. ¿Qué crea el comando <code>git init</code>?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una carpeta oculta <code>.git/</code> que
+                                    convierte la carpeta actual en un repositorio.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un repositorio en GitHub
+                                    automáticamente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un archivo <code>init.config</code> con la
+                                    configuración.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un commit inicial con todos los
+                                    archivos.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">4. ¿Cuál es la diferencia entre <code>git init</code> y
+                            <code>git clone</code>?
+                        </p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">No hay diferencia, hacen lo mismo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>clone</code> solo funciona con
+                                    GitHub.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>init</code> descarga un repositorio
+                                    remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>init</code> crea un repo nuevo vacío;
+                                    <code>clone</code> descarga uno existente con todo su
+                                    historial.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- ═══════════ STAGING & COMMITS ═══════════ -->
+
+                    <!-- Pregunta 5 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">5. ¿Cuáles son los 3 estados de un archivo en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Nuevo, editado, borrado.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Modified, staged, committed.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Local, remoto, eliminado.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Tracked, untracked, ignored.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 6 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">6. ¿Qué hace <code>git add .</code>?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Crea un commit con todos los
+                                    archivos.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Sube todos los archivos a GitHub.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Agrega todos los archivos modificados al
+                                    staging area.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Muestra el estado de todos los
+                                    archivos.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 7 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">7. ¿Qué información NO contiene un commit?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La contraseña del usuario.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El hash único del commit.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El mensaje descriptivo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El autor y la fecha.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 8 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">8. ¿Para qué existe el staging area?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para guardar archivos en la nube.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para proteger archivos con
+                                    contraseña.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para compilar el código antes de
+                                    ejecutarlo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Para elegir qué cambios incluir en cada
+                                    commit.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- ═══════════ RAMAS Y MERGE ═══════════ -->
+
+                    <!-- Pregunta 9 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">9. ¿Qué es una rama (branch) en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una copia completa de todos los
+                                    archivos.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una carpeta en el servidor remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un puntero a un commit que permite
+                                    trabajar de forma independiente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un archivo de configuración.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 10 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">10. ¿Qué comando crea una rama Y te cambia a ella?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git branch nueva-rama</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git checkout -b nueva-rama</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git merge nueva-rama</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git push nueva-rama</code></span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 11 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">11. Antes de hacer merge, ¿a qué rama debes moverte?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q11" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">A la rama que recibirá los cambios (ej:
+                                    <code>main</code>).</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q11" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">A la rama que quieres fusionar.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q11" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">No importa, Git lo detecta
+                                    automáticamente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q11" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">A una rama nueva y vacía.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 12 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">12. ¿Cuándo ocurre un conflicto de merge?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q12" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Cuando creas una rama nueva.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q12" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Cuando haces push sin conexión.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q12" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Cuando el repositorio tiene más de 100
+                                    commits.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q12" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Cuando dos ramas modificaron las mismas
+                                    líneas del mismo archivo.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- ═══════════ REMOTOS ═══════════ -->
+
+                    <!-- Pregunta 13 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">13. ¿Qué es <code>origin</code> en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q13" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El primer commit del repositorio.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q13" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El nombre por defecto del repositorio
+                                    remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q13" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La rama principal del proyecto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q13" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un comando para crear repositorios.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 14 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">14. ¿Cuál es la diferencia entre <code>git fetch</code> y
+                            <code>git pull</code>?
+                        </p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q14" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>fetch</code> solo descarga;
+                                    <code>pull</code> descarga y fusiona
+                                    automáticamente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q14" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Son exactamente iguales.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q14" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>fetch</code> sube archivos y
+                                    <code>pull</code> los descarga.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q14" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>fetch</code> elimina ramas remotas y
+                                    <code>pull</code> las crea.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 15 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">15. ¿Cuál es el flujo correcto para subir cambios a un
+                            remoto?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q15" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git push</code> →
+                                    <code>git add</code> →
+                                    <code>git commit</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q15" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git commit</code> →
+                                    <code>git add</code> →
+                                    <code>git push</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q15" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git add</code> →
+                                    <code>git commit</code> →
+                                    <code>git push</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q15" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git clone</code> →
+                                    <code>git push</code> →
+                                    <code>git pull</code></span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Botones del quiz -->
+                    <div class="quiz-actions">
+                        <button type="button" class="btn-quiz btn-check-quiz" id="btnCheckQuiz">
+                            <i class="bi bi-check-circle"></i> Comprobar respuestas
+                        </button>
+                        <button type="button" class="btn-quiz btn-retry-quiz" id="btnRetryQuiz" style="display:none;">
+                            <i class="bi bi-arrow-repeat"></i> Reintentar
+                        </button>
+                    </div>
+
+                    <!-- Resultado -->
+                    <div class="quiz-results" id="quizResults" style="display:none;">
+                        <div class="results-icon" id="resultsIcon"></div>
+                        <h3 id="resultsTitle"></h3>
+                        <p id="resultsText"></p>
+                        <div class="results-score">
+                            <span id="resultsScore"></span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Navegación -->
+            <div class="lesson-nav">
+                <a href="remotos-push-pull-practica.html" class="lesson-nav-link prev">
+                    <i class="bi bi-arrow-left"></i> Anterior: Remotos (Práctico)
+                </a>
+                <a href="../../index.php" class="lesson-nav-link next">
+                    Volver al inicio <i class="bi bi-house-door"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&gt;_ Malleus Codeficarum <span class="footer-separator">|</span> El grimorio del código</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/quiz.js"></script>
+
+</body>
+
+</html>

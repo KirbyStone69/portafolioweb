@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Repositorios en Git: init y clone — Teórico sobre cómo crear y clonar repositorios.">
+    <title>Repositorios: init y clone (Teórico) — Malleus Codeficarum</title>
+
+    <!-- Google Fonts — Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Breadcrumb ===== -->
+    <div class="lesson-breadcrumb">
+        <div class="container">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">Repositorios: init y clone (Teórico)</span>
+        </div>
+    </div>
+
+    <!-- ===== Lesson Content ===== -->
+    <main class="lesson-container">
+        <div class="container">
+
+            <!-- Header de la lección -->
+            <div class="lesson-hero">
+                <span class="lesson-tag-large tag-theory">Teoría</span>
+                <h1><i class="bi bi-folder-plus"></i> Repositorios: init y clone</h1>
+                <p class="lesson-subtitle">Teórico — Entiende qué es un repositorio y los dos comandos principales
+                    para crear uno.</p>
+            </div>
+
+            <!-- ── Sección 1: ¿Qué es un repositorio? ── -->
+            <section class="lesson-section" id="que-es-repo">
+                <h2><span class="section-number">01</span> ¿Qué es un repositorio?</h2>
+
+                <p>
+                    Un <strong>repositorio</strong> (o <em>repo</em>) es la carpeta de tu proyecto junto con todo el
+                    historial de cambios que Git almacena. Dentro del repositorio, Git crea una carpeta oculta llamada
+                    <code>.git</code> donde guarda toda la información de versiones, ramas, configuración y más.
+                </p>
+
+                <div class="highlight-box">
+                    <i class="bi bi-lightbulb"></i>
+                    <div>
+                        <strong>Analogía:</strong> Un repositorio es como un cuaderno donde no solo escribes, sino que
+                        también conservas todas las versiones anteriores de cada página, con fecha y autor de cada
+                        cambio.
+                    </div>
+                </div>
+
+                <p>Hay dos formas principales de obtener un repositorio:</p>
+
+                <div class="comparison-grid" style="margin-top: 1rem;">
+                    <div class="comparison-col">
+                        <h5><i class="bi bi-plus-circle"></i> git init</h5>
+                        <ul>
+                            <li>Crea un repositorio nuevo desde cero</li>
+                            <li>Ideal para proyectos que estás empezando</li>
+                            <li>Genera la carpeta <code>.git</code> en tu directorio actual</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-col highlight">
+                        <h5><i class="bi bi-download"></i> git clone</h5>
+                        <ul>
+                            <li>Copia un repositorio existente (remoto)</li>
+                            <li>Descarga todo el historial de commits</li>
+                            <li>Mantiene la conexión con el repositorio original</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 2: git init en detalle ── -->
+            <section class="lesson-section" id="git-init">
+                <h2><span class="section-number">02</span> <code>git init</code> — Crear un repositorio nuevo</h2>
+
+                <p>
+                    El comando <code>git init</code> transforma una carpeta normal en un repositorio de Git.
+                    Lo que hace internamente es crear la carpeta oculta <code>.git/</code> con toda la estructura
+                    necesaria para empezar a rastrear cambios.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>Flujo típico para iniciar un proyecto</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code>mkdir mi-proyecto       # Crear carpeta del proyecto
+cd mi-proyecto          # Entrar a la carpeta
+git init                # Inicializar el repositorio</code></pre>
+                        </div>
+                        <div class="code-block output">
+                            <pre><code>Initialized empty Git repository in /home/usuario/mi-proyecto/.git/</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="bi bi-info-circle"></i>
+                    <div>
+                        Después de <code>git init</code>, tu carpeta se ve igual por fuera, pero contiene una carpeta
+                        oculta <code>.git/</code>. Puedes verificarlo con <code>ls -la</code> (Linux/Mac) o
+                        <code>dir /a</code> (Windows).
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 3: git clone en detalle ── -->
+            <section class="lesson-section" id="git-clone">
+                <h2><span class="section-number">03</span> <code>git clone</code> — Clonar un repositorio existente
+                </h2>
+
+                <p>
+                    El comando <code>git clone</code> crea una copia completa de un repositorio remoto
+                    en tu computadora. Esto incluye <strong>todos los archivos, todo el historial de commits,
+                        todas las ramas</strong> y la configuración del remoto.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-terminal"></i>
+                        <h4>Sintaxis básica</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang"><i class="bi bi-terminal"></i> Terminal</span>
+                                <button class="btn-copy" onclick="copyCode(this)">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                            <pre><code>git clone https://github.com/usuario/repositorio.git</code></pre>
+                        </div>
+                        <p style="font-size: 0.84rem; color: #94a3b8; margin-top: 0.8rem;">
+                            Esto crea una carpeta llamada <code>repositorio/</code> con todo el contenido
+                            y el historial del proyecto. También configura automáticamente el
+                            <strong>remote</strong> llamado <code>origin</code> apuntando a la URL original.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glossary-list" style="margin-top: 1.5rem;">
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-link-45deg"></i> HTTPS vs SSH</div>
+                        <div class="glossary-def">
+                            Puedes clonar por <strong>HTTPS</strong>
+                            (<code>https://github.com/...</code>) que pide usuario/contraseña, o por
+                            <strong>SSH</strong> (<code>git@github.com:...</code>) que usa llaves SSH.
+                            Para empezar, HTTPS es más sencillo.
+                        </div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-folder-symlink"></i> Clonar en una carpeta
+                            específica</div>
+                        <div class="glossary-def">
+                            Puedes darle un nombre diferente a la carpeta destino:
+                            <code>git clone URL mi-carpeta</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 4: init vs clone ── -->
+            <section class="lesson-section" id="init-vs-clone">
+                <h2><span class="section-number">04</span> ¿Cuándo usar cada uno?</h2>
+
+                <div class="table-responsive">
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>Situación</th>
+                                <th>Comando</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Empiezo un proyecto nuevo desde cero</td>
+                                <td class="highlight-cell"><code>git init</code></td>
+                            </tr>
+                            <tr>
+                                <td>Quiero trabajar en un proyecto que ya existe en GitHub</td>
+                                <td class="highlight-cell"><code>git clone URL</code></td>
+                            </tr>
+                            <tr>
+                                <td>Ya tengo una carpeta con archivos y quiero versionarla</td>
+                                <td class="highlight-cell"><code>git init</code> (dentro de la carpeta)</td>
+                            </tr>
+                            <tr>
+                                <td>Quiero contribuir a un proyecto open source</td>
+                                <td class="highlight-cell">Fork en GitHub → <code>git clone</code> de tu fork</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- ===== CUESTIONARIO ===== -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="quiz-section" id="cuestionario">
+                <div class="quiz-header">
+                    <h2><i class="bi bi-patch-question"></i> Cuestionario de evaluación</h2>
+                    <p>Pon a prueba lo que aprendiste sobre repositorios, <code>git init</code> y
+                        <code>git clone</code>.
+                    </p>
+                </div>
+
+                <form id="quizForm">
+
+                    <!-- Pregunta 1 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">1. ¿Qué es un repositorio en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un servidor remoto donde se guarda código.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un programa para editar código.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una carpeta de proyecto con todo su historial de cambios
+                                    almacenado por Git.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un archivo de configuración de Git.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">2. ¿Qué carpeta oculta crea <code>git init</code>?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>.github</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>.git</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>.gitconfig</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>.repo</code></span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">3. ¿Qué hace <code>git clone</code> que <code>git init</code>
+                            no hace?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Crea la carpeta <code>.git</code>.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Configura el nombre de usuario.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Permite hacer commits.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Descarga todo el historial y archivos de un repositorio
+                                    remoto.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">4. ¿Qué remote se configura automáticamente al hacer
+                            <code>git clone</code>?
+                        </p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>origin</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>upstream</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>main</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>remote</code></span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">5. Si ya tienes una carpeta con archivos y quieres empezar a
+                            versionar con Git, ¿qué comando usas?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git clone .</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git init</code> (dentro de esa carpeta)</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git start</code></span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text"><code>git new</code></span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Botones del quiz -->
+                    <div class="quiz-actions">
+                        <button type="button" class="btn-quiz btn-check-quiz" id="btnCheckQuiz">
+                            <i class="bi bi-check-circle"></i> Comprobar respuestas
+                        </button>
+                        <button type="button" class="btn-quiz btn-retry-quiz" id="btnRetryQuiz" style="display:none;">
+                            <i class="bi bi-arrow-repeat"></i> Reintentar
+                        </button>
+                    </div>
+
+                    <!-- Resultado final -->
+                    <div class="quiz-results" id="quizResults" style="display:none;">
+                        <div class="results-icon" id="resultsIcon"></div>
+                        <h3 id="resultsTitle"></h3>
+                        <p id="resultsText"></p>
+                        <div class="results-score">
+                            <span id="resultsScore"></span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- ===== Navegación de lecciones ===== -->
+            <div class="lesson-nav">
+                <a href="instalacion-y-configuracion.html" class="lesson-nav-link prev">
+                    <i class="bi bi-arrow-left"></i> Anterior: Instalación y Configuración
+                </a>
+                <a href="repositorios-init-clone-practica.html" class="lesson-nav-link next">
+                    Siguiente: Práctica: init y clone <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&gt;_ Malleus Codeficarum <span class="footer-separator">|</span> El grimorio del código</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../../static/js/main.js"></script>
+
+    <!-- Quiz JS -->
+    <script src="../../static/js/quiz.js"></script>
+
+</body>
+
+</html>

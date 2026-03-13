@@ -1,0 +1,2 @@
+--Integracion del backend para modulo de especialidades medicas y mejoras en scripts--
+Se implemento el backend completo para gestionar especialidades medicas y se agregaron funciones de script necesarias junto con alertas sweetalert para manejo de respuestas manteniendo intacto el frontend original

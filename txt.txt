@@ -1,0 +1,22 @@
+pagina de notas, (boton de agregar notas) nota con titulo, con descripcion, que contenga la fecha de cracion, edicion, borrar, mostrar que hubo edicion 
+
+cada persona ve su propio 
+
+/\visual
+index, style, juntos, (hoja de estilos con iconos tipo awesomefont)
+1.-pop box (recuadro para agregar notas)
+2.-form para agregar notas (modal) //text area para la descripción (valor de falso para cuando se agrega una nota) 
+
+/\funcionamiento
+constructor de los objetos de los elementos en el html
+(modal de opciones de editar y eliminar)
+array de meses 
+notas array 
+
+cada persona va tener en su perfil la oportunindad de agregar una nota 
+
+codigo de admin
+
+//sin base de datos, cuando sea admin ver un dahsboard
+
+con un adminlet // free admin 

@@ -1,0 +1,1881 @@
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Code', 'Source Code Pro', 'Courier New', monospace;
+  background-color: #0d0d0d;
+  color: #c8ccd4;
+  min-height: 100vh;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  background-color: #111827 !important;
+  border-bottom: 1px solid #1e293b;
+  padding: 1rem 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand {
+  font-family: 'Fira Code', 'Source Code Pro', 'Courier New', monospace;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #8badc9 !important;
+  letter-spacing: 2px;
+  text-transform: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #a8cfeb !important;
+  text-shadow: 0 0 8px rgba(139, 173, 201, 0.4);
+}
+
+.navbar-brand .brand-symbol {
+  color: #4a7a9b;
+  margin-right: 6px;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+  padding: 2.5rem 0 1.5rem;
+}
+
+.hero-card {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-card h1 {
+  font-family: 'Fira Code', 'Source Code Pro', 'Courier New', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #8badc9;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.hero-card .tagline {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.hero-card .cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: #8badc9;
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== Roadmap Section ===== */
+.roadmap-section {
+  padding: 1rem 0 3rem;
+}
+
+/* --- Tema principal (Git) --- */
+.roadmap-topic {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.roadmap-topic-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.roadmap-topic-header:hover {
+  background-color: #1a2234;
+}
+
+.topic-icon i {
+  font-size: 1.4rem;
+  color: #f97316;
+}
+
+.topic-title {
+  flex: 1;
+  text-align: left;
+}
+
+.topic-chevron i {
+  font-size: 1rem;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+}
+
+.roadmap-topic-header.collapsed .topic-chevron i {
+  transform: rotate(180deg);
+}
+
+/* --- Sub-carpeta (Bases de Git) --- */
+.roadmap-folder {
+  border-top: 1px solid #1e293b;
+}
+
+.roadmap-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0.85rem 1.25rem 0.85rem 2rem;
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.roadmap-folder-header:hover {
+  background-color: #1a2234;
+}
+
+.folder-chevron i {
+  font-size: 0.75rem;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+}
+
+.roadmap-folder-header.collapsed .folder-chevron i {
+  transform: rotate(-90deg);
+}
+
+.folder-icon i {
+  color: #facc15;
+  font-size: 1rem;
+}
+
+.roadmap-folder-header.collapsed .folder-icon i::before {
+  content: "\F2D5";
+  /* bi-folder2 (closed) */
+}
+
+.folder-title {
+  flex: 1;
+  text-align: left;
+}
+
+.folder-badge {
+  font-size: 0.7rem;
+  font-weight: 400;
+  background-color: #1e293b;
+  color: #94a3b8;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* --- Lecciones --- */
+.roadmap-lessons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.roadmap-lessons li {
+  border-top: 1px solid #1a2234;
+}
+
+.roadmap-lessons li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.75rem 1.25rem 0.75rem 3.5rem;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.roadmap-lessons li a:hover {
+  background-color: #1a2234;
+  color: #e2e8f0;
+}
+
+.lesson-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #4a7a9b;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.roadmap-lessons li a:hover .lesson-dot {
+  background-color: #4a7a9b;
+}
+
+/* --- Tags de lección --- */
+.lesson-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.tag-theory {
+  color: #60a5fa;
+  border: 1px solid #1e40af;
+  background-color: rgba(30, 64, 175, 0.15);
+}
+
+.tag-workshop {
+  color: #fbbf24;
+  border: 1px solid #92400e;
+  background-color: rgba(146, 64, 14, 0.15);
+}
+
+.tag-lab {
+  color: #34d399;
+  border: 1px solid #065f46;
+  background-color: rgba(6, 95, 70, 0.15);
+}
+
+.tag-exam {
+  color: #fb7185;
+  border: 1px solid #9f1239;
+  background-color: rgba(159, 18, 57, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LESSON PAGES — Breadcrumb, Hero, Content, Quiz
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Breadcrumb ── */
+.lesson-breadcrumb {
+  background-color: #0f1623;
+  border-bottom: 1px solid #1e293b;
+  padding: 0.6rem 0;
+  font-size: 0.78rem;
+}
+
+.lesson-breadcrumb a {
+  color: #4a7a9b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lesson-breadcrumb a:hover {
+  color: #8badc9;
+}
+
+.lesson-breadcrumb .separator {
+  color: #374151;
+  margin: 0 6px;
+}
+
+.lesson-breadcrumb .current {
+  color: #94a3b8;
+}
+
+/* ── Lesson Container ── */
+.lesson-container {
+  padding: 2rem 0 3rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Lesson Hero ── */
+.lesson-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(135deg, #111827 0%, #0f1a2e 100%);
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.lesson-hero h1 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #8badc9;
+  margin: 0.8rem 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.lesson-hero h1 i {
+  color: #f97316;
+  margin-right: 8px;
+}
+
+.lesson-hero .lesson-subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.lesson-tag-large {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 14px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── Lesson Section ── */
+.lesson-section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #1a2234;
+}
+
+.lesson-section:last-of-type {
+  border-bottom: none;
+}
+
+.lesson-section h2 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-number {
+  font-size: 0.75rem;
+  color: #4a7a9b;
+  background: rgba(74, 122, 155, 0.12);
+  border: 1px solid #1e3a5f;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.lesson-section p {
+  color: #b0b8c8;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.lesson-section code {
+  background-color: #1e293b;
+  color: #60a5fa;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.lesson-section strong {
+  color: #cbd5e1;
+}
+
+.lesson-section em {
+  color: #94a3b8;
+}
+
+/* ── Highlight Box ── */
+.highlight-box {
+  display: flex;
+  gap: 14px;
+  padding: 1.1rem 1.3rem;
+  background-color: rgba(74, 122, 155, 0.08);
+  border-left: 3px solid #4a7a9b;
+  border-radius: 0 6px 6px 0;
+  margin: 1.3rem 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+.highlight-box>i {
+  color: #4a7a9b;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Concept Card ── */
+.concept-card {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.concept-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.9rem 1.2rem;
+  background-color: #0f1623;
+  border-bottom: 1px solid #1e293b;
+}
+
+.concept-card-header i {
+  color: #f97316;
+  font-size: 1.1rem;
+}
+
+.concept-card-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.concept-card-body {
+  padding: 1.2rem;
+}
+
+/* ── Comparison Grid ── */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-col {
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #0d1117;
+  border: 1px solid #1e293b;
+}
+
+.comparison-col.highlight {
+  border-color: #4a7a9b;
+  background-color: rgba(74, 122, 155, 0.06);
+}
+
+.comparison-col h5 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.comparison-col.highlight h5 {
+  color: #8badc9;
+}
+
+.comparison-col h5 i {
+  font-size: 1rem;
+}
+
+.comparison-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison-col ul li {
+  font-size: 0.8rem;
+  color: #6b7280;
+  padding: 4px 0;
+  padding-left: 14px;
+  position: relative;
+}
+
+.comparison-col ul li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: #374151;
+}
+
+.comparison-col.highlight ul li {
+  color: #94a3b8;
+}
+
+.comparison-col.highlight ul li::before {
+  color: #4a7a9b;
+}
+
+/* ── Features Grid ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.feature-card {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 1.3rem;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.feature-card:hover {
+  border-color: #4a7a9b;
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(74, 122, 155, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+}
+
+.feature-icon i {
+  font-size: 1.2rem;
+  color: #4a7a9b;
+}
+
+.feature-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 0.4rem;
+}
+
+.feature-card p {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Glossary List ── */
+.glossary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.3rem 0;
+}
+
+.glossary-item {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 1rem 1.3rem;
+  transition: border-color 0.3s;
+}
+
+.glossary-item:hover {
+  border-color: #2d4a63;
+}
+
+.glossary-term {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #8badc9;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.glossary-term i {
+  color: #f97316;
+  font-size: 0.95rem;
+}
+
+.glossary-def {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  padding-left: 26px;
+}
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: 1.5rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #4a7a9b, #1e293b);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -23px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #0d0d0d;
+  border: 2px solid #4a7a9b;
+}
+
+.timeline-date {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4a7a9b;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.timeline-content p {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Lesson Table ── */
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin: 1rem 0;
+}
+
+.lesson-table thead {
+  background-color: #0f1623;
+}
+
+.lesson-table th {
+  color: #8badc9;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid #1e293b;
+}
+
+.lesson-table td {
+  color: #94a3b8;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #1a2234;
+}
+
+.lesson-table tbody tr:hover {
+  background-color: rgba(74, 122, 155, 0.05);
+}
+
+.highlight-cell {
+  color: #60a5fa !important;
+  font-weight: 600;
+}
+
+/* ── Reasons List ── */
+.reasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.3rem 0;
+}
+
+.reason-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  transition: border-color 0.3s;
+}
+
+.reason-item:hover {
+  border-color: #2d4a63;
+}
+
+.reason-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a7a9b, #1e3a5f);
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reason-item strong {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+
+.reason-item p {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   QUIZ SECTION
+   ═══════════════════════════════════════════════════════════ */
+
+.quiz-section {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid #1e293b;
+}
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.quiz-header h2 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-header h2 i {
+  color: #f97316;
+  margin-right: 8px;
+}
+
+.quiz-header p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ── Quiz Question ── */
+.quiz-question {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-left: 3px solid #4a7a9b;
+  border-radius: 0 8px 8px 0;
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1.2rem;
+  transition: border-color 0.3s;
+}
+
+.quiz-question.answered-correct {
+  border-left-color: #22c55e;
+}
+
+.quiz-question.answered-incorrect {
+  border-left-color: #ef4444;
+}
+
+.quiz-question.unanswered {
+  border-left-color: #eab308;
+}
+
+.quiz-question-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.quiz-question-text code {
+  background-color: #1e293b;
+  color: #60a5fa;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* ── Quiz Options (radio buttons) ── */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1.1rem;
+  background-color: #0f1623;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+  position: relative;
+}
+
+.quiz-option:hover {
+  background-color: #1a2234;
+  border-color: #2d4a63;
+  transform: translateX(3px);
+}
+
+.quiz-option.selected {
+  border-color: #4a7a9b;
+  background-color: rgba(74, 122, 155, 0.08);
+}
+
+.quiz-option.correct {
+  border-color: #22c55e !important;
+  background-color: rgba(34, 197, 94, 0.08) !important;
+}
+
+.quiz-option.incorrect {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.08) !important;
+}
+
+.quiz-option input[type="radio"] {
+  display: none;
+}
+
+.radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #374151;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.quiz-option.selected .radio-custom,
+.quiz-option input[type="radio"]:checked~.radio-custom {
+  border-color: #4a7a9b;
+}
+
+.quiz-option input[type="radio"]:checked~.radio-custom::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4a7a9b;
+}
+
+.quiz-option.correct .radio-custom {
+  border-color: #22c55e !important;
+}
+
+.quiz-option.correct .radio-custom::after {
+  background-color: #22c55e !important;
+}
+
+.quiz-option.incorrect .radio-custom {
+  border-color: #ef4444 !important;
+}
+
+.quiz-option.incorrect .radio-custom::after {
+  background-color: #ef4444 !important;
+}
+
+.option-text {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.quiz-option.correct .option-text {
+  color: #4ade80;
+}
+
+.quiz-option.incorrect .option-text {
+  color: #f87171;
+}
+
+/* ── Quiz Feedback ── */
+.quiz-feedback {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 0.4rem 0;
+}
+
+.quiz-feedback.show {
+  display: flex;
+}
+
+.quiz-feedback.success {
+  color: #22c55e;
+}
+
+.quiz-feedback.error {
+  color: #ef4444;
+}
+
+.quiz-feedback.warning {
+  color: #eab308;
+}
+
+/* ── Quiz Actions ── */
+.quiz-actions {
+  text-align: center;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-quiz {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-check-quiz {
+  background: linear-gradient(135deg, #4a7a9b, #1e3a5f);
+  color: #e2e8f0;
+}
+
+.btn-check-quiz:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(74, 122, 155, 0.3);
+}
+
+.btn-retry-quiz {
+  background: linear-gradient(135deg, #374151, #1f2937);
+  color: #94a3b8;
+}
+
+.btn-retry-quiz:hover {
+  color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(55, 65, 81, 0.4);
+}
+
+/* ── Quiz Results ── */
+.quiz-results {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.results-icon i {
+  font-size: 3rem;
+}
+
+.results-icon.perfect i {
+  color: #f59e0b;
+}
+
+.results-icon.good i {
+  color: #22c55e;
+}
+
+.results-icon.okay i {
+  color: #eab308;
+}
+
+.results-icon.low i {
+  color: #ef4444;
+}
+
+.quiz-results h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+  color: #e2e8f0;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.quiz-results p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.results-score {
+  margin-top: 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #8badc9;
+}
+
+/* ── Lesson Navigation ── */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1e293b;
+}
+
+.lesson-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.7rem 1.2rem;
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+}
+
+.lesson-nav-link:hover {
+  color: #e2e8f0;
+  border-color: #4a7a9b;
+  background-color: #1a2234;
+}
+
+.lesson-nav-link.prev {
+  margin-right: auto;
+}
+
+.lesson-nav-link.next {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .lesson-nav {
+    flex-direction: column;
+  }
+
+  .lesson-hero h1 {
+    font-size: 1.3rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CODE BLOCKS & SCREENSHOTS (Lesson pages)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Code Block ── */
+.code-block {
+  background-color: #0d1117;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+  font-size: 0.82rem;
+}
+
+.code-block.output {
+  border-left: 3px solid #22c55e;
+  background-color: #0a0f14;
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #111827;
+  border-bottom: 1px solid #1e293b;
+}
+
+.code-lang {
+  font-size: 0.72rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.code-lang i {
+  color: #4a7a9b;
+}
+
+.btn-copy {
+  background: none;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 3px 8px;
+  font-size: 0.78rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-copy:hover {
+  color: #e2e8f0;
+  border-color: #4a7a9b;
+}
+
+.btn-copy.copied {
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+
+.code-block.output code {
+  color: #94a3b8;
+}
+
+/* ── Screenshot Placeholder ── */
+.screenshot-placeholder {
+  margin: 1.3rem 0;
+}
+
+.screenshot-frame {
+  background-color: #0f1623;
+  border: 1px dashed #2d4a63;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.screenshot-frame img {
+  width: 100%;
+  display: block;
+  opacity: 0.6;
+  min-height: 120px;
+  object-fit: cover;
+}
+
+.screenshot-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0.8rem 1.1rem;
+  background-color: rgba(234, 179, 8, 0.06);
+  border-top: 1px solid rgba(234, 179, 8, 0.15);
+  font-size: 0.78rem;
+  color: #eab308;
+  line-height: 1.6;
+}
+
+.screenshot-note i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 1rem;
+}
+
+.screenshot-note code {
+  background-color: #1e293b;
+  color: #60a5fa;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.76rem;
+}
+
+/* ── Step Card ── */
+.step-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 1.1rem 1.3rem;
+  margin: 1rem 0;
+}
+
+.step-card .step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #c2410c);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-card p {
+  font-size: 0.85rem;
+  color: #b0b8c8;
+  line-height: 1.6;
+  margin: 0 0 0.3rem;
+}
+
+.step-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Options List (installer options) ── */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.option-item {
+  background-color: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 0.9rem 1.2rem;
+  transition: border-color 0.2s;
+}
+
+.option-item:hover {
+  border-color: #2d4a63;
+}
+
+.option-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.3rem;
+}
+
+.option-header i {
+  color: #22c55e;
+  font-size: 0.95rem;
+}
+
+.option-header strong {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+
+.option-item p {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 24px;
+}
+
+/* ── Subtitle H3 ── */
+.lesson-subtitle-h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8badc9;
+  margin: 1.8rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #1a2234;
+}
+
+/* ── Lesson Link ── */
+.lesson-link {
+  color: #60a5fa;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.lesson-link:hover {
+  color: #93c5fd;
+  border-bottom-color: #93c5fd;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════ */
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #1e293b;
+  background-color: #0a0d14;
+  text-align: center;
+}
+
+.site-footer p {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: #4a5568;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.footer-separator {
+  color: #2d3748;
+  margin: 0 8px;
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GIT SIMULATOR — 3-Panel Interactive Environment
+   ═══════════════════════════════════════════════════════════ */
+
+.sim-container {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 0;
+  min-height: 520px;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  margin: 2rem 0;
+}
+
+@media (max-width: 900px) {
+  .sim-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+/* ── Panel Instrucciones (izquierda) ── */
+.sim-panel-instructions {
+  background-color: #111827;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .sim-panel-instructions {
+    border-right: none;
+    border-bottom: 1px solid #1e293b;
+  }
+}
+
+.sim-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background-color: #0f1623;
+  border-bottom: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+
+.sim-panel-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sim-panel-title i {
+  color: #4a7a9b;
+}
+
+.sim-step-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #8badc9;
+  background: rgba(74, 122, 155, 0.15);
+  border: 1px solid #1e3a5f;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+
+.sim-instructions-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem;
+}
+
+.sim-step-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+}
+
+.sim-step-content {
+  font-size: 0.84rem;
+  color: #b0b8c8;
+  line-height: 1.75;
+}
+
+.sim-step-content p {
+  margin-bottom: 0.8rem;
+}
+
+.sim-step-content code {
+  background-color: #1e293b;
+  color: #60a5fa;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.sim-step-content strong {
+  color: #cbd5e1;
+}
+
+.sim-hint {
+  display: none;
+  margin-top: 0.8rem;
+  padding: 0.7rem 1rem;
+  background: rgba(234, 179, 8, 0.08);
+  border-left: 3px solid #eab308;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.8rem;
+  color: #eab308;
+  line-height: 1.6;
+}
+
+.sim-instructions-footer {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.sim-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sim-btn-hint {
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  color: #eab308;
+}
+
+.sim-btn-hint:hover {
+  background: rgba(234, 179, 8, 0.18);
+}
+
+.sim-btn-reset {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  margin-left: auto;
+}
+
+.sim-btn-reset:hover {
+  background: rgba(239, 68, 68, 0.18);
+}
+
+/* ── Progress Bar ── */
+.sim-progress {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #1e293b;
+  background: #0a0d14;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.sim-progress-bar-bg {
+  flex: 1;
+  height: 4px;
+  background-color: #1e293b;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sim-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a7a9b, #60a5fa);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.sim-progress-text {
+  font-size: 0.7rem;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+/* ── Panel Terminal / Editor (centro) ── */
+.sim-panel-terminal {
+  background-color: #0a0d14;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .sim-panel-terminal {
+    border-right: none;
+    border-bottom: 1px solid #1e293b;
+    min-height: 250px;
+  }
+}
+
+.sim-terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.8rem 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+}
+
+.sim-terminal-line {
+  color: #e2e8f0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.sim-prompt-echo {
+  color: #22c55e;
+  font-weight: 600;
+  margin: 0 6px 0 2px;
+}
+
+.sim-prompt-path {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.sim-terminal-hint {
+  font-size: 0.65rem;
+  color: #374151;
+  letter-spacing: 1px;
+}
+
+.sim-terminal-input-row {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid #1e293b;
+  background-color: #0d1117;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.sim-prompt {
+  color: #22c55e;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.sim-terminal-input-row input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #e2e8f0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  caret-color: #22c55e;
+}
+
+.sim-terminal-input-row input::placeholder {
+  color: #374151;
+}
+
+.sim-btn-send {
+  background: linear-gradient(135deg, #4a7a9b, #1e3a5f);
+  color: #e2e8f0;
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.sim-btn-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(74, 122, 155, 0.3);
+}
+
+/* ── Panel Output (derecha) ── */
+.sim-panel-output {
+  background-color: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .sim-panel-output {
+    min-height: 200px;
+  }
+}
+
+.sim-output-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.8rem 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+}
+
+.sim-output-line {
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.sim-output-line.comment {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.sim-output-line.output {
+  color: #94a3b8;
+}
+
+.sim-output-line.success {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.sim-output-line.error {
+  color: #f87171;
+}
+
+.sim-output-line.blank {
+  height: 0.5rem;
+}
+
+/* ── Sim Complete Message ── */
+.sim-complete-msg {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.sim-complete-msg i {
+  font-size: 2.5rem;
+  color: #f59e0b;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.sim-complete-msg p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+/* ── Sim Section (wraps the whole simulator in lesson pages) ── */
+.sim-section {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid #1e293b;
+}
+
+.sim-section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sim-section-header h2 {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.sim-section-header h2 i {
+  color: #22c55e;
+  margin-right: 8px;
+}
+
+.sim-section-header p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FULLSCREEN SIMULATOR MODE
+   Used on practice-only pages where the simulator fills
+   the entire viewport.
+   ═══════════════════════════════════════════════════════════ */
+
+.sim-fullpage-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sim-fullpage-body .navbar {
+  flex-shrink: 0;
+}
+
+.sim-breadcrumb {
+  flex-shrink: 0;
+}
+
+.sim-fullpage-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+}
+
+.sim-container.sim-fullpage {
+  flex: 1;
+  margin: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  min-height: 0;
+  box-shadow: none;
+}
+
+.sim-fullpage-nav {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  background-color: #0a0d14;
+  border-top: 1px solid #1e293b;
+}
+
+.sim-fullpage-nav .lesson-nav-link {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.sim-fullpage-nav .lesson-nav-link:hover {
+  color: #93c5fd;
+}
+
+.sim-fullpage-nav .lesson-nav-link i {
+  font-size: 0.85rem;
+}
+
+/* Mobile: stack panels vertically and allow scroll */
+@media (max-width: 900px) {
+  .sim-fullpage-body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .sim-fullpage-main {
+    overflow: auto;
+  }
+
+  .sim-container.sim-fullpage {
+    min-height: 80vh;
+  }
+}

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="¿Qué es Git y para qué sirve? — Aprende los fundamentos del sistema de control de versiones más usado del mundo.">
+    <title>¿Qué es Git? — Malleus Codeficarum</title>
+
+    <!-- Google Fonts — Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/style/styles.css">
+</head>
+
+<body>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.php">
+                <span class="brand-symbol">&gt;_</span>Malleus Codeficarum
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== Breadcrumb ===== -->
+    <div class="lesson-breadcrumb">
+        <div class="container">
+            <a href="../../index.php"><i class="bi bi-house-door"></i> Inicio</a>
+            <span class="separator">/</span>
+            <span>Git</span>
+            <span class="separator">/</span>
+            <span>Bases de Git</span>
+            <span class="separator">/</span>
+            <span class="current">¿Qué es Git?</span>
+        </div>
+    </div>
+
+    <!-- ===== Lesson Content ===== -->
+    <main class="lesson-container">
+        <div class="container">
+
+            <!-- Header de la lección -->
+            <div class="lesson-hero">
+                <span class="lesson-tag-large tag-theory">Teoría</span>
+                <h1><i class="bi bi-git"></i> ¿Qué es Git y para qué sirve?</h1>
+                <p class="lesson-subtitle">El sistema de control de versiones que revolucionó el desarrollo de software.
+                </p>
+            </div>
+
+            <!-- ── Sección 1: ¿Qué es Git? ── -->
+            <section class="lesson-section" id="que-es-git">
+                <h2><span class="section-number">01</span> ¿Qué es Git?</h2>
+
+                <p>
+                    <strong>Git</strong> es un <em>sistema de control de versiones distribuido</em> (DVCS — Distributed
+                    Version Control System).
+                    En términos simples, es una herramienta que <strong>registra y guarda cada cambio</strong> que haces
+                    en los archivos de un proyecto,
+                    permitiéndote volver a cualquier versión anterior en cualquier momento.
+                </p>
+
+                <div class="highlight-box">
+                    <i class="bi bi-lightbulb"></i>
+                    <div>
+                        <strong>Analogía:</strong> Piensa en Git como un <em>"Ctrl+Z infinito"</em> para tu proyecto
+                        entero.
+                        Cada vez que guardas un cambio (lo que en Git se llama <code>commit</code>), es como crear una
+                        fotografía instantánea de todos tus archivos en ese momento exacto.
+                    </div>
+                </div>
+
+                <p>
+                    A diferencia de otros sistemas, Git es <strong>distribuido</strong>: cada desarrollador tiene una
+                    copia completa
+                    del historial del proyecto en su propia computadora. No dependes de un servidor central para
+                    trabajar;
+                    puedes hacer commits, crear ramas y revisar el historial completamente <strong>offline</strong>.
+                </p>
+
+                <div class="concept-card">
+                    <div class="concept-card-header">
+                        <i class="bi bi-diagram-3"></i>
+                        <h4>Centralizado vs Distribuido</h4>
+                    </div>
+                    <div class="concept-card-body">
+                        <div class="comparison-grid">
+                            <div class="comparison-col">
+                                <h5><i class="bi bi-hdd-network"></i> Centralizado (SVN)</h5>
+                                <ul>
+                                    <li>Un solo servidor tiene el historial completo</li>
+                                    <li>Necesitas conexión para hacer commits</li>
+                                    <li>Si el servidor falla, se pierde el historial</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-col highlight">
+                                <h5><i class="bi bi-diagram-3"></i> Distribuido (Git)</h5>
+                                <ul>
+                                    <li>Cada desarrollador tiene una copia completa</li>
+                                    <li>Puedes trabajar sin conexión</li>
+                                    <li>Redundancia natural: múltiples copias del historial</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 2: ¿Para qué sirve Git? ── -->
+            <section class="lesson-section" id="para-que-sirve">
+                <h2><span class="section-number">02</span> ¿Para qué sirve Git?</h2>
+
+                <p>Git resuelve problemas reales que todo desarrollador enfrenta en su día a día:</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+                        <h4>Historial completo</h4>
+                        <p>Cada cambio queda registrado: quién lo hizo, cuándo y por qué. Puedes volver a cualquier
+                            versión anterior del proyecto en segundos.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-people"></i></div>
+                        <h4>Colaboración</h4>
+                        <p>Varios desarrolladores pueden trabajar en el mismo proyecto simultáneamente sin pisar el
+                            trabajo del otro, fusionando cambios de forma ordenada.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-signpost-split"></i></div>
+                        <h4>Ramas (Branches)</h4>
+                        <p>Puedes crear líneas de desarrollo paralelas para experimentar o agregar funciones nuevas sin
+                            afectar el código principal.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+                        <h4>Seguridad y respaldo</h4>
+                        <p>Cada copia del repositorio es un respaldo completo. Git usa SHA-1 para garantizar la
+                            integridad de cada archivo y cada commit.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-arrow-counterclockwise"></i></div>
+                        <h4>Revertir errores</h4>
+                        <p>¿Rompiste algo? Con Git puedes regresar a un estado funcional anterior en segundos, sin
+                            perder trabajo.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
+                        <h4>Velocidad</h4>
+                        <p>Git realiza la mayoría de operaciones localmente, haciéndolo extremadamente rápido comparado
+                            con sistemas centralizados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 3: Conceptos clave ── -->
+            <section class="lesson-section" id="conceptos-clave">
+                <h2><span class="section-number">03</span> Conceptos clave</h2>
+
+                <p>Antes de usar Git, es esencial entender su vocabulario básico:</p>
+
+                <div class="glossary-list">
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-folder2"></i> Repositorio (repo)</div>
+                        <div class="glossary-def">Es la carpeta de tu proyecto junto con todo el historial de cambios
+                            almacenado por Git (en una carpeta oculta llamada <code>.git</code>). Puede ser
+                            <strong>local</strong> (en tu PC) o <strong>remoto</strong> (en GitHub, GitLab, etc.).</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-camera"></i> Commit</div>
+                        <div class="glossary-def">Una "fotografía" o instantánea del estado de tu proyecto en un momento
+                            dado. Cada commit tiene un identificador único (hash SHA-1), un mensaje descriptivo, autor y
+                            fecha.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-signpost-split"></i> Branch (Rama)</div>
+                        <div class="glossary-def">Una línea de desarrollo independiente. La rama principal suele
+                            llamarse <code>main</code> o <code>master</code>. Puedes crear ramas para features,
+                            bugfixes, experimentos, etc.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-intersect"></i> Merge (Fusión)</div>
+                        <div class="glossary-def">El proceso de combinar los cambios de una rama en otra. Por ejemplo,
+                            fusionar la rama <code>feature-login</code> de vuelta a <code>main</code> cuando la función
+                            está completa.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-inbox"></i> Staging Area (Área de preparación)</div>
+                        <div class="glossary-def">Un espacio intermedio donde seleccionas qué cambios quieres incluir en
+                            tu próximo commit. Te permite hacer commits parciales y organizados.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-cloud"></i> Remote (Remoto)</div>
+                        <div class="glossary-def">Una versión del repositorio alojada en un servidor (como GitHub o
+                            GitLab). Permite compartir tu código con otros y tener un respaldo en la nube.</div>
+                    </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term"><i class="bi bi-copy"></i> Clone (Clonar)</div>
+                        <div class="glossary-def">Crear una copia completa de un repositorio remoto en tu computadora,
+                            incluyendo todo el historial de commits.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 4: ¿Quién creó Git? ── -->
+            <section class="lesson-section" id="quien-creo-git">
+                <h2><span class="section-number">04</span> ¿Quién creó Git?</h2>
+
+                <p>
+                    Git fue creado en <strong>2005</strong> por <strong>Linus Torvalds</strong>, el mismo creador del
+                    kernel de Linux.
+                    La historia es fascinante:
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">1991–2002</span>
+                            <p>El desarrollo del kernel de Linux usaba parches y archivos comprimidos para gestionar
+                                cambios entre miles de colaboradores.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2002–2005</span>
+                            <p>El proyecto Linux adoptó <strong>BitKeeper</strong>, un sistema de control de versiones
+                                propietario que ofrecía uso gratuito a proyectos open source.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">Abril 2005</span>
+                            <p>La relación con BitKeeper se rompió. Linus Torvalds decidió crear su propia herramienta
+                                en <strong>solo 10 días</strong>, con estos objetivos: velocidad, diseño simple, soporte
+                                para desarrollo no lineal (miles de ramas paralelas) y capacidad para manejar proyectos
+                                grandes.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2005–Hoy</span>
+                            <p>Git se convirtió en <strong>el estándar de la industria</strong>. Hoy es mantenido por
+                                Junio Hamano y una comunidad global de desarrolladores.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="bi bi-chat-quote"></i>
+                    <div>
+                        <em>"I'm an egotistical bastard, and I name all my projects after myself. First 'Linux', now
+                            'Git'."</em>
+                        <br><small>— Linus Torvalds (Git significa "persona desagradable" en argot británico)</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Sección 5: Git vs otros VCS ── -->
+            <section class="lesson-section" id="git-vs-otros">
+                <h2><span class="section-number">05</span> Git vs otros sistemas de control de versiones</h2>
+
+                <p>Git no es el único VCS que existe, pero sí el más popular con diferencia. Veamos cómo se compara:</p>
+
+                <div class="table-responsive">
+                    <table class="lesson-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th><i class="bi bi-git"></i> Git</th>
+                                <th>SVN (Subversion)</th>
+                                <th>Mercurial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tipo</td>
+                                <td class="highlight-cell">Distribuido</td>
+                                <td>Centralizado</td>
+                                <td>Distribuido</td>
+                            </tr>
+                            <tr>
+                                <td>Velocidad</td>
+                                <td class="highlight-cell">Muy rápido</td>
+                                <td>Lento en repos grandes</td>
+                                <td>Rápido</td>
+                            </tr>
+                            <tr>
+                                <td>Branching</td>
+                                <td class="highlight-cell">Ligero y rápido</td>
+                                <td>Pesado (copias de carpetas)</td>
+                                <td>Bueno pero menos flexible</td>
+                            </tr>
+                            <tr>
+                                <td>Trabajo offline</td>
+                                <td class="highlight-cell">Completo</td>
+                                <td>Limitado</td>
+                                <td>Completo</td>
+                            </tr>
+                            <tr>
+                                <td>Adopción</td>
+                                <td class="highlight-cell">~95% del mercado</td>
+                                <td>Decreciente</td>
+                                <td>Nicho</td>
+                            </tr>
+                            <tr>
+                                <td>Plataformas</td>
+                                <td class="highlight-cell">GitHub, GitLab, Bitbucket</td>
+                                <td>Apache SVN</td>
+                                <td>Bitbucket (limitado)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ── Sección 6: ¿Por qué aprender Git? ── -->
+            <section class="lesson-section" id="por-que-aprender">
+                <h2><span class="section-number">06</span> ¿Por qué aprender Git?</h2>
+
+                <p>
+                    Git no es solo una herramienta de desarrollo: es una <strong>habilidad esencial</strong> para
+                    cualquier
+                    persona en tecnología. Aquí las razones principales:
+                </p>
+
+                <div class="reasons-list">
+                    <div class="reason-item">
+                        <span class="reason-number">1</span>
+                        <div>
+                            <strong>Requisito laboral universal</strong>
+                            <p>Prácticamente el 100% de las ofertas de trabajo en desarrollo de software mencionan Git
+                                como requisito. No importa si eres frontend, backend, DevOps o data scientist.</p>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <span class="reason-number">2</span>
+                        <div>
+                            <strong>Portfolio profesional</strong>
+                            <p>Plataformas como GitHub funcionan como tu "CV técnico". Los reclutadores revisan tu
+                                actividad, tus repositorios y tu forma de escribir commits.</p>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <span class="reason-number">3</span>
+                        <div>
+                            <strong>Open Source</strong>
+                            <p>El mundo del software libre vive en Git. Contribuir a proyectos open source es una de las
+                                mejores formas de aprender y ganar visibilidad.</p>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <span class="reason-number">4</span>
+                        <div>
+                            <strong>Trabajo en equipo real</strong>
+                            <p>Aprender Git te prepara para la realidad del desarrollo profesional: pull requests, code
+                                reviews, integración continua y despliegues automatizados.</p>
+                        </div>
+                    </div>
+                    <div class="reason-item">
+                        <span class="reason-number">5</span>
+                        <div>
+                            <strong>Disciplina y organización</strong>
+                            <p>Usar Git te obliga a pensar en la estructura de tus cambios, a escribir mensajes
+                                descriptivos y a organizar tu trabajo en unidades lógicas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- ===== CUESTIONARIO ===== -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="quiz-section" id="cuestionario">
+                <div class="quiz-header">
+                    <h2><i class="bi bi-patch-question"></i> Cuestionario de evaluación</h2>
+                    <p>Pon a prueba lo que aprendiste. Selecciona la respuesta correcta para cada pregunta.</p>
+                </div>
+
+                <form id="quizForm">
+
+                    <!-- Pregunta 1 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">1. ¿Qué tipo de sistema de control de versiones es Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Centralizado, porque depende de un servidor principal.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Distribuido, porque cada desarrollador tiene una copia
+                                    completa del historial.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Híbrido, porque combina elementos centralizados y
+                                    distribuidos.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Lineal, porque solo permite un flujo de trabajo
+                                    secuencial.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">2. ¿Quién creó Git y en qué año?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Bill Gates en 2001.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Guido van Rossum en 2003.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Linus Torvalds en 2005.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Mark Zuckerberg en 2008.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">3. ¿Qué es un "commit" en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una instantánea del estado del proyecto en un momento
+                                    dado.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un comando para borrar archivos del repositorio.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una copia del repositorio en un servidor remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q3" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un mensaje de error que genera Git.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">4. ¿Cuál es la principal ventaja de un sistema distribuido sobre
+                            uno centralizado?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Es más fácil de instalar.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Solo necesita un servidor central.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">No requiere internet para nada.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q4" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Puedes trabajar offline y cada copia es un respaldo completo
+                                    del historial.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">5. ¿Qué es el "Staging Area" en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El servidor donde se almacena el repositorio remoto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un espacio intermedio donde seleccionas qué cambios incluir en
+                                    el próximo commit.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una rama especial para pruebas.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q5" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">El área donde se resuelven conflictos de merge.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 6 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">6. ¿Qué hace el comando <code>git clone</code>?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Crea una nueva rama en el repositorio local.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Elimina un repositorio existente.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Crea una copia completa de un repositorio remoto en tu
+                                    computadora.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q6" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Sube cambios locales al servidor.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 7 -->
+                    <div class="quiz-question" data-answer="a">
+                        <p class="quiz-question-text">7. ¿Qué es una "branch" (rama) en Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una línea de desarrollo independiente que permite trabajar en
+                                    paralelo sin afectar el código principal.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Una copia de seguridad automática del proyecto.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un tipo de archivo especial que crea Git.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q7" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Un registro de errores del sistema.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 8 -->
+                    <div class="quiz-question" data-answer="b">
+                        <p class="quiz-question-text">8. ¿Qué problema motivó la creación de Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La necesidad de crear un lenguaje de programación
+                                    nuevo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La ruptura con BitKeeper obligó al equipo de Linux a crear su
+                                    propia herramienta de control de versiones.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La falta de editores de texto para Linux.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q8" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">La necesidad de reemplazar Java como lenguaje
+                                    principal.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 9 -->
+                    <div class="quiz-question" data-answer="d">
+                        <p class="quiz-question-text">9. ¿Qué porcentaje aproximado del mercado de control de versiones
+                            ocupa Git actualmente?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Alrededor del 40%.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Alrededor del 60%.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Alrededor del 80%.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q9" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Alrededor del 95%.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Pregunta 10 -->
+                    <div class="quiz-question" data-answer="c">
+                        <p class="quiz-question-text">10. ¿Cuál de las siguientes NO es una razón para aprender Git?</p>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="a">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Es requisito en prácticamente todas las ofertas de trabajo de
+                                    desarrollo.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="b">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Permite contribuir a proyectos open source.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="c">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">Reemplaza la necesidad de aprender cualquier lenguaje de
+                                    programación.</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q10" value="d">
+                                <span class="radio-custom"></span>
+                                <span class="option-text">GitHub funciona como un portfolio profesional técnico.</span>
+                            </label>
+                        </div>
+                        <div class="quiz-feedback"></div>
+                    </div>
+
+                    <!-- Botones del quiz -->
+                    <div class="quiz-actions">
+                        <button type="button" class="btn-quiz btn-check-quiz" id="btnCheckQuiz">
+                            <i class="bi bi-check-circle"></i> Comprobar respuestas
+                        </button>
+                        <button type="button" class="btn-quiz btn-retry-quiz" id="btnRetryQuiz" style="display:none;">
+                            <i class="bi bi-arrow-repeat"></i> Reintentar
+                        </button>
+                    </div>
+
+                    <!-- Resultado final -->
+                    <div class="quiz-results" id="quizResults" style="display:none;">
+                        <div class="results-icon" id="resultsIcon"></div>
+                        <h3 id="resultsTitle"></h3>
+                        <p id="resultsText"></p>
+                        <div class="results-score">
+                            <span id="resultsScore"></span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- ===== Navegación de lecciones ===== -->
+            <div class="lesson-nav">
+                <a href="../../index.php" class="lesson-nav-link prev">
+                    <i class="bi bi-arrow-left"></i> Volver al índice
+                </a>
+                <a href="instalacion-y-configuracion.html" class="lesson-nav-link next">
+                    Siguiente: Instalación y Configuración <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&gt;_ Malleus Codeficarum <span class="footer-separator">|</span> El grimorio del código</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../../static/js/main.js"></script>
+
+    <!-- Quiz JS -->
+    <script src="../../static/js/quiz.js"></script>
+</body>
+
+</html>
