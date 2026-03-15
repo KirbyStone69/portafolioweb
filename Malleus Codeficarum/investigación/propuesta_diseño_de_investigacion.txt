@@ -43,7 +43,6 @@ Fecha de elaboración: Marzo 2026
 
 
 2.1 Variables
-
    Variable Independiente (VI):
    - Implementación del bootcamp interactivo de Git (plataforma Malleus Codeficarum) + uso obligatorio del sistema de control de versiones en proyectos.
 
@@ -124,13 +123,6 @@ Fecha de elaboración: Marzo 2026
 
    Fase 2 — Intervención / Capacitación (Semanas 2-3)
    ├─ Grupo Experimental: Completar el bootcamp de Malleus Codeficarum
-   │   ├─ Módulo: ¿Qué es Git y para qué sirve? (Teoría)
-   │   ├─ Módulo: Instalación y configuración
-   │   ├─ Módulo: Repositorios (init, clone) — Teoría + Laboratorio
-   │   ├─ Módulo: Staging y commits — Teoría + Laboratorio
-   │   ├─ Módulo: Ramas y merge — Teoría + Laboratorio
-   │   ├─ Módulo: Remotos (push, pull, fetch) — Teoría + Laboratorio
-   │   └─ Evaluación final del bootcamp
    └─ Grupo de Control: Clase normal sin capacitación en Git
 
    Fase 3 — Desarrollo del proyecto (Semanas 4-10)
