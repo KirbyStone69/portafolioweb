@@ -1,5 +1,13 @@
 <?php
 $titulo = "KirbyStone";
+
+$archivo_visitas = __DIR__ . '/visitas.txt';
+if (!file_exists($archivo_visitas)) {
+    file_put_contents($archivo_visitas, '0');
+}
+$visitas = (int)file_get_contents($archivo_visitas);
+$visitas++;
+file_put_contents($archivo_visitas, $visitas);
 $items_a_ignorar = [
     '.', 
     '..', 
@@ -69,8 +77,9 @@ usort($proyectos, function($a, $b) {
             <h2 class="seccion-titulo">Sobre Mí</h2>
             <div class="sobre-mi-contenido">
                 <div class="sobre-mi-texto">
-                    <p>¡Hola! Soy <strong>KirbyStone</strong>, desarrollador apasionado por la tecnología y la programación.</p>
-                    <p>Me encanta crear proyectos web, explorar nuevas herramientas y aprender algo nuevo cada día.</p>
+                    <p>Hola, soy <strong>Eder Omar</strong>, Técnico Superior Universitario en Desarrollo de Software Multiplataforma. <br>
+                        Cuento con experiencia en la creación de aplicaciones web enfocadas a servicios, aplicaciones de escritorio y aplicaciones móviles.
+                         También tengo experiencia en el uso de servicios de AWS, como EC2, para el alojamiento de sistemas web en la nube.</p>
                 </div>
                 <div class="sobre-mi-stats">
                     <div class="stat-item">
@@ -119,11 +128,15 @@ usort($proyectos, function($a, $b) {
     <footer id="contacto" class="site-footer">
         <div class="container">
             <h2 class="seccion-titulo">Contacto</h2>
-            <p class="footer-texto">¿Quieres colaborar o tienes alguna pregunta? ¡Contáctame!</p>
+            <p class="footer-texto">Mi portafolio está en crecimiento y estoy buscando nuevos proyectos técnicos para desarrollar. 
+                Si necesitas una solución de software o automatización contactame.</p>
             <div class="footer-links">
                 <a href="https://github.com/KirbyStone69" target="_blank" class="footer-link">
                     <span class="footer-link-icon">🐙</span> GitHub
                 </a>
+            </div>
+            <div class="footer-visitas">
+                <span id="contador-visitas" data-total="<?= $visitas ?>">0</span> visitas
             </div>
             <div class="footer-copy">
                 <p>&copy; <?= date('Y') ?> KirbyStone. Todos los derechos reservados.</p>
@@ -133,76 +146,6 @@ usort($proyectos, function($a, $b) {
     <!-- ==================== FIN PIE DE PAGINA ==================== -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script>
-        anime({
-            targets: '.logo',
-            translateY: [-30, 0],
-            opacity: [0, 1],
-            duration: 1000,
-            easing: 'easeOutExpo'
-        });
-
-        anime({
-            targets: '.nav-link',
-            translateY: [-20, 0],
-            opacity: [0, 1],
-            delay: anime.stagger(100, {start: 200}),
-            duration: 800,
-            easing: 'easeOutExpo'
-        });
-
-        anime({
-            targets: '.seccion-titulo',
-            translateX: [-50, 0],
-            opacity: [0, 1],
-            delay: anime.stagger(200, {start: 400}),
-            duration: 1000,
-            easing: 'easeOutExpo'
-        });
-
-        anime({
-            targets: '.proyecto-card',
-            translateY: [100, 0],
-            opacity: [0, 1],
-            delay: anime.stagger(100, {start: 600}),
-            duration: 1000,
-            easing: 'easeOutExpo'
-        });
-
-        document.querySelectorAll('.proyecto-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                anime({
-                    targets: this,
-                    scale: 1.1,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                anime({
-                    targets: this,
-                    scale: 1,
-                    duration: 300,
-                    easing: 'easeOutQuad'
-                });
-            });
-        });
-
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-menu').classList.toggle('nav-activo');
-        });
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-                document.querySelector('.nav-menu').classList.remove('nav-activo');
-            });
-        });
-    </script>
+    <script src="js.js"></script>
 </body>
 </html>
