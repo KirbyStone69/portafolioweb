@@ -38,12 +38,12 @@ if ($sql->execute()) {
     // registro en bitacora
     registrar_bitacora($_SESSION['id_usuario'], 'Generar reporte', 'Reportes');
     
-    header("Location: /practica-9/reportes.php?ok=1");
+    header("Location: /Dashboard Medico/reportes.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: /practica-9/reportes.php?ok=0");
+    header("Location: /Dashboard Medico/reportes.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

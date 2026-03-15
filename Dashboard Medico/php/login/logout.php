@@ -19,7 +19,7 @@ session_unset();
 // aqui cierro la sesion
 session_destroy();
 
-// aqui redirijo al login
-header("Location: /practica-9/index.php");
+// aqui redirijo al login del Dashboard Médico
+header("Location: /Dashboard Medico/index.php");
 exit;
 ?>

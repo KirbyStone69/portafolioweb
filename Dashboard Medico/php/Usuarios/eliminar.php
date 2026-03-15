@@ -41,12 +41,12 @@ if ($sql->execute()) {
         null
     );
     
-    header("Location: /practica-9/Usuarios.php?ok=3");
+    header("Location: /Dashboard Medico/Usuarios.php?ok=3");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: /practica-9/Usuarios.php?ok=0");
+    header("Location: /Dashboard Medico/Usuarios.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

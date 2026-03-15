@@ -48,12 +48,12 @@ if ($sql->execute()) {
         )
     );
     
-    header("Location: /practica-9/Tarifas.php?ok=1");
+    header("Location: /Dashboard Medico/Tarifas.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: /practica-9/Tarifas.php?ok=0");
+    header("Location: /Dashboard Medico/Tarifas.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

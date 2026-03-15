@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // aqui verifico si el usuario esta logueado
 if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== true) {
     // si no esta logueado lo mando al login
-    header("Location: /practica-9/index.php?error=2");
+    header("Location: /Dashboard Medico/index.php?error=2");
     exit;
 }
 
@@ -19,7 +19,7 @@ if (isset($_SESSION['ultimo_acceso'])) {
         // sesion expirada por inactividad
         session_unset();
         session_destroy();
-        header("Location: /practica-9/index.php?error=2");
+        header("Location: /Dashboard Medico/index.php?error=2");
         exit;
     }
 }

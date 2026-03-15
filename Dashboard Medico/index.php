@@ -28,6 +28,9 @@
           <form action="php/login/validar_login.php" method="POST" style="width: 23rem;" id="form-login">
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingresar</h3>
+            <div class="alert alert-info py-2 text-center" role="alert" style="font-size: 0.9em;">
+              Usuario: <strong>admin</strong> | Contraseña: <strong>admin</strong>
+            </div>
 
             <div class="form-outline mb-4">
               <label class="form-label">Usuario <span class="text-danger">*</span></label>
@@ -53,7 +56,7 @@
             </center>
             
           </form>
-
+          
         </div>
 
       </div>

@@ -65,12 +65,12 @@ if ($sql->execute()) {
         )
     );
     
-    header("Location: /practica-9/Expedientes.php?ok=2");
+    header("Location: /Dashboard Medico/Expedientes.php?ok=2");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: /practica-9/Expedientes.php?ok=0");
+    header("Location: /Dashboard Medico/Expedientes.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

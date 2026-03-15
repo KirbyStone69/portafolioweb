@@ -58,20 +58,20 @@ if ($resultado->num_rows === 1) {
         // aqui redirijo segun el rol
         if ($datos_usuario['Rol'] === 'Paciente') {
             // los pacientes van directo a la agenda
-            header("Location: /practica-9/agenda.php");
+            header("Location: /Dashboard Medico/agenda.php");
         } else {
             // el resto del staff va al dashboard
-            header("Location: /practica-9/Dashboard.php");
+            header("Location: /Dashboard Medico/Dashboard.php");
         }
         exit;
     } else {
         // usuario inactivo
-        header("Location: /practica-9/index.php?error=1");
+        header("Location: /Dashboard Medico/index.php?error=1");
         exit;
     }
 } else {
     // usuario o contraseña incorrectos
-    header("Location: /practica-9/index.php?error=1");
+    header("Location: /Dashboard Medico/index.php?error=1");
     exit;
 }
 

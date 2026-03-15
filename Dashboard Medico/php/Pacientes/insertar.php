@@ -29,7 +29,7 @@ if (!empty($curp)) {
     $sql_check->bind_param("s", $curp);
     $sql_check->execute();
     if ($sql_check->get_result()->num_rows > 0) {
-        header("Location: /practica-9/Pacientes.php?ok=0&error=" . urlencode("El CURP ya existe"));
+        header("Location: /Dashboard Medico/Pacientes.php?ok=0&error=" . urlencode("El CURP ya existe"));
         $sql_check->close();
         $conexion->close();
         exit;
@@ -71,12 +71,12 @@ if ($sql->execute()) {
         )
     );
     
-      header("Location: /practica-9/Pacientes.php?ok=1");
+      header("Location: /Dashboard Medico/Pacientes.php?ok=1");
       $sql->close();
       $conexion->close();
   exit;
 } else {
-      header("Location: /practica-9/Pacientes.php?ok=0");
+      header("Location: /Dashboard Medico/Pacientes.php?ok=0");
       $sql->close();
       $conexion->close();
       exit;

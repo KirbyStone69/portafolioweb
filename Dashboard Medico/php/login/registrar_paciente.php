@@ -21,7 +21,7 @@ $contrasena_confirmar = $_POST['password_confirm'];
 
 // aqui verifico que las contraseñas coincidan
 if ($contrasena !== $contrasena_confirmar) {
-    header("Location: /practica-9/registro.php?error=1");
+    header("Location: /Dashboard Medico/registro.php?error=1");
     exit;
 }
 
@@ -33,7 +33,7 @@ $resultado_verificar = $sql_verificar->get_result();
 
 if ($resultado_verificar->num_rows > 0) {
     // aqui significa que el usuario ya existe
-    header("Location: /practica-9/registro.php?error=2");
+    header("Location: /Dashboard Medico/registro.php?error=2");
     $sql_verificar->close();
     $conexion->close();
     exit;
@@ -47,7 +47,7 @@ $resultado_verificar_curp = $sql_verificar_curp->get_result();
 
 if ($resultado_verificar_curp->num_rows > 0) {
     // aqui significa que el CURP ya esta registrado
-    header("Location: /practica-9/registro.php?error=2");
+    header("Location: /Dashboard Medico/registro.php?error=2");
     $sql_verificar_curp->close();
     $conexion->close();
     exit;
@@ -107,7 +107,7 @@ try {
     );
     
     // aqui redirijo con exito
-    header("Location: /practica-9/registro.php?ok=1");
+    header("Location: /Dashboard Medico/registro.php?ok=1");
     
     $sql_paciente->close();
     $sql_usuario->close();
@@ -117,7 +117,7 @@ try {
 } catch (Exception $e) {
     // aqui si algo salio mal, deshago todo
     $conexion->rollback();
-    header("Location: /practica-9/registro.php?error=3");
+    header("Location: /Dashboard Medico/registro.php?error=3");
     $conexion->close();
     exit;
 }

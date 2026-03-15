@@ -33,7 +33,7 @@ foreach ($servicios as $servicio) {
 }
 
 if (abs($total_calculado - $monto) > 0.01) {
-    header("Location: /practica-9/Pagos.php?ok=0&error=" . urlencode("El total no coincide con la suma de servicios"));
+    header("Location: /Dashboard Medico/Pagos.php?ok=0&error=" . urlencode("El total no coincide con la suma de servicios"));
     exit;
 }
 
@@ -114,7 +114,7 @@ try {
         )
     );
     
-    header("Location: /practica-9/Pagos.php?ok=1");
+    header("Location: /Dashboard Medico/Pagos.php?ok=1");
     $conexion->close();
     exit;
     
@@ -122,7 +122,7 @@ try {
     // si algo fallo, deshago todo
     $conexion->rollback();
     error_log("Error en insertar pago: " . $e->getMessage());
-    header("Location: /practica-9/Pagos.php?ok=0&error=" . urlencode($e->getMessage()));
+    header("Location: /Dashboard Medico/Pagos.php?ok=0&error=" . urlencode($e->getMessage()));
     $conexion->close();
     exit;
 }

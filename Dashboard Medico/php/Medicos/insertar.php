@@ -65,7 +65,7 @@ if (!empty($cedula)) {
     $sql_check->bind_param("s", $cedula);
     $sql_check->execute();
     if ($sql_check->get_result()->num_rows > 0) {
-        header("Location: /practica-9/Medicos.php?ok=0&error=" . urlencode("La cédula profesional ya existe"));
+        header("Location: /Dashboard Medico/Medicos.php?ok=0&error=" . urlencode("La cédula profesional ya existe"));
         $sql_check->close();
         $conexion->close();
         exit;
@@ -107,12 +107,12 @@ if ($sql->execute()) {
         )
     );
     
-    header("Location: /practica-9/Medicos.php?ok=1");
+    header("Location: /Dashboard Medico/Medicos.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: /practica-9/Medicos.php?ok=0");
+    header("Location: /Dashboard Medico/Medicos.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;
