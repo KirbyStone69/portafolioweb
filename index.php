@@ -16,7 +16,8 @@ $items_a_ignorar = [
     '.heroku',      
     '.profile.d',   
     '.composer',    
-    'vendor'        
+    'vendor',
+    'img'        
 ];
 $items = scandir('.');
 $proyectos = [];
@@ -130,14 +131,27 @@ usort($proyectos, function($a, $b) {
                 Si necesitas una solución de software o automatización contactame.</p>
             <div class="footer-links">
                 <a href="https://github.com/KirbyStone69" target="_blank" class="footer-link">
-                    <span class="footer-link-icon">🐙</span> GitHub
+                    <img src="img/github.svg" alt="GitHub" class="footer-link-icon-img"> GitHub
+                </a>
+
+                <a href="https://wa.me/+528342186956" target="_blank" class="footer-link">
+                    <img src="img/whatsapp.svg" alt="WhatsApp" class="footer-link-icon-img"> WhatsApp
+                </a>
+                <a href="https://www.linkedin.com" target="_blank" class="footer-link">
+                    <img src="img/linkedin.svg" alt="LinkedIn" class="footer-link-icon-img"> LinkedIn
+                </a>
+                <a class="footer-link">
+                    <img src="img/gmail.svg" alt="Gmail personal" class="footer-link-icon-img"> Gmail Personal : edeveloco@gmail.com
+                </a>
+                <a class="footer-link">
+                    <img src="img/gmail.svg" alt="Gmail institucional" class="footer-link-icon-img"> Gmail institucional : 2430206@upv.edu.mx
                 </a>
             </div>
             <div class="footer-visitas">
                 <span id="contador-visitas" data-total="<?= $visitas ?>">0</span> visitas
             </div>
             <div class="footer-copy">
-                <p>&copy; <?= date('Y') ?> KirbyStone. Todos los derechos reservados.</p>
+                <p>&copy; <?= date('Y') ?> KirbyStone. Todos los derechos reservados. | Powered by Heroku</p>
             </div>
         </div>
     </footer>

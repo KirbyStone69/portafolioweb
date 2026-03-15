@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.334 22.006">
+  <defs>
+    <style>
+      .a {
+        fill: #4285f4;
+      }
+
+      .b {
+        fill: #34a853;
+      }
+
+      .c {
+        fill: #fbbc04;
+      }
+
+      .d {
+        fill: #ea4335;
+        fill-rule: evenodd;
+      }
+
+      .e {
+        fill: #c5221f;
+      }
+    </style>
+  </defs>
+  <title>Asset 10</title>
+  <g>
+    <path class="a" d="M2,22.006H6.667V10.672L0,5.672V20.006A2,2,0,0,0,2,22.006Z"/>
+    <path class="b" d="M22.667,22.006h4.667a2,2,0,0,0,2-2V5.672l-6.667,5Z"/>
+    <path class="c" d="M22.667,2.006v8.666l6.667-5V3.006a3,3,0,0,0-4.8-2.4Z"/>
+    <path class="d" d="M6.667,10.672V2.006l8,6,8-6v8.666l-8,6Z"/>
+    <path class="e" d="M0,3.006V5.672l6.667,5V2.006L4.8.606A3,3,0,0,0,0,3.006Z"/>
+  </g>
+</svg>
