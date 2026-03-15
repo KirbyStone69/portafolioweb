@@ -11,14 +11,16 @@ if ($conexion->connect_error) {
 }
 
 // Obtener ingresos por dia de la semana actual
+// Calculamos el inicio y fin de la semana (Lunes a Domingo)
 $sql = "SELECT 
+    DATE(FechaPago) as fecha,
     DAYOFWEEK(FechaPago) as dia,
     COALESCE(SUM(Monto), 0) as total
 FROM Gestor_Pagos
 WHERE EstatusPago = 'Pagado'
     AND YEARWEEK(FechaPago, 1) = YEARWEEK(CURRENT_DATE(), 1)
-GROUP BY DAYOFWEEK(FechaPago)
-ORDER BY dia";
+GROUP BY DATE(FechaPago), DAYOFWEEK(FechaPago)
+ORDER BY fecha";
 
 $resultado = $conexion->query($sql);
 

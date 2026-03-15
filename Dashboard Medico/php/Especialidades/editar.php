@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -24,16 +24,30 @@ if (!$sql) {
 
 $sql->bind_param("ssi", $nombre, $descripcion, $id);
 
+// JR: obtengo datos anteriores antes de actualizar
+$datos_anteriores = obtener_datos_anteriores($conexion, 'Especialidades', 'IdEspecialidad', $id);
+
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Editar especialidad', 'Especialidades');
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Editar',
+        'Especialidades',
+        'Editó especialidad #' . $id . ': ' . $nombre,
+        $id,
+        $datos_anteriores,
+        array(
+            'NombreEspecialidad' => $nombre,
+            'Descripcion' => $descripcion
+        )
+    );
     
-      header("Location: ../../Especialidades.php?ok=2");
+      header("Location: /practica-9/Especialidades.php?ok=2");
       $sql->close();
       $conexion->close();
   exit;
 } else {
-      header("Location: ../../Especialidades.php?ok=0");
+      header("Location: /practica-9/Especialidades.php?ok=0");
       $sql->close();
       $conexion->close();
       exit;

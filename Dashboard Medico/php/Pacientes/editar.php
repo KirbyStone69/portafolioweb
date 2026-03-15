@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -36,17 +36,35 @@ if (!$sql) {
 // asigna los parametros
 $sql->bind_param("sssssssssssi", $nombreCompleto, $curp, $fechaNacimiento, $sexo, $telefono, $correo, $direccion, $contactoEmergencia, $telefonoEmergencia, $alergias, $antecedentes, $id);
 
+// aqui obtengo los datos anteriores antes de actualizar
+$datos_anteriores = obtener_datos_anteriores($conexion, 'Control_Pacientes', 'IdPaciente', $id);
+
 // ejecuta la consulta
 if ($sql->execute()) {
     // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Editar paciente', 'Pacientes');
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Editar',
+        'Pacientes',
+        'Editó paciente: ' . $nombreCompleto,
+        $id,
+        $datos_anteriores,
+        array(
+            'NombreCompleto' => $nombreCompleto,
+            'CURP' => $curp,
+            'FechaNacimiento' => $fechaNacimiento,
+            'Sexo' => $sexo,
+            'Telefono' => $telefono,
+            'CorreoElectronico' => $correo
+        )
+    );
     
-    header("Location: ../../Pacientes.php?ok=2");
+    header("Location: /practica-9/Pacientes.php?ok=2");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Pacientes.php?ok=0");
+    header("Location: /practica-9/Pacientes.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

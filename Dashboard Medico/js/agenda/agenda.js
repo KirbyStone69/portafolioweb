@@ -8,36 +8,40 @@ let todasLasCitas = [];
 document.addEventListener('DOMContentLoaded', function () {
     // Inicializar modal
     modalCita = new bootstrap.Modal(document.getElementById('modalCita'));
-    
+
     // Inicializar calendario
     inicializarCalendario();
-    
+
     // Cargar datos de pacientes y medicos
     cargarPacientes();
     cargarMedicos();
     cargarMedicosFiltro();
-    
+
     // Cargar tabla de citas
     cargarTablaCitas();
-    
-    // Eventos de botones
-    document.getElementById('btnNuevaCita').addEventListener('click', abrirModalNuevo);
+
+    // Eventos de botones (verificar que existan primero)
+    const btnNuevaCita = document.getElementById('btnNuevaCita');
+    if (btnNuevaCita) {
+        btnNuevaCita.addEventListener('click', abrirModalNuevo);
+    }
+
     document.getElementById('btnGuardarCita').addEventListener('click', guardarCita);
-    document.getElementById('btnEliminarCita').addEventListener('click', function() {
+    document.getElementById('btnEliminarCita').addEventListener('click', function () {
         const idCita = document.getElementById('idCita').value;
         if (idCita) {
             eliminarCita(idCita);
         }
     });
-    
+
     // Eventos de filtros
     document.getElementById('filtroMedico').addEventListener('change', aplicarFiltros);
     document.getElementById('filtroEstado').addEventListener('change', aplicarFiltros);
     document.getElementById('btnLimpiarFiltros').addEventListener('click', limpiarFiltros);
     document.getElementById('filtroEstadoTabla').addEventListener('change', cargarTablaCitas);
-    
+
     // Evento al cambiar de tab
-    document.getElementById('citas-tab').addEventListener('shown.bs.tab', function() {
+    document.getElementById('citas-tab').addEventListener('shown.bs.tab', function () {
         cargarTablaCitas();
     });
 });
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Inicializar el calendario con FullCalendar
 function inicializarCalendario() {
     const calendarEl = document.getElementById('calendar');
-    
+
     calendar = new FullCalendar.Calendar(calendarEl, {
         themeSystem: 'bootstrap5',
         locale: 'es',
@@ -60,6 +64,14 @@ function inicializarCalendario() {
         aspectRatio: 1.8,
         editable: false,
         selectable: true,
+        selectMirror: true,
+        navLinks: (typeof rolUsuario !== 'undefined' && rolUsuario !== 'Paciente'), // solo staff puede navegar dias
+        navLinkDayClick: function (date, jsEvent) {
+            // Al hacer clic en el numero del dia, abre modal para nueva cita (solo staff)
+            if (typeof rolUsuario !== 'undefined' && rolUsuario === 'Paciente') return;
+            const fechaStr = date.toISOString().split('T')[0];
+            abrirModalNuevo(fechaStr);
+        },
         nowIndicator: true,
         dayMaxEvents: 3,
         moreLinkClick: 'popover',
@@ -68,10 +80,10 @@ function inicializarCalendario() {
             startTime: '08:00',
             endTime: '18:00'
         },
-        
+
         // Cargar eventos desde el servidor
-        events: function(info, successCallback, failureCallback) {
-            fetch('php/agenda/tabla.php')
+        events: function (info, successCallback, failureCallback) {
+            fetch('php/Agenda/tabla.php')
                 .then(response => response.json())
                 .then(data => {
                     todasLasCitas = data;
@@ -82,38 +94,46 @@ function inicializarCalendario() {
                     failureCallback(error);
                 });
         },
-        
-        // Al hacer click en un evento
-        eventClick: function(info) {
+
+        // Al hacer click en un evento (solo staff puede editar)
+        eventClick: function (info) {
+            if (typeof rolUsuario !== 'undefined' && rolUsuario === 'Paciente') return;
             abrirModalEditar(info.event);
         },
-        
-        // Al hacer click en una fecha
-        dateClick: function(info) {
+
+        // Al hacer click en una fecha (espacio vacio) - solo staff
+        dateClick: function (info) {
+            if (typeof rolUsuario !== 'undefined' && rolUsuario === 'Paciente') return;
             abrirModalNuevo(info.dateStr);
         },
-        
+
+        // Al seleccionar un rango de fechas - solo staff
+        select: function (info) {
+            if (typeof rolUsuario !== 'undefined' && rolUsuario === 'Paciente') return;
+            abrirModalNuevo(info.startStr);
+        },
+
         // Formato de hora
         eventTimeFormat: {
             hour: '2-digit',
             minute: '2-digit',
             hour12: false
         },
-        
+
         // Contenido personalizado del evento con colores
-        eventContent: function(arg) {
+        eventContent: function (arg) {
             const estado = arg.event.extendedProps.estado;
             const hora = arg.timeText;
             const paciente = arg.event.title;
-            
+
             // Definir color de fondo segun el estado
-            const bgColor = 
+            const bgColor =
                 estado === 'Completada' ? '#28a745' :
-                estado === 'Programada' ? '#ffc107' :
-                '#dc3545';
-                
+                    estado === 'Programada' ? '#ffc107' :
+                        '#dc3545';
+
             const textColor = estado === 'Programada' ? '#000' : '#fff';
-            
+
             const html = `
                 <div style="background: ${bgColor}; color: ${textColor}; padding: 2px 4px; border-radius: 3px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     <div style="font-weight: 600; font-size: 0.7rem;">${hora}</div>
@@ -122,24 +142,24 @@ function inicializarCalendario() {
             `;
             return { html };
         },
-        
+
         // Color del evento
         eventColor: '#007bff',
         eventBackgroundColor: 'transparent',
         eventBorderColor: 'transparent'
     });
-    
+
     calendar.render();
 }
 
 // Cargar lista de pacientes
 function cargarPacientes() {
-    fetch('php/agenda/obtener_pacientes.php')
+    fetch('php/Agenda/obtener_pacientes.php')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('selectPaciente');
             select.innerHTML = '<option value="">Seleccione un paciente</option>';
-            
+
             data.forEach(paciente => {
                 const option = document.createElement('option');
                 option.value = paciente.IdPaciente;
@@ -154,16 +174,16 @@ function cargarPacientes() {
 
 // Cargar lista de medicos
 function cargarMedicos() {
-    fetch('php/agenda/obtener_medicos.php')
+    fetch('php/Agenda/obtener_medicos.php')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('selectMedico');
             select.innerHTML = '<option value="">Seleccione un médico</option>';
-            
+
             data.forEach(medico => {
                 const option = document.createElement('option');
                 option.value = medico.IdMedico;
-                option.textContent = medico.NombreCompleto + 
+                option.textContent = medico.NombreCompleto +
                     (medico.NombreEspecialidad ? ' - ' + medico.NombreEspecialidad : '');
                 select.appendChild(option);
             });
@@ -175,16 +195,16 @@ function cargarMedicos() {
 
 // Cargar lista de medicos para el filtro
 function cargarMedicosFiltro() {
-    fetch('php/agenda/obtener_medicos.php')
+    fetch('php/Agenda/obtener_medicos.php')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('filtroMedico');
             select.innerHTML = '<option value="">Todos los médicos</option>';
-            
+
             data.forEach(medico => {
                 const option = document.createElement('option');
                 option.value = medico.IdMedico;
-                option.textContent = medico.NombreCompleto + 
+                option.textContent = medico.NombreCompleto +
                     (medico.NombreEspecialidad ? ' - ' + medico.NombreEspecialidad : '');
                 select.appendChild(option);
             });
@@ -198,11 +218,11 @@ function cargarMedicosFiltro() {
 function aplicarFiltrosACitas(citas) {
     const filtroMedico = document.getElementById('filtroMedico').value;
     const filtroEstado = document.getElementById('filtroEstado').value;
-    
+
     return citas.filter(cita => {
         const cumpleMedico = !filtroMedico || cita.extendedProps.idMedico == filtroMedico;
         const cumpleEstado = !filtroEstado || cita.extendedProps.estado === filtroEstado;
-        
+
         return cumpleMedico && cumpleEstado;
     });
 }
@@ -227,7 +247,7 @@ function abrirModalNuevo(fecha = null) {
     document.getElementById('idCita').value = '';
     document.getElementById('estadoCita').value = 'Programada';
     document.getElementById('btnEliminarCita').style.display = 'none';
-    
+
     // Si se proporciona una fecha, establecerla
     if (fecha) {
         const fechaObj = new Date(fecha);
@@ -235,7 +255,7 @@ function abrirModalNuevo(fecha = null) {
         const fechaLocal = new Date(fechaObj.getTime() - (fechaObj.getTimezoneOffset() * 60000));
         document.getElementById('fechaCita').value = fechaLocal.toISOString().slice(0, 16);
     }
-    
+
     modalCita.show();
 }
 
@@ -243,21 +263,21 @@ function abrirModalNuevo(fecha = null) {
 function abrirModalEditar(evento) {
     editando = true;
     document.getElementById('tituloModal').textContent = 'Editar Cita';
-    
+
     // Llenar el formulario con los datos del evento
     document.getElementById('idCita').value = evento.id;
     document.getElementById('selectPaciente').value = evento.extendedProps.idPaciente;
     document.getElementById('selectMedico').value = evento.extendedProps.idMedico;
-    
+
     // Formatear fecha para input datetime-local
     const fecha = new Date(evento.start);
     const fechaLocal = new Date(fecha.getTime() - (fecha.getTimezoneOffset() * 60000));
     document.getElementById('fechaCita').value = fechaLocal.toISOString().slice(0, 16);
-    
+
     document.getElementById('motivoConsulta').value = evento.extendedProps.motivo || '';
     document.getElementById('estadoCita').value = evento.extendedProps.estado;
     document.getElementById('observaciones').value = evento.extendedProps.observaciones || '';
-    
+
     document.getElementById('btnEliminarCita').style.display = 'block';
     modalCita.show();
 }
@@ -265,66 +285,66 @@ function abrirModalEditar(evento) {
 // Guardar cita (crear o actualizar)
 function guardarCita() {
     const form = document.getElementById('formCita');
-    
+
     // Validar formulario
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
-    
+
     // Recoger datos del formulario
     const formData = new FormData();
     const idCita = document.getElementById('idCita').value;
-    
+
     if (editando && idCita) {
         formData.append('idCita', idCita);
     }
-    
+
     formData.append('idPaciente', document.getElementById('selectPaciente').value);
     formData.append('idMedico', document.getElementById('selectMedico').value);
     formData.append('fechaCita', document.getElementById('fechaCita').value);
     formData.append('motivoConsulta', document.getElementById('motivoConsulta').value);
     formData.append('estadoCita', document.getElementById('estadoCita').value);
     formData.append('observaciones', document.getElementById('observaciones').value);
-    
+
     // Determinar URL segun si es nuevo o editar
-    const url = editando ? 'php/agenda/actualizar.php' : 'php/agenda/insertar.php';
-    
+    const url = editando ? 'php/Agenda/actualizar.php' : 'php/Agenda/insertar.php';
+
     // Enviar datos al servidor
     fetch(url, {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: data.message,
-                timer: 2000,
-                showConfirmButton: false
-            });
-            
-            // Cerrar modal y recargar calendario
-            modalCita.hide();
-            calendar.refetchEvents();
-        } else {
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: data.message,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Cerrar modal y recargar calendario
+                modalCita.hide();
+                calendar.refetchEvents();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.error || 'Error al guardar la cita'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: data.error || 'Error al guardar la cita'
+                text: 'Error de conexión con el servidor'
             });
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error de conexión con el servidor'
         });
-    });
 }
 
 // Eliminar cita
@@ -342,40 +362,40 @@ function eliminarCita(idCita) {
         if (result.isConfirmed) {
             const formData = new FormData();
             formData.append('idCita', idCita);
-            
-            fetch('php/agenda/eliminar.php', {
+
+            fetch('php/Agenda/eliminar.php', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Eliminado',
-                        text: data.message,
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                    
-                    modalCita.hide();
-                    calendar.refetchEvents();
-                } else {
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Eliminado',
+                            text: data.message,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        modalCita.hide();
+                        calendar.refetchEvents();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.error
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: data.error
+                        text: 'Error de conexión con el servidor'
                     });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error de conexión con el servidor'
                 });
-            });
         }
     });
 }
@@ -384,26 +404,26 @@ function eliminarCita(idCita) {
 function cargarTablaCitas() {
     const estadoFiltro = document.getElementById('filtroEstadoTabla').value;
     const tbody = document.getElementById('tablaCitasBody');
-    
-    fetch('php/agenda/tabla.php')
+
+    fetch('php/Agenda/tabla.php')
         .then(response => response.json())
         .then(data => {
             tbody.innerHTML = '';
-            
+
             // Filtrar por estado si hay filtro
             let citasFiltradas = data;
             if (estadoFiltro) {
                 citasFiltradas = data.filter(cita => cita.extendedProps.estado === estadoFiltro);
             }
-            
+
             // Ordenar por fecha
             citasFiltradas.sort((a, b) => new Date(a.start) - new Date(b.start));
-            
+
             if (citasFiltradas.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="7" class="text-center">No hay citas registradas</td></tr>';
                 return;
             }
-            
+
             citasFiltradas.forEach(cita => {
                 const fecha = new Date(cita.start);
                 const fechaFormateada = fecha.toLocaleDateString('es-MX', {
@@ -413,12 +433,12 @@ function cargarTablaCitas() {
                     hour: '2-digit',
                     minute: '2-digit'
                 });
-                
-                const badgeClass = 
+
+                const badgeClass =
                     cita.extendedProps.estado === 'Completada' ? 'bg-success' :
-                    cita.extendedProps.estado === 'Programada' ? 'bg-warning text-dark' :
-                    'bg-danger';
-                
+                        cita.extendedProps.estado === 'Programada' ? 'bg-warning text-dark' :
+                            'bg-danger';
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${fechaFormateada}</td>
@@ -428,9 +448,10 @@ function cargarTablaCitas() {
                     <td>${cita.extendedProps.motivo || 'Sin motivo'}</td>
                     <td><span class="badge ${badgeClass}">${cita.extendedProps.estado}</span></td>
                     <td>
-                        <button class="btn btn-sm btn-primary" onclick="verDetalleCita('${cita.id}')">
+                        ${(typeof rolUsuario === 'undefined' || rolUsuario !== 'Paciente') ?
+                        `<button class="btn btn-sm btn-primary" onclick="verDetalleCita('${cita.id}')">
                             <i class="bi bi-eye"></i>
-                        </button>
+                        </button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -444,7 +465,7 @@ function cargarTablaCitas() {
 
 // Ver detalle de cita desde la tabla
 function verDetalleCita(idCita) {
-    fetch('php/agenda/tabla.php')
+    fetch('php/Agenda/tabla.php')
         .then(response => response.json())
         .then(data => {
             const cita = data.find(c => c.id == idCita);

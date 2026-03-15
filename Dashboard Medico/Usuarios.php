@@ -1,7 +1,7 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once 'php/auth/verificar_sesion.php';
+require_once 'php/login/verificar_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -94,8 +94,7 @@ require_once 'php/auth/verificar_sesion.php';
                 </li>
                 <hr class="h-color mx-2">
                 <li class=""><a href="Expedientes.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-folder"></i> Expedientes</a></li>
-                  <i class="fal fa-dollar-sign"></i> Tarifas</a>
-                </li>
+
                 <hr class="h-color mx-2">
 
                 <li class="">
@@ -134,7 +133,7 @@ require_once 'php/auth/verificar_sesion.php';
                                 <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1">Mi cuenta</a></li>
                                 <li><a class="dropdown-item" href="#">Configuración</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="php/auth/logout.php">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="php/login/logout.php">Cerrar sesión</a></li>
                               </ul>
                             </li>
                         </ul>
@@ -166,6 +165,7 @@ require_once 'php/auth/verificar_sesion.php';
                   <option value="Admin">Admin</option>
                   <option value="Medico">Medico</option>
                   <option value="Recepcionista">Recepcionista</option>
+                  <option value="Paciente">Paciente</option>
                 </select>
               </div>
 
@@ -190,6 +190,22 @@ require_once 'php/auth/verificar_sesion.php';
                   <option value="">Cargando...</option>
                 </select>
                 <small class="text-muted">Vincula este usuario a un médico registrado (solo para rol Médico)</small>
+              </div>
+
+              <!-- aqui va el selector de paciente (solo para rol Paciente) -->
+              <div class="mb-3" id="grupo-paciente" style="display:none;">
+                <label for="select-paciente" class="form-label">Paciente</label>
+                <select class="form-select" name="paciente_id" id="select-paciente">
+                  <option value="">Seleccione un paciente</option>
+                </select>
+                <small class="text-muted">Solo para usuarios con rol Paciente</small>
+              </div>
+
+              <div class="mb-3" id="grupo-recepcionista" style="display:none;">
+                <label for="select-medicos" class="form-label">Médicos asignados</label>
+                <select class="form-select" name="medicos_asignados[]" id="select-medicos" multiple size="4">
+                </select>
+                <small class="text-muted">Selecciona los médicos que atenderá esta recepcionista</small>
               </div>
 
               <div class="mb-3" id="grupo-medicos-asignados" style="display:none;">

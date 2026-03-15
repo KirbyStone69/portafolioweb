@@ -25,7 +25,7 @@
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form action="php/auth/validar_login.php" method="POST" style="width: 23rem;" id="form-login">
+          <form action="php/login/validar_login.php" method="POST" style="width: 23rem;" id="form-login">
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingresar</h3>
 
@@ -48,16 +48,10 @@
               <div class="pt-1 mb-4">
                 <button type="submit" class="btn btn-info btn-lg btn-block">Ingresar</button>
               </div>
+              
+              <p class="mb-2 pb-lg-2" style="color: #393f81;">¿No tienes cuenta? <a href="registro.php" style="color: #393f81;">Regístrate aquí</a></p>
             </center>
             
-            <!-- Usuarios de prueba -->
-            <div class="alert alert-light border" role="alert">
-              <small class="text-muted">
-                <strong>Usuarios de prueba:</strong><br>
-                <strong>admin</strong> / admin<br>
-                <strong>dr.juan</strong> / 12345
-              </small>
-            </div>
           </form>
 
         </div>
@@ -75,6 +69,22 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// aqui verifico si ya hay sesion activa en el servidor
+(function verificarSesionActiva() {
+    fetch('php/login/verificar_sesion_ajax.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.sesion_activa) {
+                // Si hay sesion activa, redirigir al dashboard
+                window.location.href = 'Dashboard.php';
+            }
+        })
+        .catch(error => {
+            // Si hay error, continuar normal en login
+            console.log('No hay sesión activa');
+        });
+})();
+
 // aqui manejo las alertas de error
 (function() {
     const params = new URLSearchParams(window.location.search);
@@ -88,6 +98,8 @@
             confirmButtonText: 'Intentar de nuevo'
         });
     } else if (error === '2') {
+        // Limpiar localStorage al cerrar sesion
+        localStorage.removeItem('usuario_sesion');
         Swal.fire({
             icon: 'warning',
             title: 'Sesión cerrada',
@@ -111,6 +123,13 @@ document.getElementById('btn-toggle-password').addEventListener('click', functio
         icon.classList.remove('bi-eye-slash');
         icon.classList.add('bi-eye');
     }
+});
+
+// aqui guardo el usuario en localStorage cuando inicia sesion exitosamente
+document.getElementById('form-login').addEventListener('submit', function(e) {
+    const usuario = document.getElementById('input-usuario').value;
+    // Guardar usuario en localStorage para recordar sesion
+    localStorage.setItem('usuario_sesion', usuario);
 });
 </script>
 </body>

@@ -10,7 +10,7 @@ if ($conexion->connect_error) {
     exit;
 }
 
-// aqui hago el select con joins para traer paciente, medico y cita
+// aqui hago el select con joins para traer paciente, medico, cita y quien recibio el pago
 $sql = "SELECT 
     p.IdPago, 
     p.IdCita,
@@ -20,16 +20,20 @@ $sql = "SELECT
     p.FechaPago,
     p.Referencia,
     p.EstatusPago,
+    p.IdUsuarioRecibe,
     pac.NombreCompleto AS NombrePaciente,
     pac.CURP AS CURPPaciente,
     m.NombreCompleto AS NombreMedico,
     m.CedulaProfesional AS CedulaMedico,
     c.FechaCita,
-    c.MotivoConsulta
+    c.MotivoConsulta,
+    u.NombreCompleto AS RecibioPago,
+    (SELECT COUNT(*) FROM Detalle_Pagos WHERE IdPago = p.IdPago) AS NumServicios
 FROM Gestor_Pagos p
 INNER JOIN Control_Pacientes pac ON p.IdPaciente = pac.IdPaciente
 INNER JOIN Control_Agenda c ON p.IdCita = c.IdCita
 INNER JOIN Control_Medicos m ON c.IdMedico = m.IdMedico
+LEFT JOIN Usuarios_Sistema u ON p.IdUsuarioRecibe = u.IdUsuario
 ORDER BY p.FechaPago DESC";
 
 $respuesta = $conexion->query($sql);
@@ -48,3 +52,4 @@ if ($respuesta) {
 }
 
 $conexion->close();
+?>

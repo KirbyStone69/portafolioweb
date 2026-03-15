@@ -1,9 +1,3 @@
-// ============================================
-// HELPERS GLOBALES PARA MEJORAR UX
-// ============================================
-
-// ========== MEJORA 1: Loading States ==========
-// Agregar loading al enviar formularios
 function agregarLoadingAlFormulario(formId) {
     const form = document.getElementById(formId);
     if (!form) return;

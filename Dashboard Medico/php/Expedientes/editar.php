@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -39,17 +39,38 @@ if (empty($proxima_cita)) {
 // aqui asigno los parametros
 $sql->bind_param("iisssssssi", $id_paciente, $id_medico, $fecha_consulta, $sintomas, $diagnostico, $tratamiento, $receta, $notas, $proxima_cita, $id);
 
+// JR: obtengo los datos anteriores antes de actualizar
+$datos_anteriores = obtener_datos_anteriores($conexion, 'Expediente_Clinico', 'IdExpediente', $id);
+
 // aqui ejecuto la actualizacion
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Editar expediente', 'Expedientes');
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Editar',
+        'Expedientes',
+        'Editó expediente clínico #' . $id . ' - Paciente ID: ' . $id_paciente,
+        $id,
+        $datos_anteriores,
+        array(
+            'IdPaciente' => $id_paciente,
+            'IdMedico' => $id_medico,
+            'FechaConsulta' => $fecha_consulta,
+            'Sintomas' => $sintomas,
+            'Diagnostico' => $diagnostico,
+            'Tratamiento' => $tratamiento,
+            'RecetaMedica' => $receta,
+            'NotasAdicionales' => $notas,
+            'ProximaCita' => $proxima_cita
+        )
+    );
     
-    header("Location: ../../Expedientes.php?ok=2");
+    header("Location: /practica-9/Expedientes.php?ok=2");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Expedientes.php?ok=0");
+    header("Location: /practica-9/Expedientes.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

@@ -1,7 +1,7 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once 'php/auth/verificar_sesion.php';
+require_once 'php/login/verificar_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -94,8 +94,7 @@ require_once 'php/auth/verificar_sesion.php';
                 </li>
                 <hr class="h-color mx-2">
                 <li class=""><a href="Expedientes.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-folder"></i> Expedientes</a></li>
-                  <i class="fal fa-dollar-sign"></i> Tarifas</a>
-                </li>
+
                 <hr class="h-color mx-2">
 
                 <li class="active">
@@ -134,7 +133,7 @@ require_once 'php/auth/verificar_sesion.php';
                                 <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1">Mi cuenta</a></li>
                                 <li><a class="dropdown-item" href="#">Configuración</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="php/auth/logout.php">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="php/login/logout.php">Cerrar sesión</a></li>
                               </ul>
                             </li>
                         </ul>
@@ -170,66 +169,17 @@ require_once 'php/auth/verificar_sesion.php';
             <tr>
               <th>Usuario</th>
               <th>Rol</th>
-              <th>Fecha</th>
+              <!-- JR: CORREGIDO - antes: Entrada, Salida, Duración -->
+              <!-- JR: ahora mostramos la fecha/hora de la accion -->
+              <th>Fecha/Hora</th>
               <th>Acción</th>
+              <th>Descripción</th>
               <th class="text-end">Módulo</th>
             </tr>
           </thead>
           <tbody id="tabla-bitacoras">
-            <tr>
-              <td>
-                <div class="fw-semibold">María López Santos</div>
-                <div class="small text-muted">Nombre: M. López</div>
-              </td>
-              <td>Supervisor</td>
-              <td>12/08/2024 - 18:12</td>
-              <td>Eliminar</td>
-              <td class="text-end"><span class="badge text-bg-light">INVENTARIO</span></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="fw-semibold">Jorge Rivas Ortega</div>
-                <div class="small text-muted">Nombre: J. Rivas</div>
-              </td>
-              <td>Recepción</td>
-              <td>03/10/2024 - 09:05</td>
-              <td>Editar</td>
-              <td class="text-end"><span class="badge text-bg-light">CITAS</span></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="fw-semibold">Lucía Fernández Sol</div>
-                <div class="small text-muted">Nombre: L. Fernández</div>
-              </td>
-              <td>Contabilidad</td>
-              <td>21/09/2024 - 14:40</td>
-              <td>Visualizar</td>
-              <td class="text-end"><span class="badge text-bg-light">FINANZAS</span></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="fw-semibold">Pablo Mendoza Cruz</div>
-                <div class="small text-muted">Nombre: P. Mendoza</div>
-              </td>
-              <td>Analista</td>
-              <td>05/07/2024 - 11:27</td>
-              <td>Editar</td>
-              <td class="text-end"><span class="badge text-bg-light">REPORTES</span></td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="fw-semibold">Carla Ruiz Navarro</div>
-                <div class="small text-muted">Nombre: C. Ruiz</div>
-              </td>
-              <td>Secretaría</td>
-              <td>28/11/2024 - 08:50</td>
-              <td>Visualizar</td>
-              <td class="text-end"><span class="badge text-bg-light">PACIENTES</span></td>
-            </tr>
+            <!-- JR: aqui se cargan los datos de bitacora desde la base de datos -->
+            <tr><td colspan="6" class="text-center">Cargando datos...</td></tr>
           </tbody>
         </table>
       </div>

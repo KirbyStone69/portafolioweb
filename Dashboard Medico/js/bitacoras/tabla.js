@@ -24,26 +24,29 @@ function cargarDatos() {
         });
 }
 
-// Funcion para filtrar datos
+// JR: Funcion para filtrar datos en la tabla
 function filtrarDatos() {
     var textoBusqueda = busqueda.toLowerCase();
 
     bitacorasFiltradas = todasLasBitacoras.filter(function (bitacora) {
         var nombre = bitacora.NombreCompleto.toLowerCase();
         var rol = bitacora.Rol.toLowerCase();
-        var accion = bitacora.AccionRealizada.toLowerCase();
+        // JR: CORREGIDO - antes decia AccionRealizada, ahora es TipoAccion
+        var accion = bitacora.TipoAccion.toLowerCase();
         var modulo = bitacora.Modulo.toLowerCase();
+        var descripcion = (bitacora.DescripcionAccion || '').toLowerCase();
         return nombre.includes(textoBusqueda) ||
             rol.includes(textoBusqueda) ||
             accion.includes(textoBusqueda) ||
-            modulo.includes(textoBusqueda);
+            modulo.includes(textoBusqueda) ||
+            descripcion.includes(textoBusqueda);
     });
 
     paginaActual = 1;
     mostrarTabla();
 }
 
-// Funcion para mostrar la tabla
+// JR: Funcion para mostrar la tabla con los datos de bitacora
 function mostrarTabla() {
     var tbody = document.getElementById('tabla-bitacoras');
     var total = bitacorasFiltradas.length;
@@ -64,18 +67,34 @@ function mostrarTabla() {
     var html = '';
 
     if (registrosMostrar.length === 0) {
-        html = '<tr><td colspan="5">No hay registros de bitácora</td></tr>';
+        html = '<tr><td colspan="6">No hay registros de bitácora</td></tr>';
     } else {
         for (var i = 0; i < registrosMostrar.length; i++) {
             var bitacora = registrosMostrar[i];
+
+            // JR: formateo la fecha y hora para mostrarla bonita
+            var fechaHora = bitacora.FechaHora || '-';
+
+            // JR: determino el color del badge segun el tipo de accion
+            var badgeClass = 'bg-secondary';
+            if (bitacora.TipoAccion === 'Login') badgeClass = 'bg-success';
+            else if (bitacora.TipoAccion === 'Logout') badgeClass = 'bg-warning';
+            else if (bitacora.TipoAccion === 'Insertar') badgeClass = 'bg-primary';
+            else if (bitacora.TipoAccion === 'Editar') badgeClass = 'bg-info';
+            else if (bitacora.TipoAccion === 'Eliminar') badgeClass = 'bg-danger';
+
             html += '<tr>';
             html += '<td>';
             html += '<div class="fw-semibold">' + bitacora.NombreCompleto + '</div>';
             html += '<div class="small text-muted">Usuario ID: ' + bitacora.IdUsuario + '</div>';
             html += '</td>';
             html += '<td>' + bitacora.Rol + '</td>';
-            html += '<td>' + bitacora.FechaAcceso + '</td>';
-            html += '<td>' + bitacora.AccionRealizada + '</td>';
+            // JR: CORREGIDO - antes era FechaAcceso, ahora es FechaHora
+            html += '<td><small>' + fechaHora + '</small></td>';
+            // JR: CORREGIDO - antes era AccionRealizada, ahora es TipoAccion
+            html += '<td><span class="badge ' + badgeClass + '">' + bitacora.TipoAccion + '</span></td>';
+            // JR: NUEVO - ahora muestro la descripcion de la accion
+            html += '<td><small>' + (bitacora.DescripcionAccion || '-') + '</small></td>';
             html += '<td class="text-end"><span class="badge text-bg-light">' + bitacora.Modulo + '</span></td>';
             html += '</tr>';
         }

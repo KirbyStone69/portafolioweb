@@ -1,8 +1,8 @@
 <?php 
 // aqui inicio sesion y verifico que este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -45,15 +45,36 @@ $sql->bind_param("iiisssssss", $id_paciente, $id_medico, $id_cita, $fecha_consul
 
 // aqui ejecuto la consulta y registro en bitacora
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Insertar expediente clínico', 'Expedientes');
+    $id_nuevo_expediente = $conexion->insert_id;
     
-    header("Location: ../../Expedientes.php?ok=1");
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Insertar',
+        'Expedientes',
+        'Creó expediente clínico #' . $id_nuevo_expediente . ' - Paciente ID: ' . $id_paciente . ' - Médico ID: ' . $id_medico,
+        $id_nuevo_expediente,
+        null,
+        array(
+            'IdPaciente' => $id_paciente,
+            'IdMedico' => $id_medico,
+            'IdCita' => $id_cita,
+            'FechaConsulta' => $fecha_consulta,
+            'Sintomas' => $sintomas,
+            'Diagnostico' => $diagnostico,
+            'Tratamiento' => $tratamiento,
+            'RecetaMedica' => $receta,
+            'NotasAdicionales' => $notas,
+            'ProximaCita' => $proxima_cita
+        )
+    );
+    
+    header("Location: /practica-9/Expedientes.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Expedientes.php?ok=0");
+    header("Location: /practica-9/Expedientes.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

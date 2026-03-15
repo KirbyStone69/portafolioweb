@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -29,17 +29,33 @@ if (!$sql) {
 // aqui pongo los valores en la consulta
 $sql->bind_param("sdiii", $descripcion, $costo, $especialidad_id, $estatus, $id);
 
+// JR: obtengo datos anteriores antes de actualizar
+$datos_anteriores = obtener_datos_anteriores($conexion, 'Gestor_Tarifas', 'IdTarifa', $id);
+
 // aqui ejecuto la consulta y redirijo
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Editar tarifa', 'Tarifas');
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Editar',
+        'Tarifas',
+        'Editó tarifa #' . $id . ': ' . $descripcion,
+        $id,
+        $datos_anteriores,
+        array(
+            'DescripcionServicio' => $descripcion,
+            'CostoBase' => $costo,
+            'EspecialidadId' => $especialidad_id,
+            'Estatus' => $estatus
+        )
+    );
     
-    header("Location: ../../Tarifas.php?ok=2");
+    header("Location: /practica-9/Tarifas.php?ok=2");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Tarifas.php?ok=0");
+    header("Location: /practica-9/Tarifas.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

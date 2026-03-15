@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -29,17 +29,33 @@ if (!$sql) {
 // aqui pongo los valores en la consulta
 $sql->bind_param("dsssi", $monto, $metodo_pago, $referencia, $estatus_pago, $id_pago);
 
+// JR: obtengo los datos anteriores antes de actualizar
+$datos_anteriores = obtener_datos_anteriores($conexion, 'Gestor_Pagos', 'IdPago', $id_pago);
+
 // aqui ejecuto y redirijo
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Editar pago', 'Pagos');
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Editar',
+        'Pagos',
+        'Editó pago #' . $id_pago . ' - Nuevo monto: $' . $monto,
+        $id_pago,
+        $datos_anteriores,
+        array(
+            'Monto' => $monto,
+            'MetodoPago' => $metodo_pago,
+            'Referencia' => $referencia,
+            'EstatusPago' => $estatus_pago
+        )
+    );
     
-    header("Location: ../../Pagos.php?ok=1");
+    header("Location: /practica-9/Pagos.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Pagos.php?ok=0");
+    header("Location: /practica-9/Pagos.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // Archivo para eliminar una cita
 header('Content-Type: application/json');
@@ -39,15 +39,26 @@ if ($resultCheck->num_rows == 0) {
     exit;
 }
 
+// JR: aqui obtengo los datos antes de eliminar para guardar en bitacora
+$datos_anteriores = $resultCheck->fetch_assoc(); // Fetch the data before deletion
+
 // Eliminar la cita
 $sql = "DELETE FROM Control_Agenda WHERE IdCita = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $idCita);
 
 if ($stmt->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Eliminar cita', 'Agenda');
-    
+    // JR: registro en bitacora con los datos de lo que se elimino
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Eliminar',
+        'Agenda',
+        'Eliminó cita #' . $idCita . ($datos_anteriores ? ' - Paciente ID: ' . $datos_anteriores['IdPaciente'] : ''),
+        $idCita,
+        $datos_anteriores,
+        null
+    );
+
     echo json_encode([
         'success' => true,
         'message' => 'Cita eliminada correctamente'

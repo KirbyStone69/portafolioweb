@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // Archivo para crear una nueva cita
 header('Content-Type: application/json');
@@ -89,8 +89,25 @@ $stmt = $conexion->prepare($sql);
 $stmt->bind_param("iissss", $idPaciente, $idMedico, $fechaCita, $motivoConsulta, $estadoCita, $observaciones);
 
 if ($stmt->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Agendar cita', 'Agenda');
+    $id_nueva_cita = $conexion->insert_id;
+    
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'], 
+        'Insertar', 
+        'Agenda', 
+        'Agendó cita #' . $id_nueva_cita . ' - Paciente ID: ' . $idPaciente . ', Médico ID: ' . $idMedico,
+        $id_nueva_cita,
+        null,
+        array(
+            'IdPaciente' => $idPaciente,
+            'IdMedico' => $idMedico,
+            'FechaCita' => $fechaCita,
+            'MotivoConsulta' => $motivoConsulta,
+            'EstadoCita' => $estadoCita,
+            'Observaciones' => $observaciones
+        )
+    );
     
     echo json_encode([
         'success' => true,

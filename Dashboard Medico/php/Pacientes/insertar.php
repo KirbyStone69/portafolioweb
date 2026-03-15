@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -23,6 +23,20 @@ $telefonoEmergencia = $_POST['telefono_emergencia'];
 $alergias = $_POST['alergias'];
 $antecedentes = $_POST['antecedentes'];
 
+// aqui valido que el CURP no exista (si se proporciono)
+if (!empty($curp)) {
+    $sql_check = $conexion->prepare("SELECT IdPaciente FROM Control_Pacientes WHERE CURP = ?");
+    $sql_check->bind_param("s", $curp);
+    $sql_check->execute();
+    if ($sql_check->get_result()->num_rows > 0) {
+        header("Location: /practica-9/Pacientes.php?ok=0&error=" . urlencode("El CURP ya existe"));
+        $sql_check->close();
+        $conexion->close();
+        exit;
+    }
+    $sql_check->close();
+}
+
 // prepara la consulta
 $sql = $conexion->prepare(
     "INSERT INTO Control_Pacientes (NombreCompleto, CURP, FechaNacimiento, Sexo, Telefono, CorreoElectronico, Direccion, ContactoEmergencia, TelefonoEmergencia, Alergias, AntecedentesMedicos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -37,15 +51,32 @@ $sql->bind_param("sssssssssss", $nombreCompleto, $curp, $fechaNacimiento, $sexo,
 
 // ejecuta la consulta
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Insertar paciente', 'Pacientes');
+    $id_nuevo = $conexion->insert_id;
     
-      header("Location: ../../Pacientes.php?ok=1");
+    // registro en bitacora
+    registrar_bitacora(
+        $_SESSION['id_usuario'],
+        'Insertar',
+        'Pacientes',
+        'Insertó paciente: ' . $nombreCompleto . ' (CURP: ' . $curp . ')',
+        $id_nuevo,
+        null,
+        array(
+            'NombreCompleto' => $nombreCompleto,
+            'CURP' => $curp,
+            'FechaNacimiento' => $fechaNacimiento,
+            'Sexo' => $sexo,
+            'Telefono' => $telefono,
+            'CorreoElectronico' => $correo
+        )
+    );
+    
+      header("Location: /practica-9/Pacientes.php?ok=1");
       $sql->close();
       $conexion->close();
   exit;
 } else {
-      header("Location: ../../Pacientes.php?ok=0");
+      header("Location: /practica-9/Pacientes.php?ok=0");
       $sql->close();
       $conexion->close();
       exit;

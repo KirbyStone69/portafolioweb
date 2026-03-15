@@ -1,2 +1,65 @@
 --Integracion del backend para modulo de especialidades medicas y mejoras en scripts--
 Se implemento el backend completo para gestionar especialidades medicas y se agregaron funciones de script necesarias junto con alertas sweetalert para manejo de respuestas manteniendo intacto el frontend original
+
+
+--Implementacion del modulo de medicos con CRUD completo--
+Se desarrollo el backend para gestionar medicos incluyendo alta baja y modificacion de registros con validaciones de datos y horarios de atencion utilizando sweetalert para retroalimentacion al usuario
+
+
+--Desarrollo del modulo de pacientes con busqueda avanzada--
+Se creo el sistema de registro y administracion de pacientes con funcionalidad de busqueda por nombre o telefono y paginacion de resultados en la tabla principal
+
+
+--Modulo de agenda con calendario interactivo FullCalendar--
+Se integro la libreria FullCalendar para visualizacion de citas medicas con funciones de arrastrar y soltar para reprogramar citas y validacion de horarios disponibles por medico
+
+
+--Backend para gestion de pagos y facturacion--
+Se implementaron las operaciones CRUD para el modulo de pagos incluyendo registro de cobros por consulta con calculo automatico de totales y generacion de recibos
+
+
+--Sistema de tarifas por especialidad medica--
+Se desarrollo el modulo para configurar tarifas de consulta por especialidad con actualizacion dinamica de precios en el modulo de pagos
+
+
+--Modulo de expedientes clinicos con historial medico--
+Se creo el sistema de expedientes que permite registrar diagnosticos notas medicas y tratamientos vinculados a cada paciente con ordenamiento cronologico
+
+
+--Gestion de usuarios con roles y permisos--
+Se implemento el CRUD de usuarios con asignacion de roles administrador medico y recepcionista incluyendo validacion de correo electronico unico
+
+
+--Sistema de autenticacion y login seguro--
+Se desarrollo el modulo de login con validacion de credenciales manejo de sesiones PHP y registro de accesos en bitacora para auditoria
+
+
+--Dashboard con estadisticas en tiempo real--
+Se creo el panel principal con graficas ChartJS mostrando citas del dia ingresos mensuales y contadores de pacientes y medicos activos
+
+
+--Modulo de bitacoras para auditoria del sistema--
+Se implemento el registro automatico de accesos al sistema con fecha hora usuario y tipo de accion para control de seguridad
+
+
+--Generacion de reportes en PDF y Excel--
+Se desarrollo el modulo de reportes utilizando las librerias TCPDF y PhpSpreadsheet para exportar datos de pacientes medicos pagos y citas
+
+
+--Registro publico de pacientes con validaciones--
+Se creo la pagina de registro publico que permite a nuevos pacientes crear su cuenta con validacion de campos obligatorios y formato de correo electronico
+
+
+--Correccion de errores en validacion de fechas de citas--
+Se soluciono el bug que permitia agendar citas en fechas pasadas agregando validacion tanto en frontend como en backend
+
+
+--Optimizacion de consultas SQL en modulo de pagos--
+Se mejoro el rendimiento de las consultas utilizando indices y joins optimizados reduciendo el tiempo de carga de la tabla de pagos
+
+
+--Implementacion de control de acceso basado en roles RBAC--
+Se agrego la verificacion de permisos en cada modulo para restringir funciones segun el rol del usuario incluyendo ocultamiento de opciones en el sidebar
+
+
+--

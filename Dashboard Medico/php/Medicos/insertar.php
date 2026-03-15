@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -57,7 +57,21 @@ $horarios = array(
     )
 );
 
-$horario_json = json_encode($horarios);
+$horarioAtencion = json_encode($horarios); // Changed from $horario_json to $horarioAtencion as per user's implied change
+
+// aqui valido que la cedula no exista (si se proporciono)
+if (!empty($cedula)) {
+    $sql_check = $conexion->prepare("SELECT IdMedico FROM Control_Medicos WHERE CedulaProfesional = ?");
+    $sql_check->bind_param("s", $cedula);
+    $sql_check->execute();
+    if ($sql_check->get_result()->num_rows > 0) {
+        header("Location: /practica-9/Medicos.php?ok=0&error=" . urlencode("La cédula profesional ya existe"));
+        $sql_check->close();
+        $conexion->close();
+        exit;
+    }
+    $sql_check->close();
+}
 
 // aqui preparo la consulta para insertar
 $sql = $conexion->prepare(
@@ -69,19 +83,36 @@ if (!$sql) {
 }
 
 // aqui pongo los valores en la consulta
-$sql->bind_param("ssisssi", $nombre, $cedula, $especialidad_id, $telefono, $correo, $horario_json, $estatus);
+$sql->bind_param("ssisssi", $nombre, $cedula, $especialidad_id, $telefono, $correo, $horarioAtencion, $estatus);
 
 // aqui ejecuto la consulta y redirijo
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Insertar medico', 'Medicos');
+    $id_nuevo = $conexion->insert_id;
     
-    header("Location: ../../Medicos.php?ok=1");
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'], 
+        'Insertar', 
+        'Medicos', 
+        'Insertó médico: ' . $nombre . ' (Cédula: ' . $cedula . ')',
+        $id_nuevo,
+        null,
+        array(
+            'NombreCompleto' => $nombre,
+            'CedulaProfesional' => $cedula,
+            'EspecialidadId' => $especialidad_id,
+            'Telefono' => $telefono,
+            'CorreoElectronico' => $correo,
+            'Estatus' => $estatus
+        )
+    );
+    
+    header("Location: /practica-9/Medicos.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Medicos.php?ok=0");
+    header("Location: /practica-9/Medicos.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

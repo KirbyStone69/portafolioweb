@@ -10,18 +10,25 @@ if ($conexion->connect_error) {
     exit;
 }
 
-// aqui hago el select con join para traer el nombre del usuario
+// JR: aqui hago el select con join para traer los datos de bitacora junto con el usuario
+// JR: IMPORTANTE: antes decia FechaAcceso, FechaSalida y AccionRealizada pero esas columnas NO EXISTEN en la BD
+// JR: Las columnas correctas son: FechaHora, TipoAccion, Modulo, etc
 $sql = "SELECT 
     b.IdBitacora, 
     b.IdUsuario,
-    b.FechaAcceso,
-    b.AccionRealizada,
+    b.TipoAccion,
     b.Modulo,
+    b.DescripcionAccion,
+    b.IdRegistroAfectado,
+    b.DatosAnteriores,
+    b.DatosNuevos,
+    b.FechaHora,
+    b.DireccionIP,
     u.NombreCompleto,
     u.Rol
 FROM Bitacora_Acceso b
 INNER JOIN Usuarios_Sistema u ON b.IdUsuario = u.IdUsuario
-ORDER BY b.FechaAcceso DESC";
+ORDER BY b.FechaHora DESC";
 
 $respuesta = $conexion->query($sql);
 

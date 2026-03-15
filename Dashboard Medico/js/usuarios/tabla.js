@@ -9,19 +9,19 @@ var todosLosMedicos = [];
 // esto carga los datos de los usuarios desde el servidor
 function cargarDatos() {
   fetch('php/Usuarios/listar.php')
-    .then(function(respuesta) {
+    .then(function (respuesta) {
       return respuesta.json();
     })
-    .then(function(datos) {
+    .then(function (datos) {
       todosLosUsuarios = datos;
       usuariosFiltrados = datos;
       paginaActual = 1;
       actualizarEstadisticas();
       mostrarTabla();
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log('Error:', error);
-      document.getElementById('tabla-usuarios').innerHTML = 
+      document.getElementById('tabla-usuarios').innerHTML =
         '<tr><td colspan="6">Error al cargar datos</td></tr>';
     });
 }
@@ -29,14 +29,14 @@ function cargarDatos() {
 // esto carga los medicos para el select
 function cargarMedicos() {
   fetch('php/Usuarios/listar_medicos.php')
-    .then(function(respuesta) {
+    .then(function (respuesta) {
       return respuesta.json();
     })
-    .then(function(datos) {
+    .then(function (datos) {
       todosLosMedicos = datos;
       llenarSelectMedicos();
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log('Error al cargar medicos:', error);
       todosLosMedicos = [];
       llenarSelectMedicos();
@@ -47,39 +47,71 @@ function cargarMedicos() {
 function llenarSelectMedicos() {
   var select = document.getElementById('select-medico');
   if (!select) return;
-  
+
   var html = '<option value="">Sin médico asignado</option>';
-  
+
   if (todosLosMedicos.length > 0) {
     for (var i = 0; i < todosLosMedicos.length; i++) {
-      html += '<option value="' + todosLosMedicos[i].IdMedico + '">' + 
-              todosLosMedicos[i].NombreCompleto + '</option>';
+      html += '<option value="' + todosLosMedicos[i].IdMedico + '">' +
+        todosLosMedicos[i].NombreCompleto + '</option>';
     }
   } else {
     html += '<option value="" disabled>No hay médicos registrados</option>';
   }
-  
+
   select.innerHTML = html;
+}
+
+// esto carga los pacientes para el select
+function cargarPacientes() {
+  fetch('php/Usuarios/obtener_pacientes.php')
+    .then(function (respuesta) {
+      return respuesta.json();
+    })
+    .then(function (datos) {
+      var select = document.getElementById('select-paciente');
+      if (!select) return;
+
+      var html = '<option value="">Seleccione un paciente</option>';
+      for (var i = 0; i < datos.length; i++) {
+        html += '<option value="' + datos[i].IdPaciente + '">' +
+          datos[i].NombreCompleto + ' - ' + datos[i].CURP + '</option>';
+      }
+      select.innerHTML = html;
+    })
+    .catch(function (error) {
+      console.log('Error al cargar pacientes:', error);
+    });
 }
 
 // esto muestra u oculta los campos segun el rol
 function controlarCampoMedico() {
   var selectRol = document.getElementById('select-rol');
   var grupoMedico = document.getElementById('grupo-medico');
+  var grupoPaciente = document.getElementById('grupo-paciente');
   var grupoMedicosAsignados = document.getElementById('grupo-medicos-asignados');
-  
+
   if (selectRol && grupoMedico && grupoMedicosAsignados) {
-    selectRol.addEventListener('change', function() {
+    selectRol.addEventListener('change', function () {
       if (this.value === 'Medico') {
         grupoMedico.style.display = 'block';
+        grupoPaciente.style.display = 'none';
         grupoMedicosAsignados.style.display = 'none';
       } else if (this.value === 'Recepcionista') {
         grupoMedico.style.display = 'none';
+        grupoPaciente.style.display = 'none';
         grupoMedicosAsignados.style.display = 'block';
         document.getElementById('select-medico').value = '';
         llenarCheckboxesMedicos();
+      } else if (this.value === 'Paciente') {
+        grupoMedico.style.display = 'none';
+        grupoPaciente.style.display = 'block';
+        grupoMedicosAsignados.style.display = 'none';
+        document.getElementById('select-medico').value = '';
+        cargarPacientes();
       } else {
         grupoMedico.style.display = 'none';
+        grupoPaciente.style.display = 'none';
         grupoMedicosAsignados.style.display = 'none';
         document.getElementById('select-medico').value = '';
       }
@@ -91,9 +123,9 @@ function controlarCampoMedico() {
 function llenarCheckboxesMedicos() {
   var container = document.getElementById('lista-medicos-asignados');
   if (!container) return;
-  
+
   var html = '';
-  
+
   if (todosLosMedicos.length > 0) {
     for (var i = 0; i < todosLosMedicos.length; i++) {
       html += '<div class="form-check mb-1">';
@@ -108,7 +140,7 @@ function llenarCheckboxesMedicos() {
   } else {
     html = '<p class="text-muted small mb-0">No hay médicos registrados</p>';
   }
-  
+
   container.innerHTML = html;
 }
 
@@ -123,7 +155,7 @@ function actualizarEstadisticas() {
     'Medico': 0,
     'Recepcionista': 0
   };
-  
+
   // aqui cuento cuantos estan activos y cuantos inactivos
   for (var i = 0; i < todosLosUsuarios.length; i++) {
     if (todosLosUsuarios[i].Activo == 1) {
@@ -131,14 +163,14 @@ function actualizarEstadisticas() {
     } else {
       usuariosInactivos++;
     }
-    
+
     // aqui cuento por rol
     var rol = todosLosUsuarios[i].Rol;
     if (porRol[rol] !== undefined) {
       porRol[rol]++;
     }
   }
-  
+
   // aqui actualizo los numeros en la pantalla
   document.getElementById('total-usuarios').textContent = totalUsuarios;
   document.getElementById('usuarios-activos').textContent = usuariosActivos;
@@ -151,17 +183,17 @@ function actualizarEstadisticas() {
 // esto filtra los usuarios cuando busco algo
 function filtrarDatos() {
   var textoBusqueda = busqueda.toLowerCase();
-  
-  usuariosFiltrados = todosLosUsuarios.filter(function(usuario) {
+
+  usuariosFiltrados = todosLosUsuarios.filter(function (usuario) {
     var nombreUsuario = usuario.Usuario.toLowerCase();
     var rol = usuario.Rol.toLowerCase();
     var medico = usuario.NombreMedico ? usuario.NombreMedico.toLowerCase() : '';
-    
-    return nombreUsuario.includes(textoBusqueda) || 
-           rol.includes(textoBusqueda) ||
-           medico.includes(textoBusqueda);
+
+    return nombreUsuario.includes(textoBusqueda) ||
+      rol.includes(textoBusqueda) ||
+      medico.includes(textoBusqueda);
   });
-  
+
   paginaActual = 1;
   mostrarTabla();
 }
@@ -191,22 +223,22 @@ function mostrarTabla() {
   var tbody = document.getElementById('tabla-usuarios');
   var total = usuariosFiltrados.length;
   var totalPaginas = Math.ceil(total / registrosPorPagina);
-  
+
   if (totalPaginas === 0) {
     totalPaginas = 1;
   }
-  
+
   if (paginaActual > totalPaginas) {
     paginaActual = totalPaginas;
   }
-  
+
   // aqui calculo que usuarios mostrar segun la pagina
   var inicio = (paginaActual - 1) * registrosPorPagina;
   var fin = inicio + registrosPorPagina;
   var registrosMostrar = usuariosFiltrados.slice(inicio, fin);
-  
+
   var html = '';
-  
+
   if (registrosMostrar.length === 0) {
     html = '<tr><td colspan="6">No hay usuarios registrados</td></tr>';
   } else {
@@ -218,13 +250,13 @@ function mostrarTabla() {
       var textoEstatus = usuario.Activo == 1 ? 'ACTIVO' : 'INACTIVO';
       var badgeRol = getBadgeRol(usuario.Rol);
       var ultimoAcceso = formatearFecha(usuario.UltimoAcceso);
-      
+
       // aqui obtengo info de medicos asignados si es recepcionista
       var infoMedicoCol = medico;
       if (usuario.Rol === 'Recepcionista' && usuario.MedicosAsignados && usuario.MedicosAsignados.length > 0) {
         infoMedicoCol = usuario.MedicosAsignados.length + ' médico(s)';
       }
-      
+
       html += '<tr>';
       html += '<td class="fw-semibold">' + usuario.Usuario + '</td>';
       html += '<td><span class="badge ' + badgeRol + '">' + usuario.Rol + '</span></td>';
@@ -233,58 +265,60 @@ function mostrarTabla() {
       html += '<td><span class="badge ' + badgeEstatus + '">' + textoEstatus + '</span></td>';
       html += '<td class="text-end">';
       html += '<div class="btn-group btn-group-sm">';
-      
+
       // aqui guardo los medicos asignados en formato JSON
       var medicosAsignadosJSON = '';
       if (usuario.MedicosAsignados) {
         medicosAsignadosJSON = JSON.stringify(usuario.MedicosAsignados);
       }
-      
+
       html += '<button class="btn btn-info btn-ver" ' +
-              'data-id="' + usuario.IdUsuario + '" ' +
-              'data-usuario="' + usuario.Usuario + '" ' +
-              'data-nombre="' + (usuario.NombreCompleto || '') + '" ' +
-              'data-telefono="' + (usuario.Telefono || '') + '" ' +
-              'data-correo="' + (usuario.CorreoElectronico || '') + '" ' +
-              'data-rol="' + usuario.Rol + '" ' +
-              'data-medico="' + medico + '" ' +
-              'data-medicos-asignados=\'' + medicosAsignadosJSON + '\' ' +
-              'data-activo="' + textoEstatus + '" ' +
-              'data-acceso="' + ultimoAcceso + '">Ver</button>';
+        'data-id="' + usuario.IdUsuario + '" ' +
+        'data-usuario="' + usuario.Usuario + '" ' +
+        'data-nombre="' + (usuario.NombreCompleto || '') + '" ' +
+        'data-telefono="' + (usuario.Telefono || '') + '" ' +
+        'data-correo="' + (usuario.CorreoElectronico || '') + '" ' +
+        'data-rol="' + usuario.Rol + '" ' +
+        'data-medico="' + medico + '" ' +
+        'data-paciente="' + (usuario.IdPaciente || '') + '" ' +
+        'data-medicos-asignados=\'' + medicosAsignadosJSON + '\' ' +
+        'data-activo="' + textoEstatus + '" ' +
+        'data-acceso="' + ultimoAcceso + '">Ver</button>';
       html += '<button class="btn btn-primary btn-editar" ' +
-              'data-id="' + usuario.IdUsuario + '" ' +
-              'data-usuario="' + usuario.Usuario + '" ' +
-              'data-nombre="' + (usuario.NombreCompleto || '') + '" ' +
-              'data-telefono="' + (usuario.Telefono || '') + '" ' +
-              'data-correo="' + (usuario.CorreoElectronico || '') + '" ' +
-              'data-rol="' + usuario.Rol + '" ' +
-              'data-medico="' + (usuario.IdMedico || '') + '" ' +
-              'data-medicos-asignados=\'' + medicosAsignadosJSON + '\' ' +
-              'data-activo="' + usuario.Activo + '">Editar</button>';
+        'data-id="' + usuario.IdUsuario + '" ' +
+        'data-usuario="' + usuario.Usuario + '" ' +
+        'data-nombre="' + (usuario.NombreCompleto || '') + '" ' +
+        'data-telefono="' + (usuario.Telefono || '') + '" ' +
+        'data-correo="' + (usuario.CorreoElectronico || '') + '" ' +
+        'data-rol="' + usuario.Rol + '" ' +
+        'data-medico="' + (usuario.IdMedico || '') + '" ' +
+        'data-paciente="' + (usuario.IdPaciente || '') + '" ' +
+        'data-medicos-asignados=\'' + medicosAsignadosJSON + '\' ' +
+        'data-activo="' + usuario.Activo + '">Editar</button>';
       html += '<button class="btn btn-danger btn-eliminar" ' +
-              'data-id="' + usuario.IdUsuario + '" ' +
-              'data-usuario="' + usuario.Usuario + '">Eliminar</button>';
+        'data-id="' + usuario.IdUsuario + '" ' +
+        'data-usuario="' + usuario.Usuario + '">Eliminar</button>';
       html += '</div>';
       html += '</td>';
       html += '</tr>';
     }
   }
-  
+
   tbody.innerHTML = html;
-  
+
   // aqui actualizo la info de paginacion
   var inicioMostrar = total === 0 ? 0 : inicio + 1;
   var finMostrar = total === 0 ? 0 : Math.min(fin, total);
-  
-  document.getElementById('info-registros').textContent = 
+
+  document.getElementById('info-registros').textContent =
     'Mostrando ' + inicioMostrar + ' a ' + finMostrar + ' de ' + total + ' registros';
-  
+
   document.getElementById('page-info').textContent = paginaActual + '/' + totalPaginas;
-  
+
   // aqui activo o desactivo los botones de paginacion
   document.getElementById('btn-prev').disabled = (paginaActual === 1);
   document.getElementById('btn-next').disabled = (paginaActual === totalPaginas);
-  
+
   // aqui pongo los eventos a los botones
   agregarEventosVer();
   agregarEventosEliminar();
@@ -294,9 +328,9 @@ function mostrarTabla() {
 // esto pone el evento click a los botones de ver
 function agregarEventosVer() {
   var botonesVer = document.querySelectorAll('.btn-ver');
-  
+
   for (var i = 0; i < botonesVer.length; i++) {
-    botonesVer[i].addEventListener('click', function() {
+    botonesVer[i].addEventListener('click', function () {
       var usuario = this.getAttribute('data-usuario');
       var nombre = this.getAttribute('data-nombre');
       var telefono = this.getAttribute('data-telefono');
@@ -314,7 +348,7 @@ function agregarEventosVer() {
 // esto muestra la info del usuario
 function verUsuario(usuario, nombre, telefono, correo, rol, medico, medicosAsignados, activo, acceso) {
   var infoMedico = '';
-  
+
   if (rol === 'Medico' && medico !== '-') {
     infoMedico = '<p><strong>Médico vinculado:</strong> ' + medico + '</p>';
   } else if (rol === 'Recepcionista' && medicosAsignados) {
@@ -331,7 +365,7 @@ function verUsuario(usuario, nombre, telefono, correo, rol, medico, medicosAsign
       infoMedico = '';
     }
   }
-  
+
   Swal.fire({
     title: 'Información del Usuario',
     html:
@@ -353,9 +387,9 @@ function verUsuario(usuario, nombre, telefono, correo, rol, medico, medicosAsign
 // esto pone el evento click a los botones de editar
 function agregarEventosEditar() {
   var botonesEditar = document.querySelectorAll('.btn-editar');
-  
+
   for (var i = 0; i < botonesEditar.length; i++) {
-    botonesEditar[i].addEventListener('click', function() {
+    botonesEditar[i].addEventListener('click', function () {
       var id = this.getAttribute('data-id');
       var usuario = this.getAttribute('data-usuario');
       var nombre = this.getAttribute('data-nombre');
@@ -363,31 +397,32 @@ function agregarEventosEditar() {
       var correo = this.getAttribute('data-correo');
       var rol = this.getAttribute('data-rol');
       var medicoId = this.getAttribute('data-medico');
+      var pacienteId = this.getAttribute('data-paciente');
       var medicosAsignados = this.getAttribute('data-medicos-asignados');
       var activo = this.getAttribute('data-activo');
-      editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, medicosAsignados, activo);
+      editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, pacienteId, medicosAsignados, activo);
     });
   }
 }
 
 // esto muestra el popup para editar un usuario
-function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, medicosAsignados, activo) {
+function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, pacienteId, medicosAsignados, activo) {
   // aqui creo las opciones del select de rol
-  var roles = ['Admin', 'Medico', 'Recepcionista'];
+  var roles = ['Admin', 'Medico', 'Recepcionista', 'Paciente'];
   var opcionesRol = '';
   for (var i = 0; i < roles.length; i++) {
     var selected = roles[i] == rol ? 'selected' : '';
     opcionesRol += '<option value="' + roles[i] + '" ' + selected + '>' + roles[i] + '</option>';
   }
-  
+
   // aqui creo las opciones del select de medicos
   var opcionesMedicos = '<option value="">Sin médico asignado</option>';
   for (var i = 0; i < todosLosMedicos.length; i++) {
     var selected = todosLosMedicos[i].IdMedico == medicoId ? 'selected' : '';
-    opcionesMedicos += '<option value="' + todosLosMedicos[i].IdMedico + '" ' + selected + '>' + 
-                       todosLosMedicos[i].NombreCompleto + '</option>';
+    opcionesMedicos += '<option value="' + todosLosMedicos[i].IdMedico + '" ' + selected + '>' +
+      todosLosMedicos[i].NombreCompleto + '</option>';
   }
-  
+
   // aqui creo los checkboxes de medicos asignados
   var medicosAsignadosArray = [];
   try {
@@ -397,7 +432,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
   } catch (e) {
     medicosAsignadosArray = [];
   }
-  
+
   var checkboxesMedicos = '';
   for (var i = 0; i < todosLosMedicos.length; i++) {
     var checked = '';
@@ -408,7 +443,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
         break;
       }
     }
-    
+
     checkboxesMedicos += '<div class="form-check mb-1">';
     checkboxesMedicos += '<input class="form-check-input checkbox-medico-asignado" type="checkbox" ';
     checkboxesMedicos += 'value="' + todosLosMedicos[i].IdMedico + '" ';
@@ -418,20 +453,21 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
     checkboxesMedicos += '</label>';
     checkboxesMedicos += '</div>';
   }
-  
+
   var checkedActivo = activo == 1 ? 'checked' : '';
   var mostrarMedico = rol === 'Medico' ? '' : 'style="display:none"';
   var mostrarMedicosAsignados = rol === 'Recepcionista' ? '' : 'style="display:none"';
   for (var i = 0; i < todosLosMedicos.length; i++) {
     var selected = todosLosMedicos[i].IdMedico == medicoId ? 'selected' : '';
-    opcionesMedicos += '<option value="' + todosLosMedicos[i].IdMedico + '" ' + selected + '>' + 
-                       todosLosMedicos[i].NombreCompleto + '</option>';
+    opcionesMedicos += '<option value="' + todosLosMedicos[i].IdMedico + '" ' + selected + '>' +
+      todosLosMedicos[i].NombreCompleto + '</option>';
   }
-  
+
   var checkedActivo = activo == 1 ? 'checked' : '';
   var mostrarMedico = rol === 'Medico' ? '' : 'style="display:none"';
+  var mostrarPaciente = rol === 'Paciente' ? '' : 'style="display:none"';
   var mostrarMedicosAsignados = rol === 'Recepcionista' ? '' : 'style="display:none"';
-  
+
   // aqui muestro el popup con sweetalert
   Swal.fire({
     title: 'Editar usuario',
@@ -454,6 +490,11 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
       '<select id="swal-input-medico" class="form-select mb-3">' + opcionesMedicos + '</select>' +
       '<small class="text-muted">Solo para usuarios con rol Médico</small>' +
       '</div>' +
+      '<div id="div-paciente" ' + mostrarPaciente + '>' +
+      '<label class="form-label small">Paciente vinculado:</label>' +
+      '<select id="swal-input-paciente" class="form-select mb-3"><option value="">Cargando...</option></select>' +
+      '<small class="text-muted">Solo para usuarios con rol Paciente</small>' +
+      '</div>' +
       '<div id="div-medicos-asignados" ' + mostrarMedicosAsignados + '>' +
       '<label class="form-label small">Médicos asignados:</label>' +
       '<div class="border rounded p-2 mb-2" style="max-height: 200px; overflow-y: auto;">' +
@@ -470,27 +511,62 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
     confirmButtonText: 'Guardar',
     cancelButtonText: 'Cancelar',
     width: '700px',
-    didOpen: function() {
+    didOpen: function () {
+      // aqui cargo los pacientes si el rol es Paciente
+      if (rol === 'Paciente') {
+        fetch('php/Usuarios/obtener_pacientes.php')
+          .then(r => r.json())
+          .then(datos => {
+            var select = document.getElementById('swal-input-paciente');
+            var html = '<option value="">Sin paciente asignado</option>';
+            datos.forEach(p => {
+              var selected = p.IdPaciente == pacienteId ? 'selected' : '';
+              html += `<option value="${p.IdPaciente}" ${selected}>${p.NombreCompleto} - ${p.CURP}</option>`;
+            });
+            select.innerHTML = html;
+          });
+      }
+
       // aqui controlo que se muestren los campos segun el rol
-      document.getElementById('swal-input-rol').addEventListener('change', function() {
+      document.getElementById('swal-input-rol').addEventListener('change', function () {
         var divMedico = document.getElementById('div-medico');
+        var divPaciente = document.getElementById('div-paciente');
         var divMedicosAsignados = document.getElementById('div-medicos-asignados');
-        
+
         if (this.value === 'Medico') {
           divMedico.style.display = 'block';
+          divPaciente.style.display = 'none';
           divMedicosAsignados.style.display = 'none';
+        } else if (this.value === 'Paciente') {
+          divMedico.style.display = 'none';
+          divPaciente.style.display = 'block';
+          divMedicosAsignados.style.display = 'none';
+          document.getElementById('swal-input-medico').value = '';
+          // Cargar pacientes
+          fetch('php/Usuarios/obtener_pacientes.php')
+            .then(r => r.json())
+            .then(datos => {
+              var select = document.getElementById('swal-input-paciente');
+              var html = '<option value="">Sin paciente asignado</option>';
+              datos.forEach(p => {
+                html += `<option value="${p.IdPaciente}">${p.NombreCompleto} - ${p.CURP}</option>`;
+              });
+              select.innerHTML = html;
+            });
         } else if (this.value === 'Recepcionista') {
           divMedico.style.display = 'none';
+          divPaciente.style.display = 'none';
           divMedicosAsignados.style.display = 'block';
           document.getElementById('swal-input-medico').value = '';
         } else {
           divMedico.style.display = 'none';
+          divPaciente.style.display = 'none';
           divMedicosAsignados.style.display = 'none';
           document.getElementById('swal-input-medico').value = '';
         }
       });
     },
-    preConfirm: function() {
+    preConfirm: function () {
       var nuevoUsuario = document.getElementById('swal-input-usuario').value;
       var nuevoNombre = document.getElementById('swal-input-nombre').value;
       var nuevoTelefono = document.getElementById('swal-input-telefono').value;
@@ -499,7 +575,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
       var nuevoRol = document.getElementById('swal-input-rol').value;
       var nuevoMedico = document.getElementById('swal-input-medico').value;
       var nuevoActivo = document.getElementById('swal-input-activo').checked;
-      
+
       // aqui obtengo los medicos asignados si es recepcionista
       var medicosAsignadosNuevos = [];
       if (nuevoRol === 'Recepcionista') {
@@ -508,20 +584,20 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
           medicosAsignadosNuevos.push(checkboxes[i].value);
         }
       }
-      
+
       // aqui valido que los campos no esten vacios
       if (!nuevoUsuario || !nuevoRol || !nuevoNombre) {
         Swal.showValidationMessage('Por favor complete los campos obligatorios');
         return false;
       }
-      
+
       // si el rol es Medico y no hay medicos, aviso
       if (nuevoRol === 'Medico' && todosLosMedicos.length === 0) {
         Swal.showValidationMessage('No hay médicos registrados. Primero registra médicos en el módulo de Médicos.');
         return false;
       }
-      
-      return { 
+
+      return {
         usuario: nuevoUsuario,
         nombre: nuevoNombre,
         telefono: nuevoTelefono,
@@ -529,42 +605,43 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
         password: nuevoPassword,
         rol: nuevoRol,
         medico: nuevoMedico,
+        paciente: document.getElementById('swal-input-paciente').value,
         medicosAsignados: medicosAsignadosNuevos,
         activo: nuevoActivo
       };
     }
-  }).then(function(result) {
+  }).then(function (result) {
     if (result.isConfirmed) {
       // aqui creo un formulario para enviar los datos
       var formulario = document.createElement('form');
       formulario.method = 'POST';
       formulario.action = 'php/Usuarios/editar.php';
-      
+
       var inputId = document.createElement('input');
       inputId.type = 'hidden';
       inputId.name = 'id';
       inputId.value = id;
-      
+
       var inputUsuario = document.createElement('input');
       inputUsuario.type = 'hidden';
       inputUsuario.name = 'usuario';
       inputUsuario.value = result.value.usuario;
-      
+
       var inputNombre = document.createElement('input');
       inputNombre.type = 'hidden';
       inputNombre.name = 'nombre_completo';
       inputNombre.value = result.value.nombre;
-      
+
       var inputTelefono = document.createElement('input');
       inputTelefono.type = 'hidden';
       inputTelefono.name = 'telefono';
       inputTelefono.value = result.value.telefono;
-      
+
       var inputCorreo = document.createElement('input');
       inputCorreo.type = 'hidden';
       inputCorreo.name = 'correo';
       inputCorreo.value = result.value.correo;
-      
+
       // solo envio password si ingresaron uno nuevo
       if (result.value.password) {
         var inputPassword = document.createElement('input');
@@ -573,17 +650,22 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
         inputPassword.value = result.value.password;
         formulario.appendChild(inputPassword);
       }
-      
+
       var inputRol = document.createElement('input');
       inputRol.type = 'hidden';
       inputRol.name = 'rol';
       inputRol.value = result.value.rol;
-      
+
       var inputMedico = document.createElement('input');
       inputMedico.type = 'hidden';
       inputMedico.name = 'medico_id';
       inputMedico.value = result.value.medico;
-      
+
+      var inputPaciente = document.createElement('input');
+      inputPaciente.type = 'hidden';
+      inputPaciente.name = 'paciente_id';
+      inputPaciente.value = result.value.paciente;
+
       // aqui agrego los medicos asignados si es recepcionista
       if (result.value.rol === 'Recepcionista' && result.value.medicosAsignados.length > 0) {
         for (var i = 0; i < result.value.medicosAsignados.length; i++) {
@@ -594,7 +676,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
           formulario.appendChild(inputMedicoAsignado);
         }
       }
-      
+
       if (result.value.activo) {
         var inputActivo = document.createElement('input');
         inputActivo.type = 'hidden';
@@ -602,7 +684,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
         inputActivo.value = '1';
         formulario.appendChild(inputActivo);
       }
-      
+
       formulario.appendChild(inputId);
       formulario.appendChild(inputUsuario);
       formulario.appendChild(inputNombre);
@@ -610,6 +692,7 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
       formulario.appendChild(inputCorreo);
       formulario.appendChild(inputRol);
       formulario.appendChild(inputMedico);
+      formulario.appendChild(inputPaciente);
       document.body.appendChild(formulario);
       formulario.submit();
     }
@@ -619,9 +702,9 @@ function editarUsuario(id, usuario, nombre, telefono, correo, rol, medicoId, med
 // esto pone el evento click a los botones de eliminar
 function agregarEventosEliminar() {
   var botonesEliminar = document.querySelectorAll('.btn-eliminar');
-  
+
   for (var i = 0; i < botonesEliminar.length; i++) {
-    botonesEliminar[i].addEventListener('click', function() {
+    botonesEliminar[i].addEventListener('click', function () {
       var id = this.getAttribute('data-id');
       var usuario = this.getAttribute('data-usuario');
       eliminarUsuario(id, usuario);
@@ -640,18 +723,18 @@ function eliminarUsuario(id, usuario) {
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'Sí, eliminar',
     cancelButtonText: 'Cancelar'
-  }).then(function(result) {
+  }).then(function (result) {
     if (result.isConfirmed) {
       // aqui creo un formulario para enviar el id a eliminar
       var formulario = document.createElement('form');
       formulario.method = 'POST';
       formulario.action = 'php/Usuarios/eliminar.php';
-      
+
       var inputId = document.createElement('input');
       inputId.type = 'hidden';
       inputId.name = 'id';
       inputId.value = id;
-      
+
       formulario.appendChild(inputId);
       document.body.appendChild(formulario);
       formulario.submit();
@@ -663,13 +746,13 @@ function eliminarUsuario(id, usuario) {
 function validarFormulario() {
   var formulario = document.getElementById('form-registro');
   if (!formulario) return;
-  
-  formulario.addEventListener('submit', function(e) {
+
+  formulario.addEventListener('submit', function (e) {
     var usuario = document.getElementById('input-usuario').value;
     var password = document.getElementById('input-password').value;
     var rol = document.getElementById('select-rol').value;
     var medico = document.getElementById('select-medico').value;
-    
+
     // aqui valido que todos los campos obligatorios esten llenos
     if (!usuario || !password || !rol) {
       e.preventDefault();
@@ -681,7 +764,7 @@ function validarFormulario() {
       });
       return false;
     }
-    
+
     // aqui valido que el password tenga minimo 4 caracteres
     if (password.length < 4) {
       e.preventDefault();
@@ -693,7 +776,7 @@ function validarFormulario() {
       });
       return false;
     }
-    
+
     // si el rol es Medico y no selecciono medico, aviso
     if (rol === 'Medico' && !medico && todosLosMedicos.length > 0) {
       e.preventDefault();
@@ -704,7 +787,7 @@ function validarFormulario() {
         showCancelButton: true,
         confirmButtonText: 'Sí, continuar',
         cancelButtonText: 'Cancelar'
-      }).then(function(result) {
+      }).then(function (result) {
         if (result.isConfirmed) {
           formulario.submit();
         }
@@ -715,35 +798,35 @@ function validarFormulario() {
 }
 
 // esto se ejecuta cuando carga la pagina
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   cargarMedicos();
   cargarDatos();
   validarFormulario();
   controlarCampoMedico();
-  
+
   // aqui pongo el evento para cambiar cuantos registros ver
-  document.getElementById('select-mostrar').addEventListener('change', function() {
+  document.getElementById('select-mostrar').addEventListener('change', function () {
     registrosPorPagina = parseInt(this.value);
     paginaActual = 1;
     mostrarTabla();
   });
-  
+
   // aqui pongo el evento para el buscador
-  document.getElementById('input-buscar').addEventListener('input', function() {
+  document.getElementById('input-buscar').addEventListener('input', function () {
     busqueda = this.value;
     filtrarDatos();
   });
-  
+
   // aqui pongo el evento para el boton anterior
-  document.getElementById('btn-prev').addEventListener('click', function() {
+  document.getElementById('btn-prev').addEventListener('click', function () {
     if (paginaActual > 1) {
       paginaActual--;
       mostrarTabla();
     }
   });
-  
+
   // aqui pongo el evento para el boton siguiente
-  document.getElementById('btn-next').addEventListener('click', function() {
+  document.getElementById('btn-next').addEventListener('click', function () {
     var totalPaginas = Math.ceil(usuariosFiltrados.length / registrosPorPagina);
     if (paginaActual < totalPaginas) {
       paginaActual++;

@@ -19,15 +19,18 @@ if ($tabla_existe && $tabla_existe->num_rows > 0) {
         u.IdUsuario, 
         u.Usuario, 
         u.Rol, 
-        u.IdMedico, 
+        u.IdMedico,
+        u.IdPaciente, 
         u.NombreCompleto,
         u.Telefono,
         u.CorreoElectronico,
         u.Activo,
         u.UltimoAcceso,
-        m.NombreCompleto as NombreMedico
+        m.NombreCompleto as NombreMedico,
+        p.NombreCompleto as NombrePaciente
     FROM Usuarios_Sistema u
     LEFT JOIN Control_Medicos m ON u.IdMedico = m.IdMedico
+    LEFT JOIN Control_Pacientes p ON u.IdPaciente = p.IdPaciente
     ORDER BY u.IdUsuario DESC";
 } else {
     // si no existe la tabla, hago el select sin join
@@ -56,14 +59,18 @@ if ($respuesta) {
         // aqui obtengo los medicos asignados si es recepcionista
         if ($linea['Rol'] == 'Recepcionista') {
             $id_usuario = $linea['IdUsuario'];
-            $sql_medicos = "SELECT 
+            
+            // JR: uso prepared statement para evitar SQL injection
+            $sql_medicos = $conexion->prepare("SELECT 
                 rm.IdMedico, 
                 m.NombreCompleto 
             FROM Recepcionista_Medico rm
             INNER JOIN Control_Medicos m ON rm.IdMedico = m.IdMedico
-            WHERE rm.IdRecepcionista = $id_usuario";
+            WHERE rm.IdRecepcionista = ?");
+            $sql_medicos->bind_param("i", $id_usuario);
+            $sql_medicos->execute();
+            $resultado_medicos = $sql_medicos->get_result();
             
-            $resultado_medicos = $conexion->query($sql_medicos);
             $medicos_asignados = [];
             
             if ($resultado_medicos) {
@@ -71,6 +78,7 @@ if ($respuesta) {
                     $medicos_asignados[] = $medico;
                 }
             }
+            $sql_medicos->close(); // JR: cierro el prepared statement
             
             $linea['MedicosAsignados'] = $medicos_asignados;
         }

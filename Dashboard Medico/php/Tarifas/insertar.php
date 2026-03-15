@@ -1,8 +1,8 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once '../auth/verificar_sesion.php';
-require_once '../auth/registrar_bitacora.php';
+require_once '../login/verificar_sesion.php';
+require_once '../login/registrar_bitacora.php';
 
 // aqui me conecto a la base de datos
 $conexion = new mysqli("localhost", "root", "edereder", "clinica_db");
@@ -30,15 +30,30 @@ $sql->bind_param("sdii", $descripcion, $costo, $especialidad_id, $estatus);
 
 // aqui ejecuto la consulta y redirijo
 if ($sql->execute()) {
-    // registro en bitacora
-    registrarBitacora($_SESSION['usuario_id'], 'Insertar tarifa', 'Tarifas');
+    $id_nuevo = $conexion->insert_id;
     
-    header("Location: ../../Tarifas.php?ok=1");
+    // JR: registro en bitacora con datos completos
+    registrar_bitacora(
+        $_SESSION['id_usuario'], 
+        'Insertar', 
+        'Tarifas', 
+        'Insertó tarifa: ' . $descripcion . ' - Costo: $' . $costo,
+        $id_nuevo,
+        null,
+        array(
+            'DescripcionServicio' => $descripcion,
+            'CostoBase' => $costo,
+            'EspecialidadId' => $especialidad_id,
+            'Estatus' => $estatus
+        )
+    );
+    
+    header("Location: /practica-9/Tarifas.php?ok=1");
     $sql->close();
     $conexion->close();
     exit;
 } else {
-    header("Location: ../../Tarifas.php?ok=0");
+    header("Location: /practica-9/Tarifas.php?ok=0");
     $sql->close();
     $conexion->close();
     exit;

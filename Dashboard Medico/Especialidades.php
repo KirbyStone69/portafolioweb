@@ -1,7 +1,7 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once 'php/auth/verificar_sesion.php';
+require_once 'php/login/verificar_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -94,8 +94,7 @@ require_once 'php/auth/verificar_sesion.php';
                 </li>
                 <hr class="h-color mx-2">
                 <li class=""><a href="Expedientes.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-folder"></i> Expedientes</a></li>
-                  <i class="fal fa-dollar-sign"></i> Tarifas</a>
-                </li>
+
                 <hr class="h-color mx-2">
 
                 <li class="">
@@ -134,7 +133,7 @@ require_once 'php/auth/verificar_sesion.php';
                                 <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1">Mi cuenta</a></li>
                                 <li><a class="dropdown-item" href="#">Configuración</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="php/auth/logout.php">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="php/login/logout.php">Cerrar sesión</a></li>
                               </ul>
                             </li>
                         </ul>

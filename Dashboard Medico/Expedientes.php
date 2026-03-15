@@ -1,7 +1,7 @@
 <?php
 // aqui inicio sesion y verifico que el usuario este logueado
 session_start();
-require_once 'php/auth/verificar_sesion.php';
+require_once 'php/login/verificar_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -41,26 +41,64 @@ require_once 'php/auth/verificar_sesion.php';
                 </h1>
                 <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fal fa-stream"></i></button>
             </div>
+            <?php
+            // Control de acceso por rol
+            $rol = $_SESSION['rol_usuario'] ?? 'Paciente';
+            ?>
             <ul class="list-unstyled px-2">
+                <?php if ($rol !== 'Paciente'): ?>
+                <!-- Inicio - Solo Staff -->
                 <li class=""><a href="Dashboard.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-home"></i> Inicio</a></li>
                 <hr class="h-color mx-2">
+                <?php endif; ?>
+                
+                <!-- Agenda - Todos -->
                 <li class=""><a href="agenda.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i> Agenda</a></li>
+                
+                <?php if ($rol !== 'Paciente'): ?>
+                <!-- Usuarios - Solo Admin -->
+                <?php if ($rol === 'Admin'): ?>
                 <li class=""><a href="Usuarios.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-list"></i> Usuarios</a></li>
-                <li class=""><a href="Pacientes.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-comment"></i> Pacientes</a></li>
+                <?php endif; ?>
+                
+                <!-- Pacientes - Admin, Médico, Recepcionista -->
+                <li class=""><a href="Pacientes.php" class="text-decoration-none px-3 py-2 d-block"><span><i class="fal fa-comment"></i> Pacientes</span></a></li>
+                
+                <!-- Médicos - Admin, Recepcionista -->
+                <?php if ($rol === 'Admin' || $rol === 'Recepcionista'): ?>
                 <li class=""><a href="Medicos.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-envelope-open-text"></i> Médicos</a></li>
+                <?php endif; ?>
+                
+                <!-- Especialidades/Tarifas - Solo Admin -->
+                <?php if ($rol === 'Admin'): ?>
                 <li class=""><a href="Especialidades.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-users"></i> Especialidades</a></li>
                 <li class=""><a href="Tarifas.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-dollar-sign"></i> Tarifas</a></li>
+                <?php endif; ?>
+                
                 <hr class="h-color mx-2">
+                
+                <!-- Expedientes - Admin, Médico -->
+                <?php if ($rol === 'Admin' || $rol === 'Medico'): ?>
                 <li class="active"><a href="Expedientes.php" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-folder"></i> Expedientes</a></li>
-                <li class=""><div class="dropdown">
+                <?php endif; ?>
+                
+                <!-- Otros - Admin, Recepcionista -->
+                <?php if ($rol === 'Admin' || $rol === 'Recepcionista'): ?>
+                <hr class="h-color mx-2">
+                <li class="">
+                  <div class="dropdown">
                     <a class="nav-link dropdown-toggle text-decoration-none px-3 py-2 d-block" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Otros</a>
                     <ul class="dropdown-menu bg-primary">
                       <li><a class="dropdown-item text-white" href="Pagos.php">Pagos</a></li>
+                      <?php if ($rol === 'Admin'): ?>
                       <li><a class="dropdown-item text-white" href="Bitacoras.php">Bitacora</a></li>
                       <li><a class="dropdown-item text-white" href="reportes.php">Reportes</a></li>
+                      <?php endif; ?>
                     </ul>
                   </div>
                 </li>
+                <?php endif; ?>
+                <?php endif; ?>
               </ul>
         </div>
         <div class="content">
@@ -77,9 +115,9 @@ require_once 'php/auth/verificar_sesion.php';
                               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Perfil</a>
                               <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
-                                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                <li><a class="dropdown-item" href="#">Configuracion</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="php/auth/logout.php">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="php/login/logout.php">Cerrar sesion</a></li>
                               </ul>
                             </li>
                         </ul>
