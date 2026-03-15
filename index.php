@@ -86,10 +86,7 @@ usort($proyectos, function($a, $b) {
                         <span class="stat-numero"><?= count($proyectos) ?></span>
                         <span class="stat-label">Proyectos</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-numero">∞</span>
-                        <span class="stat-label">Curiosidad</span>
-                    </div>
+
                 </div>
             </div>
         </div>
