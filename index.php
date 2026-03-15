@@ -53,6 +53,7 @@ usort($proyectos, function($a, $b) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($titulo) ?></title>
+    <link rel="icon" href="kirby.ico" type="image/x-icon">
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
@@ -110,7 +111,7 @@ usort($proyectos, function($a, $b) {
                         </div>
                         <div class="proyecto-info">
                             <div class="proyecto-nombre"><?= htmlspecialchars($proyecto['nombre']) ?></div>
-                            <a class="proyecto-btn" href="<?= htmlspecialchars($proyecto['nombre']) ?>/">
+                            <a class="proyecto-btn" href="<?= htmlspecialchars($proyecto['nombre']) ?>/" target="_blank" rel="noopener">
                                 Ver Proyecto →
                             </a>
                         </div>
