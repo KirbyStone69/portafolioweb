@@ -137,9 +137,11 @@ usort($proyectos, function($a, $b) {
                 <a href="https://wa.me/+528342186956" target="_blank" class="footer-link">
                     <img src="img/whatsapp.svg" alt="WhatsApp" class="footer-link-icon-img"> WhatsApp
                 </a>
+                <!-- comente linkedin por que no tengo jejeje 
                 <a href="https://www.linkedin.com" target="_blank" class="footer-link">
                     <img src="img/linkedin.svg" alt="LinkedIn" class="footer-link-icon-img"> LinkedIn
                 </a>
+                -->
                 <a class="footer-link">
                     <img src="img/gmail.svg" alt="Gmail personal" class="footer-link-icon-img"> Gmail Personal : edeveloco@gmail.com
                 </a>
