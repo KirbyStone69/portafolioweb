@@ -2,53 +2,16 @@
 // Este archivo devuelve los ingresos de la semana actual por dia
 header('Content-Type: application/json');
 
-// Conexion a la base de datos
-require_once __DIR__ . "/../mock_db.php";
-$conexion = new MockMysqli();
-if ($conexion->connect_error) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Error de conexión']);
-    exit;
-}
-
-// Obtener ingresos por dia de la semana actual
-// Calculamos el inicio y fin de la semana (Lunes a Domingo)
-$sql = "SELECT 
-    DATE(FechaPago) as fecha,
-    DAYOFWEEK(FechaPago) as dia,
-    COALESCE(SUM(Monto), 0) as total
-FROM Gestor_Pagos
-WHERE EstatusPago = 'Pagado'
-    AND YEARWEEK(FechaPago, 1) = YEARWEEK(CURRENT_DATE(), 1)
-GROUP BY DATE(FechaPago), DAYOFWEEK(FechaPago)
-ORDER BY fecha";
-
-$resultado = $conexion->query($sql);
-
 // Inicializar array con 7 dias (Lun-Dom) en 0
-$ingresos_semana = [0, 0, 0, 0, 0, 0, 0];
-
-// Llenar con los datos reales
-if ($resultado) {
-    while ($fila = $resultado->fetch_assoc()) {
-        // DAYOFWEEK devuelve 1=Domingo, 2=Lunes, ..., 7=Sabado
-        // Convertimos a indice 0=Lunes, ..., 6=Domingo
-        $dia_semana = $fila['dia'];
-        if ($dia_semana == 1) { // Domingo
-            $ingresos_semana[6] = floatval($fila['total']);
-        } else { // Lunes a Sabado
-            $ingresos_semana[$dia_semana - 2] = floatval($fila['total']);
-        }
-    }
-}
-
-// Preparar respuesta
-$respuesta = [
-    'dias' => ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
-    'montos' => $ingresos_semana
+$ingresos_semana = [
+    rand(1000, 3000), // Lunes
+    rand(1500, 4000), // Martes
+    rand(2000, 5000), // Miércoles
+    rand(2500, 6000), // Jueves
+    rand(3000, 7000), // Viernes
+    rand(1000, 3000), // Sábado
+    rand(500, 2000)   // Domingo
 ];
 
-echo json_encode($respuesta);
-
-$conexion->close();
+echo json_encode($ingresos_semana);
 ?>

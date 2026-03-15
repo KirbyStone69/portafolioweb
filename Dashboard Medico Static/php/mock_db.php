@@ -2,44 +2,87 @@
 // MockMysqli implementation to simulate a database connection for a portfolio without a real database.
 
 class MockResult {
-    public $num_rows = 1; // Simulate 1 row so login validation strictly passes
+    public $num_rows = 1; 
     private $fetched_rows = 0;
+    private $max_rows = 8; // Simulate 8 rows for tables
 
     public function fetch_assoc() {
-        if ($this->fetched_rows >= $this->num_rows) {
+        if ($this->fetched_rows >= $this->max_rows) {
             return false; // Stop the loop
         }
         $this->fetched_rows++;
 
-        // Return dummy data common across queries
+        $nombres = ['Juan', 'María', 'José', 'Ana', 'Luis', 'Carmen', 'Carlos', 'Laura', 'Pedro', 'Sofía'];
+        $apellidos = ['Pérez', 'García', 'Martínez', 'López', 'González', 'Rodríguez', 'Fernández', 'Gómez'];
+        $especialidades = ['Medicina General', 'Cardiología', 'Pediatría', 'Ginecología', 'Dermatología', 'Nutrición'];
+        $servicios = ['Consulta General', 'Revisión Anual', 'Electrocardiograma', 'Ultrasonido', 'Limpieza', 'Terapia'];
+        $estadosCita = ['Programada', 'Completada', 'Cancelada'];
+        $estadosPago = ['Pagado', 'Pendiente'];
+        
+        $nombre = $nombres[array_rand($nombres)];
+        $apellido = $apellidos[array_rand($apellidos)];
+        
+        // Ensure first fetch (used by login) always returns the admin credentials accurately
+        if ($this->fetched_rows === 1) {
+            return [
+                'total' => rand(30, 150), // For stats
+                'IdUsuario' => 1,
+                'Usuario' => 'admin',
+                'Rol' => 'Admin',
+                'IdMedico' => 1,
+                'IdPaciente' => 1,
+                'NombreCompleto' => 'Administrador (Demo)',
+                'Activo' => 1,
+                
+                // Typical patient/medical columns
+                'Id' => 1,
+                'id' => 1,
+                'Nombre' => $nombre,
+                'nombre' => $nombre,
+                'Apellidos' => $apellido,
+                'Especialidad' => $especialidades[array_rand($especialidades)],
+                'Telefono' => '55' . rand(10000000, 99999999),
+                'Email' => strtolower($nombre) . '@ejemplo.com',
+                'Estatus' => 1,
+                'FechaRegistro' => date('Y-m-d', strtotime('-' . rand(1, 30) . ' days')),
+                'Servicio' => $servicios[array_rand($servicios)],
+                'Monto' => rand(3, 15) * 100,
+                'EstatusPago' => $estadosPago[array_rand($estadosPago)],
+                'EstadoCita' => $estadosCita[array_rand($estadosCita)],
+                'fecha' => date('Y-m-d'),
+                'Fecha' => date('Y-m-d'),
+                'Hora' => rand(8, 18) . ':00:00'
+            ];
+        }
+
+        // Return random data for subsequent fetches
         return [
-            'total' => rand(10, 100), // For stats
-            'IdUsuario' => 1,
-            'Usuario' => 'admin',
-            'Rol' => 'Admin',
-            'IdMedico' => 1,
-            'IdPaciente' => 1,
-            'NombreCompleto' => 'Administrador (Demo)',
+            'total' => rand(30, 150),
+            'IdUsuario' => rand(2, 20),
+            'Usuario' => strtolower($nombre),
+            'Rol' => (rand(0, 1) ? 'Medico' : 'Paciente'),
+            'IdMedico' => rand(2, 20),
+            'IdPaciente' => rand(2, 20),
+            'NombreCompleto' => $nombre . ' ' . $apellido,
             'Activo' => 1,
             
-            // Typical patient/medical columns
-            'Id' => rand(1, 100),
-            'id' => rand(1, 100),
-            'Nombre' => 'Nombre Prueba',
-            'nombre' => 'Nombre Prueba',
-            'Apellidos' => 'Apellido Prueba',
-            'Especialidad' => 'General',
-            'Telefono' => '555-5555',
-            'Email' => 'prueba@ejemplo.com',
+            'Id' => rand(2, 100),
+            'id' => rand(2, 100),
+            'Nombre' => $nombre,
+            'nombre' => $nombre,
+            'Apellidos' => $apellido,
+            'Especialidad' => $especialidades[array_rand($especialidades)],
+            'Telefono' => '55' . rand(10000000, 99999999),
+            'Email' => strtolower($nombre) . strtolower($apellido) . rand(1, 99) . '@ejemplo.com',
             'Estatus' => 1,
-            'FechaRegistro' => date('Y-m-d'),
-            'Servicio' => 'Consulta',
-            'Monto' => 500,
-            'EstatusPago' => 'Pagado',
-            'EstadoCita' => 'Programada',
-            'fecha' => date('Y-m-d'),
-            'Fecha' => date('Y-m-d'),
-            'Hora' => '10:00:00'
+            'FechaRegistro' => date('Y-m-d', strtotime('-' . rand(1, 30) . ' days')),
+            'Servicio' => $servicios[array_rand($servicios)],
+            'Monto' => rand(3, 15) * 100,
+            'EstatusPago' => $estadosPago[array_rand($estadosPago)],
+            'EstadoCita' => $estadosCita[array_rand($estadosCita)],
+            'fecha' => date('Y-m-d', strtotime('+' . rand(0, 7) . ' days')),
+            'Fecha' => date('Y-m-d', strtotime('+' . rand(0, 7) . ' days')),
+            'Hora' => rand(8, 18) . ':00:00'
         ];
     }
 
