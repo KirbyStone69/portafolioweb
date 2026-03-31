@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <!-- Bootstrap CSS & Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Fuente Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fffffe;
+            font-family: 'Poppins', sans-serif;
+        }
+        .header-bg {
+            background-color: #1e3a8a;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        .card-img-top {
+            height: 250px;
+            object-fit: contain;
+            object-position: center;
+        }
+        .btn-sweetalert {
+            background-color: #1e3a8a;
+            color: white;
+        }
+        .container.my-5 {
+            margin-top: 120px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-bg p-4 shadow-lg">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-globe-americas fs-3 text-white me-3"></i>
+                <h1 class="text-white fs-3 fw-bold m-0">Catálogo</h1>
+            </div>
+            <button class="text-white fs-3 border-0 bg-transparent" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar" style="position: fixed; top: 92px; right: 0; width: 280px; height: calc(100% - 80px); background-color: #333; z-index: 1000;">
+                <div class="d-flex flex-column h-100">
+                    <div class="p-3">
+                        <a href="dashboard.html" class="d-flex align-items-center text-decoration-none text-white mb-4">
+                            <i class="bi bi-house-door-fill me-3"></i>
+                            <span class="fs-6">Dashboard</span>
+                        </a>
+                        <a href="productos.html" class="d-flex align-items-center text-decoration-none text-white mb-4">
+                            <i class="bi bi-view-list me-3"></i>
+                            <span class="fs-6">Gestión de productos</span>
+                        </a>
+                        <a href="#" class="d-flex align-items-center text-decoration-none text-white mb-4">
+                            <i class="bi bi-view-list me-3"></i>
+                            <span class="fs-6">Catálogo</span>
+                        </a>
+                        <a href="pedidos.html" class="d-flex align-items-center text-decoration-none text-white mb-4">
+                            <i class="bi bi-bag-fill me-3"></i>
+                            <span class="fs-6">Historial de pedidos</span>
+                        </a>
+                        <a href="#" class="d-flex align-items-center text-decoration-none text-white mb-4" id="abrirCarrito">
+                            <i class="bi bi-cart-fill me-3"></i>
+                            <span class="fs-6">Carrito</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-auto p-3 mb-2">
+                        <button id="VaciarAll" class="btn w-100 mb-2 py-2" style="background-color: #ffc107; color: black;">
+                            <i class="bi bi-trash-fill me-2"></i>Vaciar datos
+                        </button>
+                        <button class="btn btn-danger w-100 py-2" id="cerrarSesionBtn">
+                            <i class="bi bi-door-closed-fill me-2"></i>Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!---->
+        </div>
+    </header>
+    <!---->
+
+    <!-- Contenido principal -->
+    <div class="container my-5">
+        <!-- Barra de búsqueda y filtros -->
+        <div class="row g-3 mb-4" id="contenedorBusquedaFiltros">
+            <!--Input de busqueda-->
+            <div class="col-md-4">
+                <input type="text" id="busquedaInput" class="form-control rounded-pill" placeholder="Buscar producto">
+            </div>
+            <!---->
+            <!-- Filtro de categoría -->
+            <div class="col-md-4">
+                <select id="filtroCategoria" class="form-select rounded-pill">
+                    <option value="" selected>Todas las categorías</option>
+                    <option value="Electrónicos">Electrónicos</option>
+                    <option value="Limpieza">Limpieza</option>
+                    <option value="Alimentos">Alimentos</option>
+                    <option value="Vestimenta">Vestimenta</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <!---->
+            <!-- Ordenar por -->
+            <div class="col-md-4 d-flex justify-content-end">
+                <select id="ordenarPor" class="form-select rounded-pill">
+                    <option value="" selected>Sin orden</option>
+                    <option value="precioDesc">De mayor a menor precio</option>
+                    <option value="precioAsc">De menor a mayor precio</option>
+                    <option value="stockDesc">De mayor a menor stock</option>
+                    <option value="stockAsc">De menor a mayor stock</option>
+                </select>
+            </div>
+            <!---->
+        </div>
+        <div class="row g-3" id="contenedorProductos">
+            <!-- Aquí se agregarán los productos dinámicamente -->
+        </div>
+    </div>
+    <!---->
+
+    <!-- Modal del carrito -->
+    <div class="modal fade" id="modalCarrito" tabindex="-1" aria-labelledby="modalCarritoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background-color: #fffffe; border-radius: 15px;">
+                <div class="modal-body p-4">
+                    <h2 class="text-center mb-4 fw-bold" style="color: #1e3a8a;">
+                        Carrito
+                    </h2>
+                    <!-- Contenedor de productos del carrito -->
+                    <div id="contenidoCarrito" style="max-height: 400px; overflow-y: auto;">
+                        <!-- Aquí se agregarán los productos del carrito dinámicamente -->
+                    </div>
+                    <!-- Total -->
+                    <div class="border-top mt-3 pt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="mb-0 fw-bold" style="color: #1e3a8a;">Total:</h4>
+                                <h4 class="mb-0 fw-bold text-success">$<span id="totalCarrito">0.00</span></h4>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="mb-0 fw-bold" style="color: #1e3a8a;">Total(IVA 16%):</h4>
+                                <h4 class="mb-0 fw-bold text-success">$<span id="totalCarritoiva">0.00</span></h4>
+                        </div>
+                    </div>
+                    <!-- Botones -->
+                    <div class="text-center">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4 me-2" data-bs-dismiss="modal" style="background-color: #777777; border: none;">
+                            Cerrar
+                        </button>
+                        <button type="button" id="VaciarCarrito" class="btn btn-danger rounded-pill px-4 me-2" id="btnVaciarCarrito" style="color: #ffffff;">
+                            <i class="bi bi-trash"></i> Vaciar carrito
+                        </button>
+                        <button type="button" id="Aceptar_compra" class="btn rounded-pill px-4" id="btnProcesarCompra" style="background-color: #1e3a8a; color: white;">
+                            <i class="bi bi-check-circle"></i> Finalizar compra
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- SweetAlert2 JS -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Sidebar -->
+    <script type="module" src="../js/sidebar.js"></script>
+    <!-- JS de sesión -->
+    <script type="module" src="../js/sesion.js"></script>
+    <!-- JS de catálogo -->
+    <script type="module" src="../js/catalogo.js"></script>
+    <!-- JS de carrito -->
+    <script type="module" src="../js/carrito.js"></script>
+</body>
+</html>
