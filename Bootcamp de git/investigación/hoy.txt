@@ -1,0 +1,9 @@
+Especifica lo siguiente:
+
+* Población.
+
+* Muestreo (probabilístico o no probabilístico). Especifica la técnica de muestreo y los pasos que realizarás. 
+
+* Metodología de investigación. Especificar el plan o estrategia concebida para obtener la información que se desea con el fin de responder al planteamiento del problema. Describe y justifica la metodología de investigación que va a seleccionar. 
+
+* Cita un trabajo que en el que se haya utilizado la misma metodología de investigación que elegiste. Asegúrate que en ese trabajo previo se evidencie la integración de TI.  

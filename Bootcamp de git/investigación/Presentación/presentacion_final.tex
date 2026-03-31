@@ -1,0 +1,333 @@
+\documentclass[t]{beamer}
+
+% --- Theme and Color Setup ---
+\usetheme{Madrid}
+
+% Define custom color scheme (less bright orange)
+\definecolor{MyBlue}{RGB}{45, 85, 130} 
+
+% Apply the blue color to the structure
+\usecolortheme[named=MyBlue]{structure}
+
+% Fix footer colors to match the blue theme
+\setbeamercolor{palette primary}{bg=MyBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=MyBlue!80!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=MyBlue!60!black,fg=white}
+\setbeamerfont{caption}{size=\footnotesize}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{tikz} 
+\usepackage{booktabs}
+
+% --- 1. CONFIGURATION FOR CONTENT SLIDES (Middle Pages) ---
+\addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=0cm, inner sep=0pt] at (current page.north east) {
+            \includegraphics[height=0.8cm, keepaspectratio]{1.png}
+        };
+    \end{tikzpicture}%
+}
+
+% --- 2. CONFIGURATION FOR FIRST & LAST PAGE ---
+\newcommand{\FirstLastPageLayout}{
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=0cm, inner sep=0pt] at (current page.north east) {
+            \includegraphics[height=1cm, keepaspectratio]{2.png}
+        };
+        \node[anchor=south west, xshift=0.5cm, yshift=0.5cm] at (current page.south west) {
+            \textcolor{MyBlue}{\footnotesize Universidad Politécnica de Victoria}
+        };
+    \end{tikzpicture}
+}
+
+% --- Info ---
+\title[Bootcamp Git]{Evaluación de un sistema de control de versiones con plataforma web de capacitación}
+\subtitle{Reducción de concentración del trabajo en proyectos universitarios}
+\author{Eder Omar Zúñiga Zavala}
+\institute[]{Universidad Politécnica de Victoria}
+\date{}
+
+\begin{document}
+
+% --- Slide 1: Title Page ---
+\begin{frame}
+    \FirstLastPageLayout
+    \titlepage
+\end{frame}
+
+% --- Slide 2: Contents ---
+\begin{frame}{Contenido}
+    \begin{itemize}
+        \item Problema identificado
+        \item Objetivos de la investigación
+        \item Marco teórico
+        \item Metodología propuesta
+        \item Plataforma desarrollada
+        \item Resultados esperados
+        \item Conclusiones
+    \end{itemize}
+\end{frame}
+
+% --- Slide 3: Problema ---
+\begin{frame}{Problema Identificado}
+    \begin{itemize}
+        \item \textbf{Concentración de trabajo} en pocos integrantes en proyectos universitarios de programación
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Limitaciones del aprendizaje} colaborativo por distribución desigual de tareas
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Falta de capacitación} estructurada en herramientas de control de versiones
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Evaluación poco objetiva} del desempeño individual en equipos
+    \end{itemize}
+\end{frame}
+
+% --- Slide 4: Objetivos ---
+\begin{frame}{Objetivos de Investigación}
+    \textbf{Objetivo General:}
+    \begin{itemize}
+        \item Evaluar el impacto de un sistema de control de versiones con entorno de aprendizaje interactivo en la distribución del trabajo universitario
+    \end{itemize}
+    
+    \vspace{0.4cm}
+    
+    \textbf{Objetivos Específicos:}
+    \begin{itemize}
+        \item Desarrollar bootcamp interactivo para estandarizar competencias en Git
+        \item Integrar control de versiones como herramienta de gestión académica
+        \item Analizar participación grupal mediante métricas objetivas
+    \end{itemize}
+\end{frame}
+
+% --- Slide 5: Marco Teórico ---
+\begin{frame}{Marco Teórico}
+    \textbf{Bases conceptuales:}
+    \begin{itemize}
+        \item \textbf{Sistemas de Control de Versiones:} Git como herramienta de colaboración
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Aprendizaje Colaborativo:} Teorías de trabajo en equipo educativo
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Bootcamps de Programación:} Metodologías de enseñanza intensiva
+    \end{itemize}
+\end{frame}
+
+% --- Slide 6: Metodología ---
+\begin{frame}{Metodología}
+    \textbf{Diseño de Investigación:}
+    \begin{itemize}
+        \item \textbf{Tipo:} Cuasi-experimental con grupos intactos
+        \item \textbf{Enfoque:} Mixto (cuantitativo + cualitativo)
+        \item \textbf{Población:} Estudiantes de informática en proyectos de equipo
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Variables:}
+    \begin{itemize}
+        \item \textbf{Independiente:} Bootcamp "Malleus Codeficarum" + uso obligatorio de Git
+        \item \textbf{Dependiente:} Distribución equitativa del trabajo
+    \end{itemize}
+\end{frame}
+
+% --- Slide 7: Instrumentos ---
+\begin{frame}{Instrumentos de Recolección}
+    \begin{enumerate}
+        \item \textbf{Minería de Datos (Git):}
+        \begin{itemize}
+            \item Commits, líneas de código, frecuencia de actividad
+            \item Coeficiente de Gini para medir desigualdad
+        \end{itemize}
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Encuestas Likert:}
+        \begin{itemize}
+            \item Pre-test y post-test de competencias técnicas
+        \end{itemize}
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Gráficos de Red:}
+        \begin{itemize}
+            \item Análisis visual de interacciones en repositorios
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% --- Slide 8: Fases del Proyecto ---
+\begin{frame}{Fases del Proyecto}
+    \begin{enumerate}
+        \item \textbf{Diagnóstico:} Pre-test de conocimientos previos en Git
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Intervención:} Capacitación mediante bootcamp interactivo
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Desarrollo:} Ejecución de proyectos con monitoreo continuo
+        
+        \vspace{0.3cm}
+        
+        \item \textbf{Evaluación:} Comparación estadística entre grupos
+    \end{enumerate}
+    
+    \vspace{0.5cm}
+    
+    \begin{tikzpicture}
+        \node[draw=MyBlue,fill=MyBlue!10,rounded corners,text width=1.8cm,text centered,minimum height=0.8cm] (fase1) at (0,0) {\footnotesize Diagnóstico};
+        \node[draw=MyBlue,fill=MyBlue!10,rounded corners,text width=1.8cm,text centered,minimum height=0.8cm] (fase2) at (3,0) {\footnotesize Intervención};
+        \node[draw=MyBlue,fill=MyBlue!10,rounded corners,text width=1.8cm,text centered,minimum height=0.8cm] (fase3) at (6,0) {\footnotesize Desarrollo};
+        \node[draw=MyBlue,fill=MyBlue!10,rounded corners,text width=1.8cm,text centered,minimum height=0.8cm] (fase4) at (9,0) {\footnotesize Evaluación};
+        
+        \draw[->,thick,MyBlue] (fase1) -- (fase2);
+        \draw[->,thick,MyBlue] (fase2) -- (fase3);
+        \draw[->,thick,MyBlue] (fase3) -- (fase4);
+    \end{tikzpicture}
+\end{frame}
+
+% --- Slide 9: Plataforma Desarrollada ---
+\begin{frame}{Plataforma "Malleus Codeficarum"}
+    \textbf{Estructura del Bootcamp:}
+    \begin{itemize}
+        \item \textbf{Área Teórica:} Explicaciones paso a paso de conceptos Git
+        \item \textbf{Área Práctica:} Terminal interactiva para ejecutar comandos
+        \item \textbf{Evaluación:} Seguimiento automático del progreso
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \textbf{Módulos incluidos:}
+    \begin{itemize}
+        \item Instalación y configuración de Git
+        \item Repositorios: init, clone, staging
+        \item Ramas, merge y resolución de conflictos
+        \item Trabajo remoto: push, pull, colaboración
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \begin{tikzpicture}
+        % Área teórica
+        \node[draw=MyBlue,fill=MyBlue!10,rounded corners,text width=3.5cm,text centered,minimum height=1.5cm] (teoria) at (0,0) {
+            \textbf{Área Teórica} \\
+            \footnotesize Instrucciones \\
+            \footnotesize Pasos a seguir
+        };
+        
+        % Área práctica  
+        \node[draw=green!70!black,fill=green!10,rounded corners,text width=3.5cm,text centered,minimum height=1.5cm] (practica) at (5,0) {
+            \textbf{Área Práctica} \\
+            \footnotesize Terminal \\
+            \footnotesize Comandos Git
+        };
+        
+        \draw[->,thick,red] (teoria) -- (practica);
+        \node[above,red] at (2.5,0.3) {\footnotesize Interacción};
+    \end{tikzpicture}
+\end{frame}
+
+% --- Slide 10: Área Teórica del Bootcamp ---
+\begin{frame}{Área Teórica - Explicación de Comandos}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=10cm, keepaspectratio]{teorico.png}
+        \caption{Interface teórica mostrando explicaciones paso a paso}
+    \end{figure}
+\end{frame}
+
+% --- Slide 11: Área Práctica del Bootcamp ---
+\begin{frame}{Área Práctica - Terminal Simulada}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=10cm, keepaspectratio]{practico.png}
+        \caption{Terminal interactiva para ejecutar comandos Git}
+    \end{figure}
+\end{frame}
+
+% --- Slide 12: Resultados Esperados ---
+\begin{frame}{Resultados Esperados}
+    \textbf{Hipótesis:} La implementación de Git + capacitación reduce la concentración de trabajo
+    
+    \vspace{0.5cm}
+    
+    \textbf{Métricas esperadas:}
+    \begin{itemize}
+        \item Reducción del Coeficiente de Gini en contribuciones
+        
+        \vspace{0.3cm}
+        
+        \item Mayor participación activa de todos los integrantes
+        
+        \vspace{0.3cm}
+        
+        \item Mejora en competencias técnicas (pre/post test)
+        
+        \vspace{0.3cm}
+        
+        \item Transparencia en evaluación individual
+    \end{itemize}
+\end{frame}
+
+% --- Slide 13: Impacto y Viabilidad ---
+\begin{frame}{Impacto y Viabilidad}
+    \textbf{Impacto Académico:}
+    \begin{itemize}
+        \item Mejora del aprendizaje colaborativo
+        \item Evaluación objetiva del desempeño individual
+        \item Preparación para entornos profesionales
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Viabilidad:}
+    \begin{itemize}
+        \item Tecnologías accesibles y conocidas
+        \item Integración natural a las dinámicas académicas
+        \item Población adecuada para la investigación
+        \item Desarrollo gradual y escalable
+    \end{itemize}
+\end{frame}
+
+% --- Slide 14: Conclusiones ---
+\begin{frame}{Conclusiones}
+    \begin{itemize}
+        \item \textbf{Necesidad real:} Problema identificado en proyectos universitarios
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Solución viable:} Combinación de tecnología educativa y herramientas profesionales
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Metodología sólida:} Diseño cuasi-experimental con instrumentos validados
+        
+        \vspace{0.5cm}
+        
+        \item \textbf{Impacto esperado:} Mejora del aprendizaje colaborativo y preparación profesional
+    \end{itemize}
+\end{frame}
+
+% --- Final page ---
+\begin{frame}[c]
+    \FirstLastPageLayout
+    \centering
+    \Huge \textcolor{MyBlue}{Gracias por su atención}
+    
+    \vspace{1.5cm}
+    \normalsize
+\end{frame}
+
+\end{document}

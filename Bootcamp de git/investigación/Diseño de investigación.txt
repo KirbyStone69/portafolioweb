@@ -1,0 +1,30 @@
+﻿Metodología y Diseño de Investigación
+Tipo y Alcance del Diseño
+La investigación se define como Cuasi-experimental con un alcance Explicativo y un enfoque Mixto. Debido a la imposibilidad de asignar alumnos al azar, se trabajará con grupos universitarios intactos para comparar el impacto de la intervención contra una metodología tradicional.
+Componente
+	Descripción
+	Tipo de Diseño
+	Cuasi-experimental (Grupo Control vs. Grupo Experimental).
+	Enfoque
+	Mixto: Métricas de software (Cuantitativo) y percepción del alumno (Cualitativo).
+	Población
+	Estudiantes de carreras de informática/computación en proyectos de equipo.
+	
+
+Variables de Estudio
+* Variable Independiente (Intervención): Implementación del bootcamp interactivo "Malleus Codeficarum" y uso obligatorio de Git para la gestión académica.
+* Variable Dependiente: Distribución equitativa del trabajo (reducción de la concentración de tareas en pocos integrantes).
+
+
+Instrumentos de Recolección
+Para validar la hipótesis, se utilizarán tres herramientas principales:
+1. Minería de Datos (Git): Extracción automatizada de commits, líneas de código (LOC) y frecuencia de actividad. Se utilizará el Coeficiente de Gini para medir la desigualdad en las contribuciones.
+2. Encuestas Likert: Aplicadas al inicio (pre-test) y al final (post-test) para medir competencias técnicas y percepción de holgazanería social.
+3. Gráficos de Red: Análisis visual de la interacción en el repositorio para identificar perfiles de participación.HG
+
+Procedimiento Sugerido
+El proceso se divide en cuatro fases críticas:
+1. Fase 1 (Diagnóstico): Aplicación de pre-test para identificar conocimientos previos de Git y lógica de programación.
+2. Fase 2 (Intervención): Capacitación intensiva mediante el Bootcamp interactivo para estandarizar competencias básicas.
+3. Fase 3 (Desarrollo): Ejecución del proyecto de programación con monitoreo continuo del flujo de trabajo en los repositorios.
+4. Fase 4 (Evaluación): Comparación estadística de métricas de contribución entre el grupo experimental y el de control.
