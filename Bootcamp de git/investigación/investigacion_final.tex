@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{setspace}
 \usepackage{cite}
@@ -57,6 +58,144 @@ Asimismo, la investigación es viable desde el punto de vista académico, al con
 La implementación de un sistema de control de versiones, acompañado de una capacitación inicial mediante un entorno de aprendizaje interactivo, reduce la concentración del trabajo en uno o pocos integrantes en proyectos universitarios de programación en equipo.
 
 \section{Metodología y Diseño de Investigación}
+
+\subsection{Tipo y Alcance del Diseño}
+ La investigación se define como Cuasi-experimental con un alcance Explicativo y un enfoque Mixto. Debido a la imposibilidad de asignar alumnos al azar, se trabajará con grupos universitarios intactos para comparar el impacto de la intervención contra una metodología tradicional.
+ 
+ \begin{table}[h]
+ \centering
+ \begin{tabular}{|l|l|}
+ \hline
+ Componente & Descripción \\
+ \hline
+ Tipo de Diseño & Cuasi-experimental (Grupo Control vs. Grupo Experimental) \\
+ \hline
+ Enfoque & Mixto: Métricas de software (Cuantitativo) y percepción del alumno (Cualitativo) \\
+ \hline
+ Población & Estudiantes de carreras de informática/computación en proyectos de equipo \\
+ \hline
+ \end{tabular}
+ \end{table}
+ 
+ \subsection{Variables de Estudio}
+ \begin{itemize}
+     \item \textbf{Variable Independiente (Intervención):} Implementación del bootcamp interactivo "Malleus Codeficarum" y uso obligatorio de Git para la gestión académica.
+     \item \textbf{Variable Dependiente:} Distribución equitativa del trabajo (reducción de la concentración de tareas en pocos integrantes).
+ \end{itemize}
+ 
+ \subsection{Instrumentos de Recolección}
+ Para validar la hipótesis, se utilizarán tres herramientas principales:
+ \begin{enumerate}
+     \item \textbf{Minería de Datos (Git):} Extracción automatizada de commits, líneas de código (LOC) y frecuencia de actividad. Se utilizará el Coeficiente de Gini para medir la desigualdad en las contribuciones.
+     \item \textbf{Encuestas Likert:} Aplicadas al inicio (pre-test) y al final (post-test) para medir competencias técnicas y percepción de holgazanería social.
+     \item \textbf{Gráficos de Red:} Análisis visual de la interacción en el repositorio para identificar perfiles de participación.
+ \end{enumerate}
+ 
+ \subsection{Procedimiento Sugerido}
+ El proceso se divide en cuatro fases críticas:
+ \begin{enumerate}
+     \item \textbf{Fase 1 (Diagnóstico):} Aplicación de pre-test para identificar conocimientos previos de Git y lógica de programación.
+     \item \textbf{Fase 2 (Intervención):} Capacitación intensiva mediante el Bootcamp interactivo para estandarizar competencias básicas.
+     \item \textbf{Fase 3 (Desarrollo):} Ejecución del proyecto de programación con monitoreo continuo del flujo de trabajo en los repositorios.
+     \item \textbf{Fase 4 (Evaluación):} Comparación estadística de métricas de contribución entre el grupo experimental y el de control.
+ \end{enumerate}
+ 
+\section{Sistema Propuesto}
+
+\subsection{Descripción General}
+Malleus Codeficarum es una plataforma web interactiva diseñada como un bootcamp para el aprendizaje de Git desde nivel básico. El sistema guía al usuario mediante lecciones teóricas, prácticas con simulador de terminal y evaluaciones automatizadas.
+
+La plataforma permite adquirir habilidades en control de versiones mediante un entorno estructurado y progresivo, simulando escenarios reales de uso de Git.
+
+\subsection{Funcionalidades Principales}
+
+\begin{itemize}
+    \item \textbf{Menú dinámico:} Generado automáticamente mediante PHP, detectando lecciones dentro de la estructura de carpetas del sistema.
+    
+    \item \textbf{Lecciones teóricas:} Contenido estructurado con ejemplos, tablas y cuestionarios de evaluación al final de cada tema.
+    
+    \item \textbf{Simulador de terminal:} Entorno interactivo donde el usuario ejecuta comandos Git (init, add, commit, branch, merge, push, pull) con validación paso a paso.
+    
+    \item \textbf{Cuestionarios interactivos:} Evaluaciones de opción múltiple con retroalimentación inmediata y cálculo automático de resultados.
+    
+    \item \textbf{Evaluación final:} Examen integral de 15 preguntas para validar el aprendizaje del módulo.
+\end{itemize}
+
+\subsection{Flujo de Interacción del Usuario}
+
+\begin{enumerate}
+    \item El usuario accede a la plataforma web.
+    \item Navega por el menú de lecciones.
+    \item Estudia contenido teórico.
+    \item Realiza prácticas en el simulador de terminal.
+    \item Responde cuestionarios para validar conocimientos.
+    \item Presenta una evaluación final.
+\end{enumerate}
+
+\subsection{Requerimientos de Hardware}
+
+\textbf{Servidor:}
+\begin{itemize}
+    \item Infraestructura en la nube (Heroku).
+    \item 512 MB de RAM (Dyno básico).
+\end{itemize}
+
+\textbf{Cliente:}
+\begin{itemize}
+    \item Navegador web moderno.
+    \item 2 GB de RAM mínimo.
+    \item Conexión a internet.
+\end{itemize}
+
+\subsection{Requerimientos de Software}
+
+\textbf{Servidor:}
+\begin{itemize}
+    \item Sistema operativo Linux (Heroku).
+    \item PHP 8.x.
+    \item Servidor Apache.
+\end{itemize}
+
+\textbf{Cliente:}
+\begin{itemize}
+    \item Navegador compatible con HTML5, CSS3 y JavaScript ES6.
+\end{itemize}
+
+\textbf{Tecnologías utilizadas:}
+\begin{itemize}
+    \item PHP (lógica del sistema)
+    \item HTML5 y CSS3 (estructura y diseño)
+    \item JavaScript (interactividad)
+    \item Bootstrap 5 (diseño responsivo)
+    \item Git (control de versiones)
+\end{itemize}
+
+\subsection{Arquitectura del Sistema}
+
+El sistema sigue un modelo cliente-servidor:
+\begin{itemize}
+    \item Cliente: Navegador web donde el usuario interactúa con la plataforma.
+    \item Servidor: Aplicación PHP desplegada en Heroku que genera contenido dinámico.
+\end{itemize}
+
+\subsection{Pseudocódigo General}
+
+\begin{verbatim}
+Inicio
+  Usuario accede a la plataforma
+  Mostrar menú de lecciones
+
+  Mientras usuario activo:
+      Seleccionar lección
+      Mostrar contenido
+      Si hay práctica:
+          Ejecutar simulador
+      Si hay evaluación:
+          Calificar respuestas
+  FinMientras
+Fin
+\end{verbatim}
+
 
 \subsection{Tipo y Alcance del Diseño}
 La investigación se define como Cuasi-experimental con un alcance Explicativo y un enfoque Mixto. Debido a la imposibilidad de asignar alumnos al azar, se trabajará con grupos universitarios intactos para comparar el impacto de la intervención contra una metodología tradicional.
@@ -184,6 +323,36 @@ La evolución de la enseñanza universitaria exige el uso de plataformas que per
 \textbf{Colaboración gamificada en entornos virtuales:} Jovanović y Milosavljević analizan plataformas como VoRtex, que utilizan el metaverso para fomentar la colaboración. Estos entornos compartidos permiten que el trabajo en equipo sea visible y dinámico, dificultando que los integrantes asuman roles pasivos.\cite{jovanovic2022}
 
 \textbf{Integración de Inteligencia Artificial (IA) y medios digitales:} Campbell Rodríguez destaca que la IA en los sistemas de gestión permite personalizar la enseñanza según el desempeño de cada alumno, detectando de forma automática quién necesita apoyo para integrarse al equipo. Asimismo, Sofi-Karim et al. resaltan que el uso de plataformas y aplicaciones innovadoras rompe con la rigidez de los sistemas tradicionales, favoreciendo un entorno de aprendizaje más flexible y conectado con la realidad tecnológica actual.\cite{campbell2025,sofikarim2023}
+
+\section{Diagramas UML}
+
+\subsection{Diagrama de Casos de Uso}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{casos_uso.png}
+\caption{Casos de uso del sistema}
+\end{figure}
+
+\subsection{Diagrama de Clases}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{clases.png}
+\caption{Diagrama de clases del sistema}
+\end{figure}
+
+\subsection{Diagrama de Secuencia}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{secuencia.png}
+\caption{Diagrama de secuencia para un flujo típico de uso}
+\end{figure}
+
+\subsection{Diagrama de Actividades}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{actividades.png}
+\caption{Diagrama de actividades del flujo general del sistema}
+\end{figure}
 
 \subsection{Fundamentación para la Implementación Técnica y Normativa}
 

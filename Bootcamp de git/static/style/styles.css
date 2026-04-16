@@ -1879,3 +1879,69 @@ html {
     min-height: 80vh;
   }
 }
+
+/* ===== PDF Section Styles ===== */
+.pdf-section {
+  background-color: #0a0d14;
+  padding: 4rem 0;
+  border-top: 1px solid #1e293b;
+}
+
+.pdf-title {
+  color: #e2e8f0;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+#pdf-viewer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.pdf-section .btn-primary {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  font-family: 'Fira Code', monospace;
+  transition: all 0.3s ease;
+}
+
+.pdf-section .btn-primary:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.pdf-section .btn-outline-primary {
+  color: #3b82f6;
+  border-color: #3b82f6;
+  font-family: 'Fira Code', monospace;
+  transition: all 0.3s ease;
+}
+
+.pdf-section .btn-outline-primary:hover {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 768px) {
+  .pdf-title {
+    font-size: 1.4rem;
+  }
+
+  #pdf-viewer {
+    flex-direction: column;
+  }
+
+  .pdf-section .btn {
+    width: 100%;
+  }
+}

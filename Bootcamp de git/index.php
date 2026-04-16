@@ -240,6 +240,21 @@ foreach ($temas as $nombre_tema => $config) {
         </div>
     </section>
 
+    <!-- ===== PDF Viewer Section ===== -->
+    <section class="pdf-section">
+        <div class="container">
+            <h2 class="pdf-title">Proyecto de Investigación</h2>
+            <div id="pdf-viewer">
+                <a href="Proyecto_de_investigación.pdf" target="_blank" class="btn btn-primary btn-lg">
+                    <i class="bi bi-file-pdf"></i> Ver PDF en navegador
+                </a>
+                <a href="Proyecto_de_investigación.pdf" download class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-download"></i> Descargar PDF
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== Footer ===== -->
     <footer class="site-footer">
         <div class="container">

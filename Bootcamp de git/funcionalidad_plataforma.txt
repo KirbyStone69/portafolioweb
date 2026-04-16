@@ -1,0 +1,385 @@
+================================================================================
+    DESCRIPCIÓN FUNCIONAL — MALLEUS CODEFICARUM (Bootcamp de Git)
+================================================================================
+
+1. DESCRIPCIÓN GENERAL DE LA PLATAFORMA
+================================================================================
+
+Malleus Codeficarum es una plataforma web educativa e interactiva diseñada como
+un bootcamp para aprender Git desde cero. La plataforma guía al usuario a través
+de un recorrido estructurado de lecciones que combinan teoría, práctica en un
+simulador de terminal y evaluaciones con cuestionarios interactivos.
+
+La plataforma está construida con PHP, HTML, CSS y JavaScript. Utiliza Bootstrap
+5 para el diseño responsivo y la fuente Fira Code para mantener una estética de
+código/terminal consistente con un tema oscuro.
+
+
+2. QUÉ HACE EXACTAMENTE LA PLATAFORMA
+================================================================================
+
+2.1. Página de inicio (index.php) — Menú dinámico
+    - Escanea automáticamente la estructura de carpetas del proyecto.
+    - Genera un menú de navegación tipo roadmap/mapa de ruta de forma dinámica.
+    - Cada lección detectada se clasifica automáticamente como:
+        • Teoría: lecciones de contenido teórico.
+        • Laboratorio: lecciones con simulador de terminal interactivo.
+        • Evaluación: cuestionarios finales del módulo.
+        • Taller: actividades prácticas guiadas.
+    - Los temas principales (ej: Git) se muestran como secciones colapsables
+      con sus lecciones organizadas en subcarpetas.
+    - Al agregar un nuevo archivo .html a cualquier carpeta del proyecto,
+      este aparece automáticamente en el menú sin necesidad de editar código.
+
+2.2. Lecciones teóricas (ej: que-es-git.html, ramas-y-merge.html, etc.)
+    - Presentan contenido educativo estructurado en secciones numeradas.
+    - Incluyen elementos didácticos como:
+        • Cajas de conceptos (concept-card) con comparaciones visuales.
+        • Cajas de información destacada (highlight-box) con analogías.
+        • Glosarios de términos técnicos con íconos descriptivos.
+        • Líneas de tiempo (timeline) para contexto histórico.
+        • Tablas comparativas entre tecnologías.
+        • Grids de características (features-grid) con tarjetas.
+        • Bloques de código con botón para copiar al portapapeles.
+    - Al final de cada lección teórica se incluye un cuestionario de
+      evaluación con preguntas de opción múltiple.
+    - Navegación secuencial entre lecciones (anterior/siguiente) y
+      breadcrumb para orientación dentro del contenido.
+
+2.3. Lecciones prácticas — Simulador de terminal Git
+    - Páginas a pantalla completa divididas en dos paneles:
+        • Panel izquierdo (Instrucciones): muestra el paso actual del
+          ejercicio, con título, descripción detallada, barra de progreso
+          y botones de pista y reinicio.
+        • Panel derecho (Terminal): simulador de terminal interactivo donde
+          el usuario escribe comandos Git reales.
+    - El simulador incluye:
+        • Sistema de archivos virtual: simula carpetas y archivos que se
+          crean y modifican mientras el usuario ejecuta comandos.
+        • Comandos libres: el usuario puede usar ls, ls -la, pwd, cd y
+          clear en cualquier momento para explorar el sistema de archivos.
+        • Validación paso a paso: el simulador verifica que el usuario
+          escriba el comando correcto antes de avanzar al siguiente paso.
+        • Historial de comandos: el usuario puede navegar por comandos
+          anteriores usando las flechas arriba/abajo del teclado.
+        • Pistas: cada paso tiene una pista que el usuario puede consultar
+          si necesita ayuda.
+        • Barra de progreso visual: muestra cuántos pasos se han completado.
+        • Retroalimentación inmediata: muestra la salida esperada del
+          comando tal como lo haría una terminal real.
+    - Lecciones prácticas disponibles:
+        • Repositorios: init y clone (6 pasos).
+        • Staging y Commits (práctica con git add, commit, status, log).
+        • Ramas y Merge (práctica con branch, checkout, merge).
+        • Remotos: push, pull y fetch (práctica con remote, push, pull, fetch).
+
+2.4. Cuestionarios interactivos (quiz.js)
+    - Sistema reutilizable de evaluación con preguntas de opción múltiple.
+    - Funcionalidades:
+        • Validación de respuestas: al presionar "Comprobar respuestas" se
+          verifican todas las respuestas contra las respuestas correctas.
+        • Retroalimentación visual por pregunta: se marca cada pregunta como
+          correcta (verde) o incorrecta (rojo), indicando cuál era la
+          respuesta correcta.
+        • Verificación de completitud: no permite evaluar si quedan
+          preguntas sin responder, mostrando una advertencia.
+        • Resultado final con puntuación: muestra la calificación con un
+          ícono y mensaje según el porcentaje obtenido:
+            - 100%: "¡Perfecto!" (trofeo)
+            - 70%-99%: "¡Buen trabajo!" (sonrisa)
+            - 50%-69%: "Puedes mejorar" (neutral)
+            - <50%: "Sigue practicando" (triste)
+        • Botón de reintentar: permite reiniciar el cuestionario para
+          volver a intentarlo.
+        • Efecto visual de selección: las opciones se resaltan al hacer
+          clic para mejorar la experiencia de usuario.
+
+2.5. Evaluación final (evaluacion.html)
+    - Examen de 15 preguntas que abarca todos los temas del módulo:
+        • ¿Qué es Git? (preguntas 1-2)
+        • Repositorios: init y clone (preguntas 3-4)
+        • Staging y Commits (preguntas 5-8)
+        • Ramas y Merge (preguntas 9-12)
+        • Remotos: push, pull, fetch (preguntas 13-15)
+    - Para aprobar se requiere al menos 12/15 respuestas correctas.
+
+2.6. Funcionalidades de interfaz (main.js)
+    - Chevron animado: los íconos de flecha rotan al expandir/colapsar
+      secciones del menú.
+    - Copiar código: botón en cada bloque de código que copia el contenido
+      al portapapeles con retroalimentación visual (ícono cambia a check
+      por 2 segundos).
+
+
+3. CÓMO INTERACTÚA EL USUARIO
+================================================================================
+
+3.1. Flujo principal de navegación
+    1. El usuario ingresa a la página de inicio (index.php).
+    2. Ve el menú tipo roadmap con todos los módulos disponibles.
+    3. Expande/colapsa los temas y subcarpetas haciendo clic en los
+       encabezados.
+    4. Selecciona una lección haciendo clic en su nombre.
+    5. La etiqueta de cada lección (Teoría, Laboratorio, Evaluación)
+       indica el tipo de contenido que encontrará.
+
+3.2. Interacción en lecciones teóricas
+    1. El usuario lee el contenido organizado en secciones numeradas.
+    2. Puede copiar ejemplos de código con un clic en el botón de copiar.
+    3. Al terminar la lectura, responde el cuestionario al final de la
+       página seleccionando opciones con clic.
+    4. Presiona "Comprobar respuestas" para ver su calificación.
+    5. Si desea mejorar, presiona "Reintentar" para resetear el quiz.
+    6. Navega a la siguiente lección usando los botones de navegación
+       al pie de la página, o regresa al índice con el breadcrumb.
+
+3.3. Interacción en lecciones prácticas (Simulador de terminal)
+    1. El usuario lee las instrucciones del paso actual en el panel
+       izquierdo.
+    2. Escribe el comando Git indicado en el campo de texto del panel
+       derecho (terminal) y presiona Enter o el botón "Enviar".
+    3. El simulador valida el comando:
+        - Si es correcto: muestra la salida esperada y avanza al
+          siguiente paso automáticamente.
+        - Si es incorrecto: muestra un mensaje de error indicando qué
+          se esperaba.
+        - Si es un comando libre (ls, pwd, cd, clear): lo ejecuta sin
+          afectar el progreso del ejercicio.
+    4. En cualquier momento el usuario puede:
+        - Presionar "Pista" para ver la solución del paso actual.
+        - Presionar "Reiniciar" para volver al primer paso.
+        - Usar las flechas del teclado para navegar el historial de
+          comandos.
+        - Usar ls o pwd para explorar el sistema de archivos virtual.
+    5. La barra de progreso se actualiza conforme avanza por los pasos.
+    6. Al completar todos los pasos, puede navegar a la siguiente lección.
+
+3.4. Interacción en la evaluación final
+    1. El usuario responde las 15 preguntas de opción múltiple.
+    2. Presiona "Comprobar respuestas" para obtener su calificación.
+    3. Ve su resultado con retroalimentación detallada por pregunta.
+    4. Si no obtuvo 12/15, puede reintentar el cuestionario.
+    5. Al finalizar, puede regresar al índice principal.
+
+
+4. ESTRUCTURA DE CONTENIDO DEL MÓDULO GIT
+================================================================================
+
+El módulo "Bases de Git" contiene las siguientes 10 lecciones en orden:
+
+    1.  ¿Qué es Git?                          (Teoría + Quiz)
+    2.  Instalación y Configuración            (Teoría)
+    3.  Repositorios: init y clone             (Teoría + Quiz)
+    4.  Repositorios: init y clone             (Laboratorio - Simulador)
+    5.  Staging y Commits                      (Teoría + Quiz)
+    6.  Staging y Commits                      (Laboratorio - Simulador)
+    7.  Ramas y Merge                          (Teoría + Quiz)
+    8.  Ramas y Merge                          (Laboratorio - Simulador)
+    9.  Remotos: push, pull y fetch            (Teoría + Quiz)
+    10. Remotos: push, pull y fetch            (Laboratorio - Simulador)
+    11. Evaluación Final                       (Evaluación - 15 preguntas)
+
+
+5. REQUERIMIENTOS DE HARDWARE
+================================================================================
+
+Al tratarse de una aplicación web alojada en la nube (Heroku), los
+requerimientos de hardware son mínimos tanto del lado del servidor como
+del cliente.
+
+5.1. Del lado del servidor (Heroku)
+    - Heroku gestiona la infraestructura automáticamente.
+    - Se utiliza un Dyno tipo "Basic" o "Eco" (contenedor Linux virtualizado).
+    - Recursos asignados por dyno:
+        • RAM: 512 MB.
+        • CPU: compartida.
+        • Almacenamiento efímero: ~500 MB (los archivos del proyecto).
+    - No se requiere base de datos (el contenido es estático/archivo).
+    - No se requiere almacenamiento persistente adicional.
+
+5.2. Del lado del cliente (navegador del usuario)
+    - Cualquier dispositivo con un navegador web moderno:
+        • Computadora de escritorio o laptop.
+        • Tablet o teléfono con navegador actualizado.
+    - Requisitos mínimos:
+        • Procesador: cualquiera capaz de ejecutar un navegador moderno.
+        • RAM: 2 GB mínimo (recomendado 4 GB).
+        • Conexión a internet estable.
+        • Resolución de pantalla: mínimo 320px (diseño responsivo).
+    - Navegadores compatibles:
+        • Google Chrome 90+
+        • Mozilla Firefox 88+
+        • Microsoft Edge 90+
+        • Safari 14+
+
+
+6. REQUERIMIENTOS DE SOFTWARE
+================================================================================
+
+6.1. Software del lado del servidor (stack de producción en Heroku)
+    - Sistema operativo: Ubuntu Linux (contenedor Heroku).
+    - Runtime: PHP 8.x (provisto por el buildpack de Heroku para PHP).
+    - Servidor web: Apache (incluido en el buildpack de PHP de Heroku).
+    - No requiere base de datos.
+    - No requiere servicios externos adicionales.
+
+6.2. Software del lado del cliente
+    - Navegador web moderno con soporte para:
+        • HTML5 y CSS3.
+        • JavaScript ES6+ (let, const, arrow functions, template literals).
+        • API del Clipboard (para la función de copiar código).
+        • Bootstrap 5 CSS y JS (cargado desde CDN).
+        • Google Fonts (cargado desde CDN).
+
+6.3. Tecnologías y librerías utilizadas
+    - PHP:              Generación dinámica del menú y detección de lecciones.
+    - HTML5:            Estructura semántica de todas las páginas.
+    - CSS3:             Tema oscuro personalizado, animaciones y diseño responsivo.
+    - JavaScript (ES6): Lógica del simulador de terminal, cuestionarios y UI.
+    - Bootstrap 5.3.3:  Framework CSS para layout responsivo y componentes.
+    - Bootstrap Icons 1.11.3: Iconografía consistente en toda la plataforma.
+    - Google Fonts:     Tipografía Fira Code para estética de código.
+
+6.4. Herramientas de desarrollo
+    - Git:              Control de versiones del proyecto.
+    - Heroku CLI:       Despliegue y administración de la aplicación.
+    - Editor de código: VS Code o similar para desarrollo local.
+
+
+7. DESPLIEGUE — HEROKU (PaaS)
+================================================================================
+
+La plataforma está desplegada en Heroku, un servicio de Plataforma como
+Servicio (PaaS) que permite alojar, ejecutar y gestionar aplicaciones web
+en la nube sin necesidad de administrar servidores físicos o virtuales.
+
+7.1. ¿Por qué Heroku?
+    - Heroku ofrece un plan gratuito de 2 años para estudiantes a través
+      del programa GitHub Student Developer Pack.
+    - No requiere configuración de servidores, redes ni infraestructura.
+    - El despliegue se realiza directamente con Git (git push heroku main).
+    - Heroku detecta automáticamente el lenguaje (PHP) y configura el
+      entorno de ejecución.
+
+7.2. Proceso de despliegue
+    1. El código fuente se versiona en un repositorio Git.
+    2. Se conecta el repositorio con la aplicación de Heroku.
+    3. Al hacer "git push heroku main", Heroku:
+        a. Detecta el buildpack de PHP.
+        b. Instala las dependencias del servidor (Apache + PHP).
+        c. Despliega la aplicación en un contenedor (Dyno).
+        d. Asigna una URL pública (ej: https://mi-app.herokuapp.com).
+    4. La aplicación queda disponible en internet inmediatamente.
+
+7.3. Características del servicio
+    - Escalamiento automático: Heroku gestiona la carga del servidor.
+    - HTTPS incluido: certificado SSL gratuito para conexiones seguras.
+    - Logs en tiempo real: monitoreo con "heroku logs --tail".
+    - Reinicio automático: si la aplicación falla, Heroku la reinicia.
+    - Costo: $0 (plan estudiante gratuito por 2 años).
+
+
+8. PSEUDOCÓDIGO — PROCESAMIENTO DE INTERACCIÓN DEL USUARIO
+================================================================================
+
+8.1. Flujo general de la plataforma
+
+    INICIO
+    |
+    |-- Usuario accede a la URL de la plataforma
+    |-- Servidor Heroku recibe la petición HTTP
+    |-- PHP ejecuta index.php
+    |
+    |   PARA CADA carpeta_tema EN directorio_proyecto:
+    |       PARA CADA subcarpeta EN carpeta_tema:
+    |           PARA CADA archivo_html EN subcarpeta:
+    |               leer contenido del archivo
+    |               extraer título desde <title>
+    |               clasificar tipo (teoría / laboratorio / evaluación)
+    |               agregar lección a la estructura del menú
+    |           FIN PARA
+    |       FIN PARA
+    |   FIN PARA
+    |
+    |-- Generar HTML del menú dinámico con la estructura
+    |-- Enviar página completa al navegador del usuario
+    |
+    FIN
+
+8.2. Flujo del simulador de terminal (JavaScript - lado del cliente)
+
+    INICIO GitSimulator
+    |
+    |-- Cargar configuración de pasos del ejercicio
+    |-- Inicializar sistema de archivos virtual
+    |-- Mostrar paso 1 en el panel de instrucciones
+    |-- pasoActual = 0
+    |
+    |-- MIENTRAS pasoActual < totalPasos:
+    |       |
+    |       |-- Esperar entrada del usuario (comando en terminal)
+    |       |-- comando = leer campo de texto
+    |       |
+    |       |-- SI comando ES "ls" O "pwd" O "cd" O "clear":
+    |       |       ejecutar comando libre en el sistema de archivos virtual
+    |       |       mostrar resultado en terminal
+    |       |       (NO avanzar de paso)
+    |       |
+    |       |-- SI NO, SI comando == comando_esperado[pasoActual]:
+    |       |       mostrar salida esperada en terminal
+    |       |       aplicar cambios al sistema de archivos virtual
+    |       |       pasoActual = pasoActual + 1
+    |       |       actualizar barra de progreso
+    |       |       mostrar siguiente paso en instrucciones
+    |       |
+    |       |-- SI NO:
+    |       |       mostrar mensaje de error en terminal
+    |       |       mostrar cuál era el comando esperado
+    |       |
+    |   FIN MIENTRAS
+    |
+    |-- Mostrar mensaje de ejercicio completado
+    |
+    FIN
+
+8.3. Flujo del cuestionario (JavaScript - lado del cliente)
+
+    INICIO Quiz
+    |
+    |-- Cargar preguntas y respuestas correctas desde el HTML
+    |
+    |-- Esperar clic en "Comprobar respuestas"
+    |
+    |-- correctas = 0
+    |-- todasRespondidas = VERDADERO
+    |
+    |-- PARA CADA pregunta EN cuestionario:
+    |       SI no tiene respuesta seleccionada:
+    |           todasRespondidas = FALSO
+    |           mostrar advertencia "Selecciona una respuesta"
+    |       SI NO, SI respuesta_seleccionada == respuesta_correcta:
+    |           correctas = correctas + 1
+    |           marcar como correcta (verde)
+    |       SI NO:
+    |           marcar como incorrecta (rojo)
+    |           resaltar la respuesta correcta
+    |       deshabilitar opciones de la pregunta
+    |   FIN PARA
+    |
+    |-- SI NO todasRespondidas: SALIR (no evaluar)
+    |
+    |-- porcentaje = (correctas / total) * 100
+    |
+    |-- SI porcentaje == 100: mostrar "¡Perfecto!"
+    |-- SI NO, SI porcentaje >= 70: mostrar "¡Buen trabajo!"
+    |-- SI NO, SI porcentaje >= 50: mostrar "Puedes mejorar"
+    |-- SI NO: mostrar "Sigue practicando"
+    |
+    |-- Mostrar puntuación final (correctas / total)
+    |-- Habilitar botón "Reintentar"
+    |
+    FIN
+
+================================================================================
+                        Documento generado el 2026-04-13
+================================================================================
