@@ -4,63 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apps en PlayStore - KirbyStone</title>
+    <meta name="description" content="Aplicaciones móviles publicadas en Play Store por KirbyStone: app Android Studio y novela visual Ren'Py.">
     <link rel="icon" href="../kirby.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css.css">
 </head>
 <body>
-    <header class="site-header">
+
+    <!-- ==================== HEADER / NAVEGACION ==================== -->
+    <header class="site-header" id="site-header">
         <div class="header-container">
-            <a href="../index.php" class="logo">KirbyStone</a>
-            <nav class="nav-menu">
+            <a href="../index.php" class="logo">
+                <span class="logo-text">KirbyStone</span>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
                 <a href="../index.php#sobre-mi" class="nav-link">Sobre Mí</a>
-                <a href="../index.php#mis-proyectos" class="nav-link">Mis Proyectos</a>
-                <a href="../index.php#contacto" class="nav-link">Contacto</a>
+                <a href="../index.php#mis-proyectos" class="nav-link">Proyectos</a>
+                <a href="../index.php#contacto" class="nav-link nav-cta">Contáctame</a>
             </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
         </div>
     </header>
+    <!-- ==================== FIN HEADER ==================== -->
 
-    <main class="container seccion">
-        <h1 class="seccion-titulo">Apps en PlayStore</h1>
-        <p>
-            En esta sección muestro algunas de mis aplicaciones móviles publicadas.
-            Mi experiencia principal ha sido desarrollando en <strong>Android Studio (Java/Kotlin)</strong>
-            y creando una <strong>novela visual</strong> con el motor <strong>Ren'Py</strong>. <br> <br> <br>
-        </p>
+    <main>
+        <!-- ==================== ENCABEZADO ==================== -->
+        <section class="hero">
+            <div class="container">
+                <h2 class="seccion-titulo reveal">Apps en <span class="grad">PlayStore</span></h2>
+                <p class="seccion-subtitulo reveal">
+                    Mis aplicaciones móviles publicadas. <strong>Android Studio (Java/Kotlin)</strong>
+                    y una <strong>novela visual</strong> hecha con el motor <strong>Ren'Py</strong>.
+                </p>
+            </div>
+        </section>
+        <!-- ==================== FIN ENCABEZADO ==================== -->
 
-        <div class="grid-proyectos apps-grid">
-            <!-- App Android Studio -->
-            <article class="card-proyecto">
-                <div class="card-imagen">
-                    <img src="2.png" alt="Captura de la app Android" loading="lazy">
-                </div>
-                <div class="card-contenido">
-                    <h2>App Android Studio</h2>
-                    <p>
-                        Aplicación desarrollada en Android Studio como un pequeño proyecto didáctico para visualizar el cubo de un binomio.
-                        Permite cambiar los valores y ver una animación donde las secciones del cubo se separan para entender mejor cada término.
-                    </p>
-                    <a href="https://play.google.com/store/apps/details?id=com.cubobinomio.app" target="_blank" rel="noopener" class="btn">
-                        Ver en Play Store
-                    </a>
-                </div>
-            </article>
+        <!-- ==================== APPS ==================== -->
+        <section class="seccion mis-proyectos">
+            <div class="container">
+                <div id="lista-proyectos">
+                    <article class="proyecto-card reveal reveal-retraso-1">
+                        <div class="preview-container preview-app">
+                            <img class="preview-image" src="2.png" alt="Captura de la app Android Studio" loading="lazy">
+                        </div>
+                        <div class="proyecto-info">
+                            <div class="proyecto-nombre">App Android Studio</div>
+                            <p>
+                                Aplicación didáctica para visualizar el cubo de un binomio: permite cambiar
+                                los valores y ver una animación donde el cubo se separa en secciones.
+                            </p>
+                            <a href="https://play.google.com/store/apps/details?id=com.cubobinomio.app" target="_blank" rel="noopener" class="btn btn-primary">
+                                Ver en Play Store →
+                            </a>
+                        </div>
+                    </article>
 
-            <!-- Novela visual Ren'Py -->
-            <article class="card-proyecto">
-                <div class="card-imagen">
-                    <img src="1.png" alt="Captura de la novela visual Ren'Py" loading="lazy">
+                    <article class="proyecto-card reveal reveal-retraso-2">
+                        <div class="preview-container preview-app">
+                            <img class="preview-image" src="1.png" alt="Captura de la novela visual Ren'Py" loading="lazy">
+                        </div>
+                        <div class="proyecto-info">
+                            <div class="proyecto-nombre">Novela Visual en Ren'Py</div>
+                            <p>
+                                Novela visual creada con Ren'Py, proyecto de colaboración grupal en el que
+                                participé como programador; arte y guion de otros miembros del equipo.
+                            </p>
+                            <a href="https://play.google.com/store/apps/details?id=com.kirby.upv" target="_blank" rel="noopener" class="btn btn-primary">
+                                Ver juego / descarga →
+                            </a>
+                        </div>
+                    </article>
                 </div>
-                <div class="card-contenido">
-                    <h2>Novela Visual en Ren'Py</h2>
-                    <p>
-                        Novela visual creada con Ren'Py que constituye un breve proyecto de colaboración grupal. Cabe destacar que mi participación en este proyecto fue exclusivamente como programador, siendo el arte y el guion obra de otros miembros del equipo.
-                    </p>
-                    <a href="https://play.google.com/store/apps/details?id=com.kirby.upv" target="_blank" rel="noopener" class="btn">
-                        Ver juego / descarga
-                    </a>
+            </div>
+        </section>
+        <!-- ==================== FIN APPS ==================== -->
+
+        <!-- ==================== CTA FINAL ==================== -->
+        <section class="seccion cta-final">
+            <div class="container">
+                <div class="cta-caja reveal">
+                    <h2>¿Te gusta lo que hago?</h2>
+                    <p>Vuelve al portafolio para ver el resto de mis proyectos.</p>
+                    <a href="../index.php#mis-proyectos" class="btn btn-primary">Volver al portafolio</a>
                 </div>
-            </article>
-        </div>
+            </div>
+        </section>
+        <!-- ==================== FIN CTA FINAL ==================== -->
     </main>
+
+    <!-- ==================== PIE DE PAGINA ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-copy">
+                <p>© 2026 KirbyStone · Eder Omar. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- ==================== FIN PIE DE PAGINA ==================== -->
+
+    <script src="../js.js"></script>
 </body>
 </html>

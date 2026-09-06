@@ -1,85 +1,151 @@
-anime({
-    targets: '.logo',
-    translateY: [-30, 0],
-    opacity: [0, 1],
-    duration: 1000,
-    easing: 'easeOutExpo'
+/* ==================== MENÚ MÓVIL ==================== */
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+menuToggle.addEventListener('click', function () {
+    navMenu.classList.toggle('nav-activo');
 });
 
-anime({
-    targets: '.nav-link',
-    translateY: [-20, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(100, {start: 200}),
-    duration: 800,
-    easing: 'easeOutExpo'
-});
-
-anime({
-    targets: '.seccion-titulo',
-    translateX: [-50, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(200, {start: 400}),
-    duration: 1000,
-    easing: 'easeOutExpo'
-});
-
-anime({
-    targets: '.proyecto-card',
-    translateY: [100, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(100, {start: 600}),
-    duration: 1000,
-    easing: 'easeOutExpo'
-});
-
-document.querySelectorAll('.proyecto-btn').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        anime({
-            targets: this,
-            scale: 1.1,
-            duration: 300,
-            easing: 'easeOutQuad'
-        });
-    });
-    
-    btn.addEventListener('mouseleave', function() {
-        anime({
-            targets: this,
-            scale: 1,
-            duration: 300,
-            easing: 'easeOutQuad'
-        });
+navMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+        navMenu.classList.remove('nav-activo');
     });
 });
 
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('.nav-menu').classList.toggle('nav-activo');
-});
+/* ==================== HEADER CON SOMBRA AL SCROLL ==================== */
+const header = document.getElementById('site-header');
 
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+window.addEventListener('scroll', function () {
+    header.classList.toggle('scrolleado', window.scrollY > 30);
+}, { passive: true });
+
+/* ==================== EFECTO MÁQUINA DE ESCRIBIR ==================== */
+const frases = [
+    'Aplicaciones Web',
+    'Aplicaciones Móviles',
+    'Aplicaciones de Escritorio',
+    'Sistemas en la Nube'
+];
+const tipoEl = document.getElementById('tipo-escrito');
+const promptEl = document.querySelector('.tipo-prompt');
+let indiceFrase = 0;
+let indiceChar = 0;
+let borrando = false;
+
+function escribir() {
+    const fraseActual = frases[indiceFrase];
+
+    if (!borrando) {
+        indiceChar++;
+        tipoEl.textContent = fraseActual.slice(0, indiceChar);
+        if (indiceChar === fraseActual.length) {
+            borrando = true;
+            setTimeout(escribir, 1800);
+            return;
         }
-        document.querySelector('.nav-menu').classList.remove('nav-activo');
-    });
-});
-
-const contador = document.getElementById('contador-visitas');
-const total = parseInt(contador.dataset.total);
-const duracion = 2000;
-const inicio = performance.now();
-function animarContador(ahora) {
-    const progreso = Math.min((ahora - inicio) / duracion, 1);
-    const ease = 1 - Math.pow(1 - progreso, 3);
-    contador.textContent = Math.floor(ease * total).toLocaleString();
-    if (progreso < 1) {
-        requestAnimationFrame(animarContador);
+        setTimeout(escribir, 90);
     } else {
-        contador.textContent = total.toLocaleString();
+        indiceChar--;
+        tipoEl.textContent = fraseActual.slice(0, indiceChar);
+        if (indiceChar === 0) {
+            borrando = false;
+            indiceFrase = (indiceFrase + 1) % frases.length;
+            setTimeout(escribir, 350);
+            return;
+        }
+        setTimeout(escribir, 50);
     }
 }
-requestAnimationFrame(animarContador);
+
+if (tipoEl) {
+    setTimeout(escribir, 400);
+}
+
+/* ==================== APARICIÓN AL HACER SCROLL ==================== */
+const elementosReveal = document.querySelectorAll('.reveal');
+
+const observador = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+        if (entrada.isIntersecting) {
+            entrada.target.classList.add('visible');
+            observador.unobserve(entrada.target);
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+elementosReveal.forEach(function (el) {
+    observador.observe(el);
+});
+
+/* ==================== COPIAR CORREO CON TOAST ==================== */
+let toastTimer;
+
+function mostrarToast(mensaje) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = mensaje;
+    requestAnimationFrame(function () {
+        toast.classList.add('visible');
+    });
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+        toast.classList.remove('visible');
+    }, 2400);
+}
+
+document.querySelectorAll('.copia-correo').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+        e.preventDefault();
+        const correo = el.getAttribute('data-correo') || '';
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(correo).then(function () {
+                mostrarToast('Correo copiado: ' + correo);
+            });
+        } else {
+            const area = document.createElement('textarea');
+            area.value = correo;
+            area.style.position = 'fixed';
+            area.style.opacity = '0';
+            document.body.appendChild(area);
+            area.select();
+            document.execCommand('copy');
+            document.body.removeChild(area);
+            mostrarToast('Correo copiado: ' + correo);
+        }
+    });
+
+    el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            el.click();
+        }
+    });
+});
+
+/* ==================== CONTADOR DE VISITAS ANIMADO ==================== */
+const contador = document.getElementById('contador-visitas');
+
+if (contador) {
+    const total = parseInt(contador.dataset.total, 10) || 0;
+    const duracion = 2000;
+    const inicio = performance.now();
+
+    function animarContador(ahora) {
+        const progreso = Math.min((ahora - inicio) / duracion, 1);
+        const ease = 1 - Math.pow(1 - progreso, 3);
+        contador.textContent = Math.floor(ease * total).toLocaleString();
+        if (progreso < 1) {
+            requestAnimationFrame(animarContador);
+        } else {
+            contador.textContent = total.toLocaleString();
+        }
+    }
+
+    requestAnimationFrame(animarContador);
+}
